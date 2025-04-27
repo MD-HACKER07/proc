@@ -1,0 +1,733 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is Selenium primarily used for?",
+      "options": ["Video editing", "Web application testing", "Mobile app development", "Data analysis"],
+      "correctAnswer": "Web application testing",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 2,
+      "question": "Which language is NOT supported by Selenium WebDriver?",
+      "options": ["Java", "Python", "C++", "Ruby"],
+      "correctAnswer": "C++",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 3,
+      "question": "Which Selenium tool is used for recording and playing back tests?",
+      "options": ["Selenium Grid", "Selenium IDE", "Selenium WebDriver", "TestNG"],
+      "correctAnswer": "Selenium IDE",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 4,
+      "question": "What type of testing does Selenium support?",
+      "options": ["Manual Testing", "Performance Testing", "Automation Testing", "Security Testing"],
+      "correctAnswer": "Automation Testing",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 5,
+      "question": "Selenium can be used to test applications on which platform?",
+      "options": ["Desktop only", "Mobile apps only", "Web browsers", "Operating systems"],
+      "correctAnswer": "Web browsers",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 6,
+      "question": "What is the function of driver.get(\"url\") in Selenium?",
+      "options": ["Submits a form", "Navigates to a web page", "Closes the browser", "Takes a screenshot"],
+      "correctAnswer": "Navigates to a web page",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 7,
+      "question": "Which component is used for distributed testing in Selenium?",
+      "options": ["Selenium IDE", "Selenium WebDriver", "Selenium Grid", "JUnit"],
+      "correctAnswer": "Selenium Grid",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 8,
+      "question": "What is the full form of IDE in Selenium IDE?",
+      "options": ["Integrated Developer Engine", "Integrated Development Environment", "Internal Data Editor", "Internet Data Execution"],
+      "correctAnswer": "Integrated Development Environment",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 9,
+      "question": "Which of these is a valid WebDriver method?",
+      "options": ["openBrowser()", "getTitle()", "showPage()", "startDriver()"],
+      "correctAnswer": "getTitle()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 10,
+      "question": "Selenium supports automation of which browser?",
+      "options": ["Chrome", "Firefox", "Edge", "All of the above"],
+      "correctAnswer": "All of the above",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 11,
+      "question": "What does the findElement() method do?",
+      "options": ["Closes the current tab", "Finds a UI element on the page", "Refreshes the browser", "Opens a new tab"],
+      "correctAnswer": "Finds a UI element on the page",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 12,
+      "question": "Selenium can be used with which testing framework in Java?",
+      "options": ["PyTest", "TestNG", "Mocha", "RSpec"],
+      "correctAnswer": "TestNG",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 13,
+      "question": "Which method is used to click a button in Selenium?",
+      "options": ["clickElement()", "press()", "click()", "hit()"],
+      "correctAnswer": "click()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 14,
+      "question": "Selenium WebDriver is designed to work with which type of applications?",
+      "options": ["Command line apps", "Web-based applications", "Android apps only", "Desktop applications"],
+      "correctAnswer": "Web-based applications",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 15,
+      "question": "What is the extension of Selenium IDE test case file?",
+      "options": [".ide", ".html", ".xml", ".java"],
+      "correctAnswer": ".html",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 16,
+      "question": "Which function is used to enter text in a text box using Selenium?",
+      "options": ["enterText()", "type()", "sendKeys()", "inputText()"],
+      "correctAnswer": "sendKeys()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 17,
+      "question": "Which of these can be automated using Selenium?",
+      "options": ["UI testing", "Captcha validation", "Code compilation", "PDF editing"],
+      "correctAnswer": "UI testing",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 18,
+      "question": "Which command is used to maximize the browser window?",
+      "options": ["driver.openWindow()", "driver.setFullScreen()", "driver.maximizeWindow()", "driver.manage().window().maximize()"],
+      "correctAnswer": "driver.manage().window().maximize()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 19,
+      "question": "What is Selenium Grid used for?",
+      "options": ["Testing mobile apps", "Managing test reports", "Running tests in parallel", "Storing test data"],
+      "correctAnswer": "Running tests in parallel",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 20,
+      "question": "What does the quit() method do in Selenium?",
+      "options": ["Minimizes the window", "Restarts the browser", "Closes all browser windows", "Stops the current test"],
+      "correctAnswer": "Closes all browser windows",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 21,
+      "question": "What is Selenium used for?",
+      "options": ["Database management", "Web automation", "Network monitoring", "Cloud computing"],
+      "correctAnswer": "Web automation",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 22,
+      "question": "Which Selenium component is used for writing test scripts?",
+      "options": ["Selenium IDE", "Selenium WebDriver", "Selenium RC", "Selenium Grid"],
+      "correctAnswer": "Selenium WebDriver",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 23,
+      "question": "Which of the following is a web automation tool?",
+      "options": ["Jenkins", "Maven", "Selenium", "JUnit"],
+      "correctAnswer": "Selenium",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 24,
+      "question": "What is the full form of XPath?",
+      "options": ["XML Path", "Extended Path", "XML Pattern", "Extensible Path"],
+      "correctAnswer": "XML Path",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 25,
+      "question": "Which locator is most preferred in Selenium?",
+      "options": ["ID", "Name", "XPath", "CSS Selector"],
+      "correctAnswer": "ID",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 26,
+      "question": "Which programming language is not supported by Selenium?",
+      "options": ["Java", "Python", "C++", "Ruby"],
+      "correctAnswer": "Ruby",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 27,
+      "question": "Which method is used to launch a URL in Selenium?",
+      "options": ["driver.get(\"url\")", "driver.navigate().to(\"url\")", "driver.open(\"url\")", "driver.openWindow(\"url\")"],
+      "correctAnswer": "driver.get(\"url\")",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 28,
+      "question": "Which Selenium component allows parallel test execution?",
+      "options": ["Selenium IDE", "Selenium WebDriver", "Selenium Grid", "JUnit"],
+      "correctAnswer": "Selenium Grid",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 29,
+      "question": "What does Selenium WebDriver interact with?",
+      "options": ["UI elements", "Web pages", "JavaScript", "All of the above"],
+      "correctAnswer": "UI elements",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 30,
+      "question": "Which function types text into an input box?",
+      "options": ["sendKeys()", "enterText()", "type()", "inputText()"],
+      "correctAnswer": "sendKeys()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 31,
+      "question": "Which tool supports recording and playback in Selenium?",
+      "options": ["Selenium IDE", "Selenium WebDriver", "Selenium Grid", "TestNG"],
+      "correctAnswer": "Selenium IDE",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 32,
+      "question": "Which class helps in performing mouse actions?",
+      "options": ["WebDriver", "Actions", "Selenium", "Driver"],
+      "correctAnswer": "Actions",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 33,
+      "question": "What is used to locate web elements in Selenium?",
+      "options": ["WebDriver", "Actions", "Selenium", "Driver"],
+      "correctAnswer": "WebDriver",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 34,
+      "question": "What is the syntax to locate an element by ID?",
+      "options": ["driver.findElement(By.id(\"id\"))", "driver.findElement(By.name(\"id\"))", "driver.findElement(By.xpath(\"//*[@id='id']\"))", "driver.findElement(By.cssSelector(\"#id\"))"],
+      "correctAnswer": "driver.findElement(By.id(\"id\"))",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 35,
+      "question": "Which method is used to click a button?",
+      "options": ["click()", "press()", "hit()", "hitElement()"],
+      "correctAnswer": "click()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 36,
+      "question": "Which browser is not supported by Selenium by default?",
+      "options": ["Internet Explorer", "Edge", "Firefox", "All of the above"],
+      "correctAnswer": "Internet Explorer",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 37,
+      "question": "Which command is used to clear a text field?",
+      "options": ["clear()", "delete()", "reset()", "remove()"],
+      "correctAnswer": "clear()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 38,
+      "question": "What is the primary use of implicit wait?",
+      "options": ["To wait for elements to appear", "To wait for elements to disappear", "To wait for elements to move", "To wait for elements to change"],
+      "correctAnswer": "To wait for elements to appear",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 39,
+      "question": "Question21Which WebDriver is used for Chrome browser?",
+      "options": ["ChromeDriver", "WebDriver", "Selenium", "Driver"],
+      "correctAnswer": "ChromeDriver",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 40,
+      "question": "What is TestNG used for?",
+      "options": ["Unit testing", "Integration testing", "System testing", "Acceptance testing"],
+      "correctAnswer": "Unit testing",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 41,
+      "question": "Which command is used to navigate to a webpage?",
+      "options": ["driver.get(\"url\")", "driver.navigate().to(\"url\")", "driver.open(\"url\")", "driver.openWindow(\"url\")"],
+      "correctAnswer": "driver.get(\"url\")",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 42,
+      "question": "What does assertEquals() do in TestNG?",
+      "options": ["Asserts that two values are equal", "Asserts that two values are not equal", "Asserts that two values are greater than", "Asserts that two values are less than"],
+      "correctAnswer": "Asserts that two values are equal",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 43,
+      "question": "Which method checks if a checkbox is selected?",
+      "options": ["isSelected()", "isChecked()", "isChecked()", "isSelected()"],
+      "correctAnswer": "isSelected()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 44,
+      "question": "What is the file extension of a TestNG XML file?",
+      "options": [".xml", ".java", ".html", ".txt"],
+      "correctAnswer": ".xml",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 45,
+      "question": "Which option launches browser in incognito mode?",
+      "options": ["--incognito", "--private", "--anonymous", "--incognito --private"],
+      "correctAnswer": "--incognito",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 46,
+      "question": "Which method is used to close all browser windows?",
+      "options": ["driver.close()", "driver.quit()", "driver.exit()", "driver.closeAllWindows()"],
+      "correctAnswer": "driver.quit()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 47,
+      "question": "What is WebDriverWait used for?",
+      "options": ["To wait for elements to appear", "To wait for elements to disappear", "To wait for elements to move", "To wait for elements to change"],
+      "correctAnswer": "To wait for elements to appear",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 48,
+      "question": "Which method is used to switch between frames?",
+      "options": ["driver.switchTo().frame(\"frameName\")", "driver.switchTo().window(\"windowName\")", "driver.switchTo().frame(\"frameName\")", "driver.switchTo().window(\"windowName\")"],
+      "correctAnswer": "driver.switchTo().frame(\"frameName\")",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 49,
+      "question": "Which method is used to accept an alert?",
+      "options": ["accept()", "acceptAlert()", "acceptAlert()", "accept()"],
+      "correctAnswer": "accept()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 50,
+      "question": "How do you select an option from a dropdown?",
+      "options": ["selectByIndex()", "selectByValue()", "selectByVisibleText()", "select()"],
+      "correctAnswer": "selectByVisibleText()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 51,
+      "question": "What is FluentWait in Selenium?",
+      "options": ["A wait condition", "A wait strategy", "A wait type", "A wait condition"],
+      "correctAnswer": "A wait condition",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 52,
+      "question": "Which element is used to define dropdown in HTML?",
+      "options": ["<select>", "<option>", "<dropdown>", "<select><option>"],
+      "correctAnswer": "<select>",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 53,
+      "question": "Title() return?",
+      "options": ["The title of the page", "The title of the browser", "The title of the window", "The title of the tab"],
+      "correctAnswer": "The title of the page",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 54,
+      "question": "Which is NOT a valid locator in Selenium?",
+      "options": ["ID", "Name", "XPath", "CSS Selector"],
+      "correctAnswer": "CSS Selector",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 55,
+      "question": "PageSource() return?",
+      "options": ["The source code of the page", "The source code of the browser", "The source code of the window", "The source code of the tab"],
+      "correctAnswer": "The source code of the page",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 56,
+      "question": "What is used to simulate keyboard actions?",
+      "options": ["Actions", "WebDriver", "Selenium", "Driver"],
+      "correctAnswer": "Actions",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 57,
+      "question": "Which annotation in TestNG is used before any test case?",
+      "options": ["@BeforeClass", "@BeforeMethod", "@BeforeTest", "@BeforeSuite"],
+      "correctAnswer": "@BeforeClass",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 58,
+      "question": "Question\n41Which language is commonly used with Selenium?",
+      "options": ["Java", "Python", "C++", "Ruby"],
+      "correctAnswer": "Java",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 59,
+      "question": "CurrentUrl()  do?",
+      "options": ["Returns the current URL", "Returns the current page source", "Returns the current page title", "Returns the current page content"],
+      "correctAnswer": "Returns the current URL",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 60,
+      "question": "Which method is used to find elements by tag name?",
+      "options": ["findElements()", "findElement()", "getElementsByTag()", "getElements()"],
+      "correctAnswer": "findElements()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 61,
+      "question": "How do you perform a right-click in Selenium?",
+      "options": ["Actions", "WebDriver", "Selenium", "Driver"],
+      "correctAnswer": "Actions",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 62,
+      "question": "What is Actions  class used for?",
+      "options": ["To perform mouse actions", "To perform keyboard actions", "To perform touch actions", "To perform all actions"],
+      "correctAnswer": "To perform mouse actions",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 63,
+      "question": "Which command refreshes the page in Selenium?",
+      "options": ["driver.refresh()", "driver.reload()", "driver.reopen()", "driver.reopenWindow()"],
+      "correctAnswer": "driver.refresh()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 64,
+      "question": "How do you switch to an alert in Selenium?",
+      "options": ["driver.switchTo().alert()", "driver.switchTo().alert()", "driver.switchTo().alert()", "driver.switchTo().alert()"],
+      "correctAnswer": "driver.switchTo().alert()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 65,
+      "question": "What does isDisplayed()  check?",
+      "options": ["If the element is visible", "If the element is hidden", "If the element is enabled", "If the element is disabled"],
+      "correctAnswer": "If the element is visible",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 66,
+      "question": "Which locator uses link text?",
+      "options": ["ID", "Name", "XPath", "CSS Selector"],
+      "correctAnswer": "CSS Selector",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 67,
+      "question": "Which method helps to find multiple elements?",
+      "options": ["findElements()", "findElement()", "getElementsByTag()", "getElements()"],
+      "correctAnswer": "findElements()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 68,
+      "question": "Which framework is used with Selenium for unit testing?",
+      "options": ["JUnit", "TestNG", "PyTest", "Mocha"],
+      "correctAnswer": "TestNG",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 69,
+      "question": "Which WebDriver is used for Firefox?",
+      "options": ["FirefoxDriver", "WebDriver", "Selenium", "Driver"],
+      "correctAnswer": "FirefoxDriver",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 70,
+      "question": "Content() ?",
+      "options": ["Returns the content of the page", "Returns the title of the page", "Returns the source code of the page", "Returns the URL of the page"],
+      "correctAnswer": "Returns the content of the page",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 71,
+      "question": "How do you handle multiple windows in Selenium?",
+      "options": ["driver.switchTo().window()", "driver.switchTo().frame()", "driver.switchTo().tab()", "driver.switchTo().window()"],
+      "correctAnswer": "driver.switchTo().window()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 72,
+      "question": "WindowHandles()  return?",
+      "options": ["Returns the window handles", "Returns the frame handles", "Returns the tab handles", "Returns the browser handles"],
+      "correctAnswer": "Returns the browser handles",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 73,
+      "question": "How do you get the text of a web element?",
+      "options": ["getText()", "getText()", "getText()", "getText()"],
+      "correctAnswer": "getText()",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 74,
+      "question": "What is the best way to wait for elements to appear?",
+      "options": ["WebDriverWait", "FluentWait", "ImplicitWait", "ExplicitWait"],
+      "correctAnswer": "WebDriverWait",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 75,
+      "question": "What is the function of driver.",
+      "options": ["To navigate to a URL", "To get the title of the page", "To get the current URL", "To get the source code of the page"],
+      "correctAnswer": "To navigate to a URL",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 76,
+      "question": "What is Selenium used for?",
+      "options": ["Database management", "Web automation", "Network monitoring", "Cloud computing"],
+      "correctAnswer": "Web automation",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 77,
+      "question": "What is the purpose of driver.",
+      "options": ["To navigate to a URL", "To get the title of the page", "To get the current URL", "To get the source code of the page"],
+      "correctAnswer": "To navigate to a URL",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 78,
+      "question": "What is the use of driver.",
+      "options": ["To navigate to a URL", "To get the title of the page", "To get the current URL", "To get the source code of the page"],
+      "correctAnswer": "To navigate to a URL",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 79,
+      "question": "What is the purpose of Thread.",
+      "options": ["To run multiple threads", "To run a single thread", "To run a single task", "To run a single process"],
+      "correctAnswer": "To run a single thread",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 80,
+      "question": "Which WebDriver is used for Chrome browser?",
+      "options": ["ChromeDriver", "WebDriver", "Selenium", "Driver"],
+      "correctAnswer": "ChromeDriver",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    },
+    {
+      "id": 81,
+      "question": "Which language is commonly used with Selenium?",
+      "options": ["Java", "Python", "C++", "Ruby"],
+      "correctAnswer": "Java",
+      "type": "single",
+      "points": 10,
+      "subject": "selenium"
+    }
+  ]
+}

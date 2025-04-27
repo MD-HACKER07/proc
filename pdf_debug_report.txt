@@ -1,0 +1,280 @@
+PDF CONTENT ANALYSIS:
+
+Total lines: 271
+
+Line 1: Question Statement
+Line 2: Which of the following best describes a process in an operating system?
+Line 3: What is the main objective of scheduling algorithms in OS?
+Line 4: Which scheduling policy selects the process that arrives first?
+Line 5: What does SJF stand for in process scheduling?
+Line 6: In STCF, a process with ____ is scheduled next.
+Line 7: Which scheduling algorithm assigns time slices to each process?
+Line 8: Which of these is not a process scheduling metric?
+Line 9: Turnaround time is calculated as:
+Line 10: Which scheduling method favors shorter jobs?
+Line 11: In Priority Scheduling, the CPU is assigned to the process with:
+Line 12: Round Robin scheduling is most suitable for:
+Line 13: Which one is not a necessary condition for deadlock?
+Line 14: Which of the following can lead to a deadlock?
+Line 15: Deadlock prevention can be achieved by eliminating:
+Line 16: Deadlock avoidance is implemented using which method?
+Line 17: Which algorithm is used for deadlock avoidance?
+Line 18: What happens in a circular wait deadlock?
+Line 19: What is a safe state in deadlock avoidance?
+Line 20: Which of the following is a non-preemptive scheduling algorithm?
+Line 21: Which scheduling metric measures the time a process spends waiting in the ready queue?
+Line 22: Which scheduling policy allows a running process to be interrupted?
+Line 23: In Priority Scheduling, which process gets scheduled first if two processes have the same priority?
+Line 24: In MLFQ, a process using more CPU is moved to:
+Line 25: Which of the following is an example of starvation?
+Line 26: What defines Response Time in a process?
+Line 27: A job arrives at time 2 ms and completes at 12 ms. What is the turnaround time?
+Line 28: Process P1 needs 4 ms CPU time, P2 needs 3 ms CPU time, both arrive at same time. FCFS average waiting time?
+Line 29: In SJF, processes have burst times 5ms, 3ms, 8ms. Average turnaround time is closest to:
+Line 30: Given 3 processes with arrival times (0ms, 2ms, 4ms) and burst times (5ms each), average waiting time with FCFS?
+Line 31: In RR with quantum 4 ms, P1 burst=10ms. How many times is P1 scheduled before completion?
+Line 32: In Priority Scheduling, if P1(priority=2) and P2(priority=1), which executes first?
+Line 33: Deadlock can occur if system has ___ resources and ___ processes.
+Line 34: Process P1 arrives at 0ms needs 7ms CPU, P2 arrives at 2ms needs 4ms CPU. In FCFS, what is average turnaround time?
+Line 35: 
+Line 36: If Turnaround Time = 20ms, Waiting Time = 12ms, what is CPU burst time?
+Line 37: What is the main function of the main memory?
+Line 38: Which memory allocation technique suffers from external fragmentation?
+Line 39: Which dynamic memory allocation algorithm searches the entire list for the smallest free suitable partition?
+Line 40: In contiguous memory allocation, which method allocates memory blocks first that fit the process size?
+Line 41: Paging helps in solving which of the following problems?
+Line 42: The mapping from logical to physical address is done by:
+Line 43: Which algorithm replaces the page that has not been used for the longest period of time?
+Line 44: In FIFO page replacement, which page is removed?
+Line 45: A system has 4 frames. A page reference string 1,2,3,4,1,2,5. How many page faults with FIFO?
+Line 46: If a system uses LRU replacement, the least recently accessed page is:
+Line 47: Which of the following is a fixed partition allocation scheme?
+Line 48: The main advantage of dynamic partitioning over fixed partitioning is:
+Line 49: External fragmentation occurs in:
+Line 50: In FIFO page replacement, increasing number of frames sometimes increases page faults. This is called:
+Line 51: Which memory management scheme requires relocation of processes during execution?
+Line 52: Page replacement occurs when:
+Line 53: In contiguous memory allocation, which strategy always allocates the largest available block?
+Line 54: In paging, what is the main advantage compared to contiguous memory allocation?
+Line 55: The basic unit of data exchange between secondary memory and main memory is called:
+Line 56: What is concurrency in operating systems?
+Line 57: Which of the following helps manage concurrency?
+Line 58: A lock is used to:
+Line 59: What is a critical section?
+Line 60: Which of the following is NOT a lock-based synchronization mechanism?
+Line 61: What is a mutex?
+Line 62: When does a thread spin in a spinlock?
+Line 63: Which condition must be satisfied for mutual exclusion?
+Line 64: Which function is commonly associated with condition variables?
+Line 65: Which two operations are associated with condition variables?
+Line 66: What is a semaphore?
+Line 67: A binary semaphore can take values:
+Line 68: What is a file system interface responsible for?
+Line 69: Which operation creates a new file?
+Line 70: 
+Line 71: Which system call is used to open a file in C?
+Line 72: Which system call reads data from a file?
+Line 73: Which system call writes data to a file?
+Line 74: The fork() system call is used to:
+Line 75: The dup() system call is used to:
+Line 76: Which command deletes a directory?
+Line 77: Which system call removes a file in UNIX?
+Line 78: What happens to open file descriptors after fork()?
+Line 79: Which operation lists files in a directory?
+Line 80: Which data structure stores metadata about a file in UNIX?
+Line 81: Which operation must happen before writing to a file?
+Line 82: Which of the following is used to organize files?
+Line 83: Which is NOT a disk scheduling algorithm?
+Line 84: Which algorithm services request closest to current head position?
+Line 85: Purpose of disk scheduling is:
+Line 86: Which scheduling moves head from one end to another and back?
+Line 87: What does SCAN algorithm do?
+Line 88: Why is C-SCAN better than SCAN?
+Line 89: Which algorithm gives best average seek time?
+Line 90: 
+Line 91: Option One Option Two
+Line 92: Program in execution Stored program
+Line 93: Maximize CPU utilization Minimize memory usage
+Line 94: Shortest Job First First-Come First-Served
+Line 95: Simple Job Finish Shortest Job First
+Line 96: Longest remaining time Shortest remaining time
+Line 97: Priority Scheduling Round Robin
+Line 98: Turnaround Time Waiting Time
+Line 99: Finish Time - Arrival Time Arrival Time - Start Time
+Line 100: FIFO SJF
+Line 101: Lowest ID Highest priority
+Line 102: Batch systems Real-time systems
+Line 103: Mutual Exclusion Hold and Wait
+Line 104: Mutual exclusion Preemption
+Line 105: Hold and Wait condition All threads
+Line 106: Resource Allocation Graph Bankers Algorithm
+Line 107: Banker's Algorithm Dijkstra's Algorithm
+Line 108: Each process waits for a resource held by next process A resource is not released
+Line 109: A state where deadlock is impossible A state where deadlock has occurred
+Line 110: Round Robin Priority Scheduling
+Line 111: Turnaround Time Waiting Time
+Line 112: Non-preemptive Preemptive
+Line 113: First entered Last entered
+Line 114: Lower priority queue Higher priority queue
+Line 115: A low-priority process waiting indefinitely A deadlock situation
+Line 116: First Response - Arrival Time First Response - Completion Time
+Line 117: 10 ms 12 ms
+Line 118: 1.5 ms 2 ms
+Line 119: 9 ms 10 ms
+Line 120: 5 ms 4 ms
+Line 121: 2 3
+Line 122: P1 P2
+Line 123: More, Less Equal, Equal
+Line 124: 10ms 13ms
+Line 125: 
+Line 126: 8ms 10ms
+Line 127: Store data permanently Temporary storage of data and instructions
+Line 128: Paging Segmentation
+Line 129: First Fit Best Fit
+Line 130: First Fit Best Fit
+Line 131: External Fragmentation Internal Fragmentation
+Line 132: CPU Operating System
+Line 133: FIFO LRU
+Line 134: Oldest loaded page Least used page
+Line 135: 4 5
+Line 136: Replaced Locked
+Line 137: Paging Segmentation
+Line 138: Less complexity Less fragmentation
+Line 139: Paging Contiguous Memory Allocation
+Line 140: Thrashing Belady's Anomaly
+Line 141: Segmentation Swapping
+Line 142: A process requests a page not in memory Page is removed from main memory
+Line 143: First Fit Best Fit
+Line 144: Eliminates internal fragmentation Increases execution speed
+Line 145: Segment Frame
+Line 146: Multiple tasks running simultaneously Single task execution
+Line 147: Deadlock Lock
+Line 148: Prevent unauthorized access Ensure exclusive access to a shared resource
+Line 149: A section of code accessing shared resources A program header
+Line 150: Spinlock Mutex
+Line 151: A mutual exclusion object A memory address
+Line 152: While waiting to acquire the lock When releasing the lock
+Line 153: Only one thread can access the critical section at a time Multiple threads access simultaneously
+Line 154: wait() execute()
+Line 155: lock and unlock wait and signal
+Line 156: An encryption algorithm A scheduling method
+Line 157: Any integer 0 and 1
+Line 158: Managing files and directories Memory management
+Line 159: mkdir create
+Line 160: 
+Line 161: open() close()
+Line 162: read() open()
+Line 163: write() read()
+Line 164: Create new processes Duplicate a file descriptor
+Line 165: Copy file content Create a process
+Line 166: rmdir mkdir
+Line 167: unlink() open()
+Line 168: They are duplicated They are copied independently
+Line 169: rmdir mkdir
+Line 170: data block inode
+Line 171: Opening the file Deleting the file
+Line 172: Superblock inode
+Line 173: SSTF Round Robin
+Line 174: SSTF FCFS
+Line 175: Increase memory Maximize CPU load
+Line 176: LOOK SSTF
+Line 177: Moves disk head in one direction then back Jumps to first request
+Line 178: Provides uniform wait time Moves faster
+Line 179: SSTF SCAN
+Line 180: 
+Line 181: Option Three Option Four Correct Option
+Line 182: Instruction Procedure A
+Line 183: Increase system calls Reduce network latency A
+Line 184: Priority Scheduling Round Robin B
+Line 185: Shortest Jump First Simple Job First B
+Line 186: Highest priority Lowest priority B
+Line 187: MLFQ First-Come First-Served B
+Line 188: Response Time Execution Instruction D
+Line 189: Start Time - Finish Time Finish Time - Execution Time A
+Line 190: Priority Scheduling Round Robin B
+Line 191: Lowest priority Longest execution time B
+Line 192: Time-sharing systems Multiprocessing systems C
+Line 193: No Preemption Interruptible execution D
+Line 194: Spooling Thread yielding A
+Line 195: Semaphores Memory paging A
+Line 196: Spinlocks Mutex B
+Line 197: Kruskal's Algorithm Floyd's Algorithm A
+Line 198: A process locks two resources Resources are infinitely produced A
+Line 199: A state where processes are terminated A state with all resources free A
+Line 200: First-Come First-Served MLFQ C
+Line 201: Response Time Execution Time B
+Line 202: Sequential Serial B
+Line 203: Shortest job Longest job A
+Line 204: Suspended state Blocked state A
+Line 205: A preemptive switch A blocked thread A
+Line 206: First CPU Allocation - Arrival Time Execution Time A
+Line 207: 8 ms 6 ms A
+Line 208: 3 ms 3.5 ms B
+Line 209: 11 ms 12 ms B
+Line 210: 6 ms 7 ms B
+Line 211: 4 5B
+Line 212: Random Depends on Arrival B
+Line 213: Less, More None C
+Line 214: 12ms 11.5ms D
+Line 215: 
+Line 216: 12ms 14ms A
+Line 217: Perform calculations Manage I/O devices B
+Line 218: Contiguous Memory Allocation Virtual Memory C
+Line 219: Worst Fit Next Fit B
+Line 220: Worst Fit Next Fit A
+Line 221: Both None A
+Line 222: Memory Management Unit Compiler C
+Line 223: Optimal NONE B
+Line 224: Random page Smallest page A
+Line 225: 6 7B
+Line 226: Moved Pinned A
+Line 227: Contiguous Allocation Virtual Memory A
+Line 228: Better utilization Less memory requirement C
+Line 229: Virtual Memory Pure Demand Paging B
+Line 230: Overhead Fragmentation B
+Line 231: Paging Contiguous Allocation B
+Line 232: A page is loaded into memory from disk Frame is locked A
+Line 233: Worst Fit Next Fit C
+Line 234: Reduces page faults Eliminates external fragmentation D
+Line 235: Block Page D
+Line 236: Single-threaded processing Sequential processing A
+Line 237: Cache Virtual memory B
+Line 238: Increase CPU speed Manage disk scheduling B
+Line 239: A memory location A CPU register A
+Line 240: Semaphore Cache D
+Line 241: An interrupt handler A paging algorithm A
+Line 242: When scheduling While executing critical section A
+Line 243: All threads must sleep Threads must terminate A
+Line 244: release() fork() A
+Line 245: create and destroy read and write B
+Line 246: A type of memory A signaling mechanism D
+Line 247: 0 and 2 1 and 2 B
+Line 248: Network communication Managing disk blocks B
+Line 249: link open B
+Line 250: 
+Line 251: fork() unlink() A
+Line 252: write() fork() A
+Line 253: fork() dup() A
+Line 254: Clone a memory segment Copy file content A
+Line 255: Create a new memory block D
+Line 256: unlink cd A
+Line 257: mkdir() link() A
+Line 258: They are closed They are deleted A
+Line 259: rm ls D
+Line 260: file content buffer B
+Line 261: Forking a process Closing another file A
+Line 262: Directory Scheduler C
+Line 263: LOOK SCAN B
+Line 264: SCAN LOOK A
+Line 265: Reduce seek time Save bandwidth C
+Line 266: SCAN FCFS C
+Line 267: Moves head randomly Only moves clockwise A
+Line 268: Reduces CPU load Skips requests A
+Line 269: C-SCAN LOOK A
+Line 270: 
+Line 271: 
+
+
+Section Headers:
+"Option One Option Two" appears at line: 91
+"Option Three Option Four Correct Option" appears at line: 181

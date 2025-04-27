@@ -1,0 +1,340 @@
+{
+  "questions": [
+    {
+      "question": "What is Selenium primarily used for?",
+      "options": []
+    },
+    {
+      "question": "Which language is NOT supported by Selenium WebDriver?",
+      "options": []
+    },
+    {
+      "question": "Which Selenium tool is used for recording and playing back tests?",
+      "options": []
+    },
+    {
+      "question": "What type of testing does Selenium support?",
+      "options": []
+    },
+    {
+      "question": "Selenium can be used to test applications on which platform?",
+      "options": []
+    },
+    {
+      "question": "What is the function of driver.get(\"url\") in Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which component is used for distributed testing in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What is the full form of IDE in Selenium IDE?",
+      "options": []
+    },
+    {
+      "question": "Which of these is a valid WebDriver method?",
+      "options": []
+    },
+    {
+      "question": "Selenium supports automation of which browser?",
+      "options": []
+    },
+    {
+      "question": "What does the findElement() method do?",
+      "options": []
+    },
+    {
+      "question": "Selenium can be used with which testing framework in Java?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to click a button in Selenium?",
+      "options": []
+    },
+    {
+      "question": "Selenium WebDriver is designed to work with which type of applications?",
+      "options": []
+    },
+    {
+      "question": "What is the extension of Selenium IDE test case file?",
+      "options": []
+    },
+    {
+      "question": "Which function is used to enter text in a text box using Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which of these can be automated using Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which command is used to maximize the browser window?",
+      "options": []
+    },
+    {
+      "question": "What is Selenium Grid used for?",
+      "options": []
+    },
+    {
+      "question": "What does the quit() method do in Selenium?",
+      "options": []
+    },
+    {
+      "question": "",
+      "options": []
+    },
+    {
+      "question": "Question",
+      "options": []
+    },
+    {
+      "question": "What is Selenium used for?",
+      "options": []
+    },
+    {
+      "question": "Which Selenium component is used for writing test scripts?",
+      "options": []
+    },
+    {
+      "question": "Which of the following is a web automation tool?",
+      "options": []
+    },
+    {
+      "question": "What is the full form of XPath?",
+      "options": []
+    },
+    {
+      "question": "Which locator is most preferred in Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which programming language is not supported by Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to launch a URL in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What is the purpose of driver.quit()?",
+      "options": []
+    },
+    {
+      "question": "Which Selenium component allows parallel test execution?",
+      "options": []
+    },
+    {
+      "question": "What does Selenium WebDriver interact with?",
+      "options": []
+    },
+    {
+      "question": "Which function types text into an input box?",
+      "options": []
+    },
+    {
+      "question": "What is the use of driver.close()?",
+      "options": []
+    },
+    {
+      "question": "Which tool supports recording and playback in Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which class helps in performing mouse actions?",
+      "options": []
+    },
+    {
+      "question": "What is used to locate web elements in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What is the syntax to locate an element by ID?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to click a button?",
+      "options": []
+    },
+    {
+      "question": "Which browser is not supported by Selenium by default?",
+      "options": []
+    },
+    {
+      "question": "Which command is used to clear a text field?",
+      "options": []
+    },
+    {
+      "question": "What is the primary use of implicit wait?",
+      "options": []
+    },
+    {
+      "question": "Question",
+      "options": []
+    },
+    {
+      "question": "Which WebDriver is used for Chrome browser?",
+      "options": []
+    },
+    {
+      "question": "What is TestNG used for?",
+      "options": []
+    },
+    {
+      "question": "Which command is used to navigate to a webpage?",
+      "options": []
+    },
+    {
+      "question": "What does assertEquals() do in TestNG?",
+      "options": []
+    },
+    {
+      "question": "Which method checks if a checkbox is selected?",
+      "options": []
+    },
+    {
+      "question": "What type of testing does Selenium support?",
+      "options": []
+    },
+    {
+      "question": "What is the file extension of a TestNG XML file?",
+      "options": []
+    },
+    {
+      "question": "Which option launches browser in incognito mode?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to close all browser windows?",
+      "options": []
+    },
+    {
+      "question": "What is WebDriverWait used for?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to switch between frames?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to accept an alert?",
+      "options": []
+    },
+    {
+      "question": "How do you select an option from a dropdown?",
+      "options": []
+    },
+    {
+      "question": "What is FluentWait in Selenium?",
+      "options": []
+    },
+    {
+      "question": "Which element is used to define dropdown in HTML?",
+      "options": []
+    },
+    {
+      "question": "What does driver.getTitle() return?",
+      "options": []
+    },
+    {
+      "question": "Which is NOT a valid locator in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What does driver.getPageSource() return?",
+      "options": []
+    },
+    {
+      "question": "What is used to simulate keyboard actions?",
+      "options": []
+    },
+    {
+      "question": "Which annotation in TestNG is used before any test case?",
+      "options": []
+    },
+    {
+      "question": "Question",
+      "options": []
+    },
+    {
+      "question": "Which language is commonly used with Selenium?",
+      "options": []
+    },
+    {
+      "question": "What does driver.getCurrentUrl() do?",
+      "options": []
+    },
+    {
+      "question": "Which method is used to find elements by tag name?",
+      "options": []
+    },
+    {
+      "question": "How do you perform a right-click in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What is Actions class used for?",
+      "options": []
+    },
+    {
+      "question": "Which command refreshes the page in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What is the purpose of Thread.sleep()?",
+      "options": []
+    },
+    {
+      "question": "How do you switch to an alert in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What does isDisplayed() check?",
+      "options": []
+    },
+    {
+      "question": "Which locator uses link text?",
+      "options": []
+    },
+    {
+      "question": "Which method helps to find multiple elements?",
+      "options": []
+    },
+    {
+      "question": "What does driver.manage().window().maximize() do?",
+      "options": []
+    },
+    {
+      "question": "Which framework is used with Selenium for unit testing?",
+      "options": []
+    },
+    {
+      "question": "What is Selenium Grid used for?",
+      "options": []
+    },
+    {
+      "question": "Which WebDriver is used for Firefox?",
+      "options": []
+    },
+    {
+      "question": "What is the use of driver.switchTo().defaultContent()?",
+      "options": []
+    },
+    {
+      "question": "How do you handle multiple windows in Selenium?",
+      "options": []
+    },
+    {
+      "question": "What does driver.getWindowHandles() return?",
+      "options": []
+    },
+    {
+      "question": "How do you get the text of a web element?",
+      "options": []
+    },
+    {
+      "question": "What is the best way to wait for elements to appear?",
+      "options": []
+    }
+  ]
+}

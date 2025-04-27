@@ -1,0 +1,1383 @@
+{
+  "subject": "Operating Systems",
+  "description": "Test your knowledge of operating system concepts including processes, memory management, scheduling, and more.",
+  "lastUpdated": "2025-04-27T15:35:14.617Z",
+  "questions": [
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following best describes a process in an operating system?",
+      "options": [
+        "Program in execution",
+        "Stored program",
+        "Instruction",
+        "Procedure"
+      ],
+      "correctAnswer": "Program in execution",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Process Management",
+      "explanation": "Explanation for: Which of the following best de..."
+    },
+    {
+      "id": "os-scheduling-2",
+      "question": "What is the main objective of scheduling algorithms in OS?",
+      "options": [
+        "Maximize CPU utilization",
+        "Minimize memory usage",
+        "Increase system calls",
+        "Reduce network latency"
+      ],
+      "correctAnswer": "Maximize CPU utilization",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: What is the main objective of ..."
+    },
+    {
+      "id": "os-processes-3",
+      "question": "Which scheduling policy selects the process that arrives first?",
+      "options": [
+        "Shortest Job First",
+        "First-Come First-Served",
+        "Priority Scheduling",
+        "Round Robin"
+      ],
+      "correctAnswer": "First-Come First-Served",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which scheduling policy select..."
+    },
+    {
+      "id": "os-processes-4",
+      "question": "What does SJF stand for in process scheduling?",
+      "options": [
+        "Simple Job Finish",
+        "Shortest Job First",
+        "Shortest Jump First",
+        "Simple Job First"
+      ],
+      "correctAnswer": "Shortest Job First",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: What does SJF stand for in pro..."
+    },
+    {
+      "id": "os-processes-5",
+      "question": "In STCF, a process with ____ is scheduled next.",
+      "options": [
+        "Longest remaining time",
+        "Shortest remaining time",
+        "Highest priority",
+        "Lowest priority"
+      ],
+      "correctAnswer": "Shortest remaining time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In STCF, a process with ____ i..."
+    },
+    {
+      "id": "os-processes-6",
+      "question": "Which scheduling algorithm assigns time slices to each process?",
+      "options": [
+        "Priority Scheduling",
+        "Round Robin",
+        "MLFQ",
+        "First-Come First-Served"
+      ],
+      "correctAnswer": "Round Robin",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which scheduling algorithm ass..."
+    },
+    {
+      "id": "os-processes-7",
+      "question": "Which of these is not a process scheduling metric?",
+      "options": [
+        "Turnaround Time",
+        "Waiting Time",
+        "Response Time",
+        "Execution Instruction"
+      ],
+      "correctAnswer": "Execution Instruction",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which of these is not a proces..."
+    },
+    {
+      "id": "os-processes-8",
+      "question": "Turnaround time is calculated as:",
+      "options": [
+        "Finish Time - Arrival Time",
+        "Arrival Time - Start Time",
+        "Start Time - Finish Time",
+        "Finish Time - Execution Time"
+      ],
+      "correctAnswer": "Finish Time - Arrival Time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Turnaround time is calculated ..."
+    },
+    {
+      "id": "os-scheduling-9",
+      "question": "Which scheduling method favors shorter jobs?",
+      "options": [
+        "FIFO",
+        "SJF",
+        "Priority Scheduling",
+        "Round Robin"
+      ],
+      "correctAnswer": "SJF",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which scheduling method favors..."
+    },
+    {
+      "id": "os-processes-10",
+      "question": "In Priority Scheduling, the CPU is assigned to the process with:",
+      "options": [
+        "Lowest ID",
+        "Highest priority",
+        "Lowest priority",
+        "Longest execution time"
+      ],
+      "correctAnswer": "Highest priority",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In Priority Scheduling, the CP..."
+    },
+    {
+      "id": "os-scheduling-11",
+      "question": "Round Robin scheduling is most suitable for:",
+      "options": [
+        "Batch systems",
+        "Real-time systems",
+        "Time-sharing systems",
+        "Multiprocessing systems"
+      ],
+      "correctAnswer": "Time-sharing systems",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Round Robin scheduling is most..."
+    },
+    {
+      "id": "os-deadlock-12",
+      "question": "Which one is not a necessary condition for deadlock?",
+      "options": [
+        "Mutual Exclusion",
+        "Hold and Wait",
+        "No Preemption",
+        "Interruptible execution"
+      ],
+      "correctAnswer": "Interruptible execution",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Which one is not a necessary c..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following can lead to a deadlock?",
+      "options": [
+        "Mutual exclusion",
+        "Preemption",
+        "Spooling",
+        "Thread yielding"
+      ],
+      "correctAnswer": "Mutual exclusion",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Which of the following can lea..."
+    },
+    {
+      "id": "os-deadlock-14",
+      "question": "Deadlock prevention can be achieved by eliminating:",
+      "options": [
+        "Hold and Wait condition",
+        "All threads",
+        "Semaphores",
+        "Memory paging"
+      ],
+      "correctAnswer": "Hold and Wait condition",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Deadlock prevention can be ach..."
+    },
+    {
+      "id": "os-deadlock-15",
+      "question": "Deadlock avoidance is implemented using which method?",
+      "options": [
+        "Resource Allocation Graph",
+        "Banker's Algorithm",
+        "Spinlocks",
+        "Mutex"
+      ],
+      "correctAnswer": "Banker's Algorithm",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Deadlock avoidance is implemen..."
+    },
+    {
+      "id": "os-deadlock-16",
+      "question": "Which algorithm is used for deadlock avoidance?",
+      "options": [
+        "Banker's Algorithm",
+        "Dijkstra's Algorithm",
+        "Kruskal's Algorithm",
+        "Floyd's Algorithm"
+      ],
+      "correctAnswer": "Banker's Algorithm",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Which algorithm is used for de..."
+    },
+    {
+      "id": "os-deadlock-17",
+      "question": "What happens in a circular wait deadlock?",
+      "options": [
+        "Each process waits for a resource held by next process",
+        "A resource is not released",
+        "A process locks two resources",
+        "Resources are infinitely produced"
+      ],
+      "correctAnswer": "Each process waits for a resource held by next process",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: What happens in a circular wai..."
+    },
+    {
+      "id": "os-deadlock-18",
+      "question": "What is a safe state in deadlock avoidance?",
+      "options": [
+        "A state where deadlock is impossible",
+        "A state where deadlock has occurred",
+        "A state where processes are terminated",
+        "A state with all resources free"
+      ],
+      "correctAnswer": "A state where deadlock is impossible",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: What is a safe state in deadlo..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following is a non-preemptive scheduling algorithm?",
+      "options": [
+        "Round Robin",
+        "Priority Scheduling",
+        "First-Come First-Served",
+        "MLFQ"
+      ],
+      "correctAnswer": "First-Come First-Served",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which of the following is a no..."
+    },
+    {
+      "id": "os-scheduling-9",
+      "question": "Which scheduling metric measures the time a process spends waiting in the ready queue?",
+      "options": [
+        "Turnaround Time",
+        "Waiting Time",
+        "Response Time",
+        "Execution Time"
+      ],
+      "correctAnswer": "Waiting Time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which scheduling metric measur..."
+    },
+    {
+      "id": "os-processes-3",
+      "question": "Which scheduling policy allows a running process to be interrupted?",
+      "options": [
+        "Non-preemptive",
+        "Preemptive",
+        "Sequential",
+        "Serial"
+      ],
+      "correctAnswer": "Preemptive",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which scheduling policy allows..."
+    },
+    {
+      "id": "os-processes-10",
+      "question": "In Priority Scheduling, which process gets scheduled first if two processes have the same priority?",
+      "options": [
+        "First entered",
+        "Last entered",
+        "Shortest job",
+        "Longest job"
+      ],
+      "correctAnswer": "First entered",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In Priority Scheduling, which ..."
+    },
+    {
+      "id": "os-processes-23",
+      "question": "In MLFQ, a process using more CPU is moved to:",
+      "options": [
+        "Lower priority queue",
+        "Higher priority queue",
+        "Suspended state",
+        "Blocked state"
+      ],
+      "correctAnswer": "Lower priority queue",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In MLFQ, a process using more ..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following is an example of starvation?",
+      "options": [
+        "A low-priority process waiting indefinitely",
+        "A deadlock situation",
+        "A preemptive switch",
+        "A blocked thread"
+      ],
+      "correctAnswer": "A low-priority process waiting indefinitely",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Which of the following is an e..."
+    },
+    {
+      "id": "os-processes-25",
+      "question": "What defines Response Time in a process?",
+      "options": [
+        "First Response - Arrival Time",
+        "First Response - Completion Time",
+        "First CPU Allocation - Arrival Time",
+        "Execution Time"
+      ],
+      "correctAnswer": "First Response - Arrival Time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: What defines Response Time in ..."
+    },
+    {
+      "id": "os-processes-26",
+      "question": "A job arrives at time 2 ms and completes at 12 ms. What is the turnaround time?",
+      "options": [
+        "10 ms",
+        "12 ms",
+        "8 ms",
+        "6 ms"
+      ],
+      "correctAnswer": "10 ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: A job arrives at time 2 ms and..."
+    },
+    {
+      "id": "os-processes-27",
+      "question": "Process P1 needs 4 ms CPU time, P2 needs 3 ms CPU time, both arrive at same time. FCFS average waiting time?",
+      "options": [
+        "1.5 ms",
+        "2 ms",
+        "3 ms",
+        "3.5 ms"
+      ],
+      "correctAnswer": "2 ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Process P1 needs 4 ms CPU time..."
+    },
+    {
+      "id": "os-processes-28",
+      "question": "In SJF, processes have burst times 5ms, 3ms, 8ms. Average turnaround time is closest to:",
+      "options": [
+        "9 ms",
+        "10 ms",
+        "11 ms",
+        "12 ms"
+      ],
+      "correctAnswer": "10 ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In SJF, processes have burst t..."
+    },
+    {
+      "id": "os-processes-29",
+      "question": "Given 3 processes with arrival times (0ms, 2ms, 4ms) and burst times (5ms each), average waiting time with FCFS?",
+      "options": [
+        "5 ms",
+        "4 ms",
+        "6 ms",
+        "7 ms"
+      ],
+      "correctAnswer": "4 ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Given 3 processes with arrival..."
+    },
+    {
+      "id": "os-processes-30",
+      "question": "In RR with quantum 4 ms, P1 burst=10ms. How many times is P1 scheduled before completion?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctAnswer": "3",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In RR with quantum 4 ms, P1 bu..."
+    },
+    {
+      "id": "os-processes-10",
+      "question": "In Priority Scheduling, if P1(priority=2) and P2(priority=1), which executes first?",
+      "options": [
+        "P1",
+        "P2",
+        "Random",
+        "Depends on Arrival"
+      ],
+      "correctAnswer": "P2",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: In Priority Scheduling, if P1(..."
+    },
+    {
+      "id": "os-processes-32",
+      "question": "Deadlock can occur if system has ___ resources and ___ processes.",
+      "options": [
+        "More, Less",
+        "Equal, Equal",
+        "Less, More",
+        "None"
+      ],
+      "correctAnswer": "Less, More",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Deadlock",
+      "explanation": "Explanation for: Deadlock can occur if system h..."
+    },
+    {
+      "id": "os-processes-33",
+      "question": "Process P1 arrives at 0ms needs 7ms CPU, P2 arrives at 2ms needs 4ms CPU. In FCFS, what is average turnaround time?",
+      "options": [
+        "10ms",
+        "13ms",
+        "12ms",
+        "11.5ms"
+      ],
+      "correctAnswer": "11.5ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: Process P1 arrives at 0ms need..."
+    },
+    {
+      "id": "os-processes-34",
+      "question": "If Turnaround Time = 20ms, Waiting Time = 12ms, what is CPU burst time?",
+      "options": [
+        "8ms",
+        "10ms",
+        "12ms",
+        "14ms"
+      ],
+      "correctAnswer": "8ms",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "CPU Scheduling",
+      "explanation": "Explanation for: If Turnaround Time = 20ms, Wai..."
+    },
+    {
+      "id": "os-memory-35",
+      "question": "What is the main function of the main memory?",
+      "options": [
+        "Store data permanently",
+        "Temporary storage of data and instructions",
+        "Perform calculations",
+        "Manage I/O devices"
+      ],
+      "correctAnswer": "Temporary storage of data and instructions",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: What is the main function of t..."
+    },
+    {
+      "id": "os-memory-36",
+      "question": "Which memory allocation technique suffers from external fragmentation?",
+      "options": [
+        "Paging",
+        "Segmentation",
+        "Contiguous Memory Allocation",
+        "Virtual Memory"
+      ],
+      "correctAnswer": "Contiguous Memory Allocation",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: Which memory allocation techni..."
+    },
+    {
+      "id": "os-memory-37",
+      "question": "Which dynamic memory allocation algorithm searches the entire list for the smallest free suitable partition?",
+      "options": [
+        "First Fit",
+        "Best Fit",
+        "Worst Fit",
+        "Next Fit"
+      ],
+      "correctAnswer": "Best Fit",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: Which dynamic memory allocatio..."
+    },
+    {
+      "id": "os-processes-38",
+      "question": "In contiguous memory allocation, which method allocates memory blocks first that fit the process size?",
+      "options": [
+        "First Fit",
+        "Best Fit",
+        "Worst Fit",
+        "Next Fit"
+      ],
+      "correctAnswer": "First Fit",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: In contiguous memory allocatio..."
+    },
+    {
+      "id": "os-processes-39",
+      "question": "Paging helps in solving which of the following problems?",
+      "options": [
+        "External Fragmentation",
+        "Internal Fragmentation",
+        "Both",
+        "None"
+      ],
+      "correctAnswer": "External Fragmentation",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: Paging helps in solving which ..."
+    },
+    {
+      "id": "os-processes-40",
+      "question": "The mapping from logical to physical address is done by:",
+      "options": [
+        "CPU",
+        "Operating System",
+        "Memory Management Unit",
+        "Compiler"
+      ],
+      "correctAnswer": "Memory Management Unit",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: The mapping from logical to ph..."
+    },
+    {
+      "id": "os-paging-41",
+      "question": "Which algorithm replaces the page that has not been used for the longest period of time?",
+      "options": [
+        "FIFO",
+        "LRU",
+        "Optimal",
+        "NONE"
+      ],
+      "correctAnswer": "LRU",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: Which algorithm replaces the p..."
+    },
+    {
+      "id": "os-paging-42",
+      "question": "In FIFO page replacement, which page is removed?",
+      "options": [
+        "Oldest loaded page",
+        "Least used page",
+        "Random page",
+        "Smallest page"
+      ],
+      "correctAnswer": "Oldest loaded page",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: In FIFO page replacement, whic..."
+    },
+    {
+      "id": "os-paging-43",
+      "question": "A system has 4 frames. A page reference string 1,2,3,4,1,2,5. How many page faults with FIFO?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correctAnswer": "6",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: A system has 4 frames. A page ..."
+    },
+    {
+      "id": "os-paging-44",
+      "question": "If a system uses LRU replacement, the least recently accessed page is:",
+      "options": [
+        "Replaced",
+        "Locked",
+        "Moved",
+        "Pinned"
+      ],
+      "correctAnswer": "Replaced",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: If a system uses LRU replaceme..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following is a fixed partition allocation scheme?",
+      "options": [
+        "Paging",
+        "Segmentation",
+        "Contiguous Allocation",
+        "Virtual Memory"
+      ],
+      "correctAnswer": "Contiguous Allocation",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: Which of the following is a fi..."
+    },
+    {
+      "id": "os-processes-46",
+      "question": "The main advantage of dynamic partitioning over fixed partitioning is:",
+      "options": [
+        "Less complexity",
+        "Less fragmentation",
+        "Better utilization",
+        "Less memory requirement"
+      ],
+      "correctAnswer": "Better utilization",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: The main advantage of dynamic ..."
+    },
+    {
+      "id": "os-memory-36",
+      "question": "External fragmentation occurs in:",
+      "options": [
+        "Paging",
+        "Contiguous Memory Allocation",
+        "Virtual Memory",
+        "Pure Demand Paging"
+      ],
+      "correctAnswer": "Contiguous Memory Allocation",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: External fragmentation occurs ..."
+    },
+    {
+      "id": "os-paging-42",
+      "question": "In FIFO page replacement, increasing number of frames sometimes increases page faults. This is called:",
+      "options": [
+        "Thrashing",
+        "Belady's Anomaly",
+        "Overhead",
+        "Fragmentation"
+      ],
+      "correctAnswer": "Belady's Anomaly",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: In FIFO page replacement, incr..."
+    },
+    {
+      "id": "os-processes-49",
+      "question": "Which memory management scheme requires relocation of processes during execution?",
+      "options": [
+        "Segmentation",
+        "Swapping",
+        "Paging",
+        "Contiguous Allocation"
+      ],
+      "correctAnswer": "Swapping",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: Which memory management scheme..."
+    },
+    {
+      "id": "os-paging-50",
+      "question": "Page replacement occurs when:",
+      "options": [
+        "A process requests a page not in memory",
+        "Page is removed from main memory",
+        "A page is loaded into memory from disk",
+        "Frame is locked"
+      ],
+      "correctAnswer": "A process requests a page not in memory",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: Page replacement occurs when:..."
+    },
+    {
+      "id": "os-processes-38",
+      "question": "In contiguous memory allocation, which strategy always allocates the largest available block?",
+      "options": [
+        "First Fit",
+        "Best Fit",
+        "Worst Fit",
+        "Next Fit"
+      ],
+      "correctAnswer": "Worst Fit",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Memory Management",
+      "explanation": "Explanation for: In contiguous memory allocatio..."
+    },
+    {
+      "id": "os-memory-52",
+      "question": "In paging, what is the main advantage compared to contiguous memory allocation?",
+      "options": [
+        "Eliminates internal fragmentation",
+        "Increases execution speed",
+        "Reduces page faults",
+        "Eliminates external fragmentation"
+      ],
+      "correctAnswer": "Eliminates external fragmentation",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: In paging, what is the main ad..."
+    },
+    {
+      "id": "os-memory-53",
+      "question": "The basic unit of data exchange between secondary memory and main memory is called:",
+      "options": [
+        "Segment",
+        "Frame",
+        "Block",
+        "Page"
+      ],
+      "correctAnswer": "Page",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Paging & Virtual Memory",
+      "explanation": "Explanation for: The basic unit of data exchang..."
+    },
+    {
+      "id": "os-concurrency-54",
+      "question": "What is concurrency in operating systems?",
+      "options": [
+        "Multiple tasks running simultaneously",
+        "Single task execution",
+        "Single-threaded processing",
+        "Sequential processing"
+      ],
+      "correctAnswer": "Multiple tasks running simultaneously",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: What is concurrency in operati..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following helps manage concurrency?",
+      "options": [
+        "Deadlock",
+        "Lock",
+        "Cache",
+        "Virtual memory"
+      ],
+      "correctAnswer": "Lock",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: Which of the following helps m..."
+    },
+    {
+      "id": "os-concurrency-56",
+      "question": "A lock is used to:",
+      "options": [
+        "Prevent unauthorized access",
+        "Ensure exclusive access to a shared resource",
+        "Increase CPU speed",
+        "Manage disk scheduling"
+      ],
+      "correctAnswer": "Ensure exclusive access to a shared resource",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: A lock is used to:..."
+    },
+    {
+      "id": "os-concurrency-57",
+      "question": "What is a critical section?",
+      "options": [
+        "A section of code accessing shared resources",
+        "A program header",
+        "A memory location",
+        "A CPU register"
+      ],
+      "correctAnswer": "A section of code accessing shared resources",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: What is a critical section?..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following is NOT a lock-based synchronization mechanism?",
+      "options": [
+        "Spinlock",
+        "Mutex",
+        "Semaphore",
+        "Cache"
+      ],
+      "correctAnswer": "Cache",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: Which of the following is NOT ..."
+    },
+    {
+      "id": "os-concurrency-59",
+      "question": "What is a mutex?",
+      "options": [
+        "A mutual exclusion object",
+        "A memory address",
+        "An interrupt handler",
+        "A paging algorithm"
+      ],
+      "correctAnswer": "A mutual exclusion object",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: What is a mutex?..."
+    },
+    {
+      "id": "os-concurrency-60",
+      "question": "When does a thread spin in a spinlock?",
+      "options": [
+        "While waiting to acquire the lock",
+        "When releasing the lock",
+        "When scheduling",
+        "While executing critical section"
+      ],
+      "correctAnswer": "While waiting to acquire the lock",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: When does a thread spin in a s..."
+    },
+    {
+      "id": "os-processes-61",
+      "question": "Which condition must be satisfied for mutual exclusion?",
+      "options": [
+        "Only one thread can access the critical section at a time",
+        "Multiple threads access simultaneously",
+        "All threads must sleep",
+        "Threads must terminate"
+      ],
+      "correctAnswer": "Only one thread can access the critical section at a time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: Which condition must be satisf..."
+    },
+    {
+      "id": "os-processes-62",
+      "question": "Which function is commonly associated with condition variables?",
+      "options": [
+        "wait()",
+        "execute()",
+        "release()",
+        "fork()"
+      ],
+      "correctAnswer": "wait()",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: Which function is commonly ass..."
+    },
+    {
+      "id": "os-processes-63",
+      "question": "Which two operations are associated with condition variables?",
+      "options": [
+        "lock and unlock",
+        "wait and signal",
+        "create and destroy",
+        "read and write"
+      ],
+      "correctAnswer": "wait and signal",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: Which two operations are assoc..."
+    },
+    {
+      "id": "os-concurrency-64",
+      "question": "What is a semaphore?",
+      "options": [
+        "An encryption algorithm",
+        "A scheduling method",
+        "A type of memory",
+        "A signaling mechanism"
+      ],
+      "correctAnswer": "A signaling mechanism",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: What is a semaphore?..."
+    },
+    {
+      "id": "os-concurrency-65",
+      "question": "A binary semaphore can take values:",
+      "options": [
+        "Any integer",
+        "0 and 1",
+        "0 and 2",
+        "1 and 2"
+      ],
+      "correctAnswer": "0 and 1",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Concurrency & Synchronization",
+      "explanation": "Explanation for: A binary semaphore can take va..."
+    },
+    {
+      "id": "os-filesystem-66",
+      "question": "What is a file system interface responsible for?",
+      "options": [
+        "Managing files and directories",
+        "Memory management",
+        "Network communication",
+        "Managing disk blocks"
+      ],
+      "correctAnswer": "Managing files and directories",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: What is a file system interfac..."
+    },
+    {
+      "id": "os-filesystem-67",
+      "question": "Which operation creates a new file?",
+      "options": [
+        "mkdir",
+        "create",
+        "link",
+        "open"
+      ],
+      "correctAnswer": "create",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which operation creates a new ..."
+    },
+    {
+      "id": "os-filesystem-68",
+      "question": "Which system call is used to open a file in C?",
+      "options": [
+        "open()",
+        "close()",
+        "fork()",
+        "unlink()"
+      ],
+      "correctAnswer": "open()",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which system call is used to o..."
+    },
+    {
+      "id": "os-filesystem-69",
+      "question": "Which system call reads data from a file?",
+      "options": [
+        "read()",
+        "open()",
+        "write()",
+        "fork()"
+      ],
+      "correctAnswer": "read()",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which system call reads data f..."
+    },
+    {
+      "id": "os-filesystem-70",
+      "question": "Which system call writes data to a file?",
+      "options": [
+        "write()",
+        "read()",
+        "fork()",
+        "dup()"
+      ],
+      "correctAnswer": "write()",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which system call writes data ..."
+    },
+    {
+      "id": "os-processes-71",
+      "question": "The fork() system call is used to:",
+      "options": [
+        "Create new processes",
+        "Duplicate a file descriptor",
+        "Clone a memory segment",
+        "Copy file content"
+      ],
+      "correctAnswer": "Create new processes",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Process Management",
+      "explanation": "Explanation for: The fork() system call is used..."
+    },
+    {
+      "id": "os-processes-72",
+      "question": "The dup() system call is used to:",
+      "options": [
+        "Duplicate a file descriptor",
+        "Create a process",
+        "Copy file content",
+        "Create a new memory block"
+      ],
+      "correctAnswer": "Duplicate a file descriptor",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: The dup() system call is used ..."
+    },
+    {
+      "id": "os-filesystem-73",
+      "question": "Which command deletes a directory?",
+      "options": [
+        "rmdir",
+        "mkdir",
+        "unlink",
+        "cd"
+      ],
+      "correctAnswer": "rmdir",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which command deletes a direct..."
+    },
+    {
+      "id": "os-filesystem-69",
+      "question": "Which system call removes a file in UNIX?",
+      "options": [
+        "unlink()",
+        "open()",
+        "mkdir()",
+        "link()"
+      ],
+      "correctAnswer": "unlink()",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which system call removes a fi..."
+    },
+    {
+      "id": "os-processes-75",
+      "question": "What happens to open file descriptors after fork()?",
+      "options": [
+        "They are duplicated",
+        "They are copied independently",
+        "They are closed",
+        "They are deleted"
+      ],
+      "correctAnswer": "They are duplicated",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Process Management",
+      "explanation": "Explanation for: What happens to open file desc..."
+    },
+    {
+      "id": "os-filesystem-76",
+      "question": "Which operation lists files in a directory?",
+      "options": [
+        "rmdir",
+        "mkdir",
+        "rm",
+        "ls"
+      ],
+      "correctAnswer": "ls",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which operation lists files in..."
+    },
+    {
+      "id": "os-filesystem-77",
+      "question": "Which data structure stores metadata about a file in UNIX?",
+      "options": [
+        "data block",
+        "inode",
+        "file content",
+        "buffer"
+      ],
+      "correctAnswer": "inode",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which data structure stores me..."
+    },
+    {
+      "id": "os-filesystem-78",
+      "question": "Which operation must happen before writing to a file?",
+      "options": [
+        "Opening the file",
+        "Deleting the file",
+        "Forking a process",
+        "Closing another file"
+      ],
+      "correctAnswer": "Opening the file",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which operation must happen be..."
+    },
+    {
+      "id": "os-processes-1",
+      "question": "Which of the following is used to organize files?",
+      "options": [
+        "Superblock",
+        "inode",
+        "Directory",
+        "Scheduler"
+      ],
+      "correctAnswer": "Directory",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "File Systems",
+      "explanation": "Explanation for: Which of the following is used..."
+    },
+    {
+      "id": "os-scheduling-80",
+      "question": "Which is NOT a disk scheduling algorithm?",
+      "options": [
+        "SSTF",
+        "Round Robin",
+        "LOOK",
+        "SCAN"
+      ],
+      "correctAnswer": "Round Robin",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Which is NOT a disk scheduling..."
+    },
+    {
+      "id": "os-processes-81",
+      "question": "Which algorithm services request closest to current head position?",
+      "options": [
+        "SSTF",
+        "FCFS",
+        "SCAN",
+        "LOOK"
+      ],
+      "correctAnswer": "SSTF",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Which algorithm services reque..."
+    },
+    {
+      "id": "os-scheduling-82",
+      "question": "Purpose of disk scheduling is:",
+      "options": [
+        "Increase memory",
+        "Maximize CPU load",
+        "Reduce seek time",
+        "Save bandwidth"
+      ],
+      "correctAnswer": "Reduce seek time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Purpose of disk scheduling is:..."
+    },
+    {
+      "id": "os-scheduling-83",
+      "question": "Which scheduling moves head from one end to another and back?",
+      "options": [
+        "LOOK",
+        "SSTF",
+        "SCAN",
+        "FCFS"
+      ],
+      "correctAnswer": "SCAN",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Which scheduling moves head fr..."
+    },
+    {
+      "id": "os-disk-84",
+      "question": "What does SCAN algorithm do?",
+      "options": [
+        "Moves disk head in one direction then back",
+        "Jumps to first request",
+        "Moves head randomly",
+        "Only moves clockwise"
+      ],
+      "correctAnswer": "Moves disk head in one direction then back",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: What does SCAN algorithm do?..."
+    },
+    {
+      "id": "os-disk-85",
+      "question": "Why is C-SCAN better than SCAN?",
+      "options": [
+        "Provides uniform wait time",
+        "Moves faster",
+        "Reduces CPU load",
+        "Skips requests"
+      ],
+      "correctAnswer": "Provides uniform wait time",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Why is C-SCAN better than SCAN..."
+    },
+    {
+      "id": "os-processes-86",
+      "question": "Which algorithm gives best average seek time?",
+      "options": [
+        "SSTF",
+        "SCAN",
+        "C-SCAN",
+        "LOOK"
+      ],
+      "correctAnswer": "SSTF",
+      "type": "single",
+      "points": 10,
+      "subject": "os",
+      "category": "Disk Management",
+      "explanation": "Explanation for: Which algorithm gives best ave..."
+    }
+  ]
+}

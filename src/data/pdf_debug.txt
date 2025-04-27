@@ -1,0 +1,246 @@
+Question No. Question
+1What is Selenium primarily used for?
+2Which language is NOT supported by Selenium WebDriver?
+3Which Selenium tool is used for recording and playing back tests?
+4What type of testing does Selenium support?
+5Selenium can be used to test applications on which platform?
+6What is the function of driver.get("url") in Selenium?
+7Which component is used for distributed testing in Selenium?
+8What is the full form of IDE in Selenium IDE?
+9Which of these is a valid WebDriver method?
+10Selenium supports automation of which browser?
+11What does the findElement() method do?
+12Selenium can be used with which testing framework in Java?
+13Which method is used to click a button in Selenium?
+14Selenium WebDriver is designed to work with which type of applications?
+15What is the extension of Selenium IDE test case file?
+16Which function is used to enter text in a text box using Selenium?
+17Which of these can be automated using Selenium?
+18Which command is used to maximize the browser window?
+19What is Selenium Grid used for?
+20What does the quit() method do in Selenium?
+Question No. Question
+1What is Selenium used for?
+2Which Selenium component is used for writing test scripts?
+3Which of the following is a web automation tool?
+4What is the full form of XPath?
+5Which locator is most preferred in Selenium?
+6Which programming language is not supported by Selenium?
+7Which method is used to launch a URL in Selenium?
+8What is the purpose of driver.quit()?
+9Which Selenium component allows parallel test execution?
+10What does Selenium WebDriver interact with?
+11Which function types text into an input box?
+12What is the use of driver.close()?
+13Which tool supports recording and playback in Selenium?
+14Which class helps in performing mouse actions?
+15What is used to locate web elements in Selenium?
+16What is the syntax to locate an element by ID?
+17Which method is used to click a button?
+18Which browser is not supported by Selenium by default?
+19Which command is used to clear a text field?
+20What is the primary use of implicit wait?
+Question No. Question21Which WebDriver is used for Chrome browser?
+22What is TestNG used for?
+23Which command is used to navigate to a webpage?
+24What does assertEquals() do in TestNG?
+25Which method checks if a checkbox is selected?
+26What type of testing does Selenium support?
+27What is the file extension of a TestNG XML file?
+28Which option launches browser in incognito mode?
+29Which method is used to close all browser windows?
+30What is WebDriverWait used for?
+31Which method is used to switch between frames?
+32Which method is used to accept an alert?
+33How do you select an option from a dropdown?
+34What is FluentWait in Selenium?
+35Which element is used to define dropdown in HTML?
+36What does driver.getTitle() return?
+37Which is NOT a valid locator in Selenium?
+38What does driver.getPageSource() return?
+39What is used to simulate keyboard actions?
+40Which annotation in TestNG is used before any test case?
+Question No. Question
+41Which language is commonly used with Selenium?
+42What does driver.getCurrentUrl()  do?
+43Which method is used to find elements by tag name?
+44How do you perform a right-click in Selenium?
+45What is Actions  class used for?
+46Which command refreshes the page in Selenium?
+47What is the purpose of Thread.sleep() ?
+48How do you switch to an alert in Selenium?
+49What does isDisplayed()  check?
+50Which locator uses link text?
+51Which method helps to find multiple elements?
+52What does driver.manage().window().maximize()  do?
+53Which framework is used with Selenium for unit testing?
+54What is Selenium Grid used for?
+55Which WebDriver is used for Firefox?
+56What is the use of driver.switchTo().defaultContent() ?
+57How do you handle multiple windows in Selenium?
+58What does driver.getWindowHandles()  return?
+59How do you get the text of a web element?
+60What is the best way to wait for elements to appear?Option A Option B Option C
+Video editing Web application testing Mobile app development
+Java Python C++
+Selenium Grid Selenium IDE Selenium WebDriver
+Manual Testing Performance Testing Automation Testing
+Desktop only Mobile apps only Web browsers
+Submits a form Navigates to a web page Closes the browser
+Selenium IDE Selenium WebDriver Selenium Grid
+Integrated Developer Engine Integrated Development Environment Internal Data Editor
+openBrowser() getTitle() showPage()
+Chrome Firefox Edge
+Closes the current tab Finds a UI element on the page Refreshes the browser
+PyTest TestNG Mocha
+clickElement() press() click()
+Command line apps Web-based applications Android apps only
+.ide .html .xml
+enterText() type() sendKeys()
+UI testing Captcha validation Code compilation
+driver.openWindow() driver.setFullScreen() driver.maximizeWindow()
+Testing mobile apps Managing test reports Running tests in parallel
+Minimizes the window Restarts the browser Closes all browser windows
+Option A Option B Option C
+Database testing Web automation Manual testing
+Selenium Grid Selenium IDE Selenium WebDriver
+Postman JIRA Selenium
+XML Path XML Pointer XML Path Language
+Name ID Class name
+Python Ruby C#
+driver.open() driver.launch() driver.get()
+Closes the browser Closes current tab Closes only child windows
+Selenium RC Selenium IDE Selenium WebDriver
+Database Operating System Web browser
+sendText() sendKeys() typeText()
+Closes all tabs Closes current tab Logs out user
+TestNG Eclipse Selenium IDE
+MouseDriver MouseHandler Actions
+Tags Selectors Locators
+By.id("value") findById("value") ByID("value")
+submit() sendKeys() click()
+Safari Chrome Firefox
+input.clearText() clear() deleteText()
+To refresh browser To wait for page to load To wait for elements to appear
+Option A Option B Option CGeckoDriver ChromeDriver EdgeDriver
+Writing documentation Managing databases Running tests
+driver.open() driver.visit() driver.get()
+Compares images Compares strings Opens a page
+isEnabled() isDisplayed() isSelected()
+Load testing Regression testing Stress testing
+.java .test .xml
+ChromeOption() FirefoxProfile() EdgeOptions()
+driver.close() driver.end() driver.quit()
+Implicit wait Explicit wait Static wait
+switchWindow() switchTo().frame() changeFrame()
+alert.accept() alert.confirm() alert.submit()
+selectValue() choose() selectByVisibleText()
+Hard-coded wait Wait with polling Loop wait
+Page URL Page name Page title
+id name class
+HTML code CSS file JavaScript
+MouseActions Keys KeyboardDriver
+@AfterMethod @BeforeTest @Start
+Option A Option B Option C
+Java PHP Swift
+Gets page title Gets page source Gets current URL
+findElementByClass findByTag() findElement(By.tagName)
+click() contextClick() doubleClick()
+Taking screenshots Window switching Complex user gestures
+driver.reload() driver.refresh() driver.update()
+Launch URL Pause execution Wait for alert
+switchAlert() getAlert() driver.switchTo().alert()
+Element position Element visibility Page title
+By.text() By.link() By.linkText()
+findElement() findElements() getElements()
+Minimize window Close tab Maximize window
+Maven TestNG Jenkins
+Writing tests Running tests on single browser Parallel execution
+SafariDriver ChromeDriver GeckoDriver
+Exit frame Enter frame Close tab
+switchTabs() driver.switchTo().window() changeWindow()
+Current URL List of tabs Set of window handles
+element.value getText() textOf()
+Thread.sleep() Implicit wait Explicit waitOption D Correct Answer
+Data analysis B
+Ruby C
+TestNG B
+Security Testing C
+Operating systems C
+Takes a screenshot B
+JUnit C
+Internet Data Execution B
+startDriver() B
+All of the above D
+Opens a new tab B
+RSpec B
+hit() C
+Desktop applications B
+.java B
+inputText() C
+PDF editing A
+driver.manage().window().maximize() D
+Storing test data C
+Stops the current test C
+Option D Correct Answer
+Performance testing B
+Selenium Server C
+QTP C
+XML Path Locator C
+XPath B
+Java C
+driver.navigate() C
+Clears browser cookies A
+TestNG C
+CPU C
+write() B
+Stops script B
+JUnit C
+Keyboard C
+Filters C
+getElementByID("value") A
+enter() C
+Edge A
+remove() C
+To close the browser C
+Option D Correct AnswerSafariDriver B
+Installing Selenium C
+driver.start() C
+Closes browser B
+isClicked() C
+Database testing B
+.txt C
+ChromeOptions() D
+driver.exit() C
+Fluent wait B
+goToFrame() B
+alert.ok() A
+setText() C
+Alert wait B
+C
+Page source C
+link D
+Logs A
+InputHandler B
+@PreTest B
+Option D Correct Answer
+Kotlin A
+Opens new tab C
+findTagElement() C
+pressRight() B
+Assertions C
+driver.sync() B
+Click button B
+alertOpen() C
+Attribute value B
+By.name() C
+locateAll() B
+Refresh page C
+Gradle B
+Recording scripts C
+EdgeDriver C
+Refresh page A
+openTab() B
+HTML of window C
+innerHTML() B
+WaitFor() C

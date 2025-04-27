@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "question": "What is the size of an int in Java?",
+    "options": [
+      "8 bits",
+      "16 bits",
+      "32 bits",
+      "64 bits"
+    ],
+    "correctAnswer": "32 bits",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 2,
+    "question": "Which keyword is used to create a class in Java?",
+    "options": [
+      "class",
+      "Class",
+      "struct",
+      "define"
+    ],
+    "correctAnswer": "class",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 3,
+    "question": "What is the default value of a boolean variable in Java?",
+    "options": [
+      "true",
+      "false",
+      "0",
+      "null"
+    ],
+    "correctAnswer": "false",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 4,
+    "question": "Which method is the entry point of a Java program?",
+    "options": [
+      "start()",
+      "main()",
+      "run()",
+      "init()"
+    ],
+    "correctAnswer": "main()",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 5,
+    "question": "Which of these is not a Java keyword?",
+    "options": [
+      "new",
+      "class",
+      "goto",
+      "function"
+    ],
+    "correctAnswer": "function",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 6,
+    "question": "What does JVM stand for?",
+    "options": [
+      "Java Variable Machine",
+      "Java Virtual Machine",
+      "Java Visual Machine",
+      "Joint Virtual Machine"
+    ],
+    "correctAnswer": "Java Virtual Machine",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 7,
+    "question": "Which data type is used to create a variable that stores text?",
+    "options": [
+      "string",
+      "String",
+      "char",
+      "text"
+    ],
+    "correctAnswer": "String",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 8,
+    "question": "What symbol is used to end a statement in Java?",
+    "options": [
+      ".",
+      ":",
+      ";",
+      "!"
+    ],
+    "correctAnswer": ";",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 9,
+    "question": "Which of the following is used for inheritance in Java?",
+    "options": [
+      "inherits",
+      "extends",
+      "implements",
+      "instanceof"
+    ],
+    "correctAnswer": "extends",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 10,
+    "question": "Which keyword is used to prevent inheritance?",
+    "options": [
+      "final",
+      "static",
+      "private",
+      "sealed"
+    ],
+    "correctAnswer": "final",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 11,
+    "question": "Which access modifier makes a member visible to all classes?",
+    "options": [
+      "private",
+      "public",
+      "protected",
+      "default"
+    ],
+    "correctAnswer": "public",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 12,
+    "question": "Which operator is used to compare two values?",
+    "options": [
+      "=",
+      "==",
+      "!=",
+      "equals"
+    ],
+    "correctAnswer": "==",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 13,
+    "question": "Which exception is thrown when a divide-by-zero occurs?",
+    "options": [
+      "IOException",
+      "ArithmeticException",
+      "NullPointerException",
+      "NumberFormatException"
+    ],
+    "correctAnswer": "ArithmeticException",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 14,
+    "question": "How is an array declared in Java?",
+    "options": [
+      "int arr[];",
+      "array arr[];",
+      "int[] array;",
+      "int array[];"
+    ],
+    "correctAnswer": "int array[];",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 15,
+    "question": "What is the superclass of all classes in Java?",
+    "options": [
+      "String",
+      "Object",
+      "Class",
+      "System"
+    ],
+    "correctAnswer": "Object",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 16,
+    "question": "Which loop is guaranteed to execute at least once?",
+    "options": [
+      "for",
+      "while",
+      "do-while",
+      "foreach"
+    ],
+    "correctAnswer": "do-while",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 17,
+    "question": "Which of the following is a valid declaration of a package?",
+    "options": [
+      "package java;",
+      "package: java;",
+      "pack java;",
+      "pkg java;"
+    ],
+    "correctAnswer": "package java;",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 18,
+    "question": "Which method is used to get the length of a string in Java?",
+    "options": [
+      "length()",
+      "getLength()",
+      "size()",
+      "count()"
+    ],
+    "correctAnswer": "length()",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 19,
+    "question": "Which of the following is not a primitive data type?",
+    "options": [
+      "int",
+      "float",
+      "boolean",
+      "String"
+    ],
+    "correctAnswer": "String",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  },
+  {
+    "id": 20,
+    "question": "Which keyword is used to handle exceptions in Java?",
+    "options": [
+      "try",
+      "catch",
+      "throw",
+      "All of the above"
+    ],
+    "correctAnswer": "All of the above",
+    "type": "single",
+    "points": 10,
+    "subject": "Java Programming"
+  }
+] 

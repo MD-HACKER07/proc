@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://www.selenium.dev/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz By MD - Quiz App</title>
+    <!-- Theme initialization script - runs before page renders -->
+    <script>
+      (function() {
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('quiz-settings');
+        let theme = 'system';
+        
+        if (savedTheme) {
+          try {
+            const settings = JSON.parse(savedTheme);
+            theme = settings.theme || 'system';
+          } catch (e) {
+            console.error('Failed to parse theme settings');
+          }
+        }
+        
+        // Apply theme immediately to prevent flash
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else if (theme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', prefersDark);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
