@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { getQuestions } from '../services/quizService';
+import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
+import { getQuestions, getAdaptiveQuizQuestions } from '../services/quizService';
+import { generateAdaptiveQuiz, AdaptiveQuizConfig } from '../services/adaptiveQuizService';
 
 // Define the types
 export interface Question {
@@ -29,12 +30,13 @@ interface QuizContextType {
   totalScore: number;
   maxScore: number;
   selectedSubject: string | null;
-  setCurrentQuestionIndex: (index: number) => void;
+  setCurrentQuestionIndex: Dispatch<SetStateAction<number>>;
   submitAnswer: (answer: string | string[]) => void;
   restartQuiz: () => void;
-  setTimeRemaining: (time: number) => void;
+  setTimeRemaining: Dispatch<SetStateAction<number>>;
   setSelectedSubject: (subjectId: string) => void;
   loadQuestions: (subjectId: string) => Promise<void>;
+  loadAdaptiveQuestions: (subjectId: string, previousPercentage?: number) => Promise<void>;
 }
 
 // Create context with default values
@@ -47,12 +49,13 @@ const QuizContext = createContext<QuizContextType>({
   totalScore: 0,
   maxScore: 0,
   selectedSubject: null,
-  setCurrentQuestionIndex: () => {},
+  setCurrentQuestionIndex: (() => {}) as Dispatch<SetStateAction<number>>,
   submitAnswer: () => {},
   restartQuiz: () => {},
-  setTimeRemaining: () => {},
-  setSelectedSubject: () => {},
-  loadQuestions: async () => {},
+  setTimeRemaining: (() => {}) as Dispatch<SetStateAction<number>>,
+  setSelectedSubject: (_subjectId: string) => {},
+  loadQuestions: async (_subjectId: string) => {},
+  loadAdaptiveQuestions: async (_subjectId: string, _previousPercentage?: number) => {},
 });
 
 // Hook to use the quiz context
@@ -68,11 +71,9 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [totalScore, setTotalScore] = useState(0);
   const [maxScore, setMaxScore] = useState(0);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
   // Load questions for a specific subject
   const loadQuestions = async (subjectId: string): Promise<void> => {
-    setLoading(true);
     try {
       const fetchedQuestions = await getQuestions(subjectId);
       
@@ -85,6 +86,9 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       
       setQuestions(formattedQuestions);
       
+      // Dynamically allocate quiz time: 1 minute per question
+      setTimeRemaining(formattedQuestions.length * 60);
+      
       // Calculate max possible score
       const total = formattedQuestions.reduce((sum, question) => sum + question.points, 0);
       setMaxScore(total);
@@ -94,21 +98,61 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } catch (error) {
       console.error('Error loading questions:', error);
       throw error;
-    } finally {
-      setLoading(false);
+    }
+  };
+
+  // Load adaptive questions based on previous performance
+  const loadAdaptiveQuestions = async (subjectId: string, previousPercentage?: number): Promise<void> => {
+    try {
+      const fetchedQuestions = await getAdaptiveQuizQuestions(subjectId, previousPercentage);
+      
+      // Format questions to ensure they have the required properties
+      const formattedQuestions = fetchedQuestions.map(q => ({
+        ...q,
+        type: q.type || 'single',
+        points: q.points || 10
+      })) as Question[];
+      
+      setQuestions(formattedQuestions);
+      
+      // Dynamically allocate quiz time: 1 minute per question
+      setTimeRemaining(formattedQuestions.length * 60);
+      
+      // Calculate max possible score
+      const total = formattedQuestions.reduce((sum, question) => sum + question.points, 0);
+      setMaxScore(total);
+      
+      // Reset quiz state when loading new questions
+      restartQuiz();
+    } catch (error) {
+      console.error('Error loading adaptive questions:', error);
+      throw error;
     }
   };
 
   // Check if the answer is correct and calculate points
-  const checkAnswer = (questionId: string | number, userAnswer: string | string[], correctAnswer: string | string[]): boolean => {
-    if (Array.isArray(correctAnswer) && Array.isArray(userAnswer)) {
-      // For multiple-choice questions, all correct options must be selected
-      return correctAnswer.length === userAnswer.length && 
-             correctAnswer.every(answer => userAnswer.includes(answer));
-    } else {
-      // For single-choice questions
-      return userAnswer === correctAnswer;
+  // Compare answers in a forgiving way (trim + case-insensitive)
+  const normalise = (val: string) => val.trim().toLowerCase();
+
+  const checkAnswer = (
+    _questionId: string | number,
+    userAnswer: string | string[],
+    correctAnswer: string | string[]
+  ): boolean => {
+    if (Array.isArray(correctAnswer)) {
+      // Multiple correct answers scenario
+      if (!Array.isArray(userAnswer)) return false;
+      if (correctAnswer.length !== userAnswer.length) return false;
+      const correctSet = new Set(correctAnswer.map(normalise));
+      return userAnswer.every(ans => correctSet.has(normalise(ans)));
     }
+
+    // Single correct answer scenario
+    if (Array.isArray(userAnswer)) {
+      // Take first element if userAnswer stored as array
+      return normalise(userAnswer[0] ?? '') === normalise(correctAnswer);
+    }
+    return normalise(userAnswer) === normalise(correctAnswer);
   };
 
   // Submit an answer
@@ -159,6 +203,7 @@ export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setTimeRemaining,
     setSelectedSubject,
     loadQuestions,
+    loadAdaptiveQuestions,
   };
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;

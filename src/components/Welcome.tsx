@@ -1,131 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useUserAuth } from '../context/UserAuthContext';
+import { motion } from 'framer-motion';
 import { 
-  Play, Timer, Award, BookOpen, ArrowRight, Search, CheckCircle, 
-  TrendingUp, BrainCircuit, Lightbulb, Trophy, Star, Settings as SettingsIcon,
-  Sparkles
+  BrainCircuit, Settings as SettingsIcon, ArrowRight, 
+  Sparkles, Info, BookOpen, Building, Award
 } from 'lucide-react';
-import { useQuiz } from '../context/QuizContext';
 import { useSettings } from '../context/SettingsContext';
-import SubjectCard from './SubjectCard';
-import { getSubjects, getQuestions, Subject } from '../services/quizService';
 import SettingsModal from './SettingsModal';
 import NetworkSpeed from './NetworkSpeed';
-import Reviews from './Reviews';
 
 interface WelcomeProps {
-  onStart: () => void;
-  onReviewsClick: () => void;
+  onUserLogin: () => void;
+  onAdminLogin: () => void;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
-  const { questions, maxScore, setSelectedSubject, loadQuestions } = useQuiz();
+const Welcome: React.FC<WelcomeProps> = ({ onUserLogin, onAdminLogin }) => {
   const { settings } = useSettings();
+  const { userProfile } = useUserAuth();
   const [username, setUsername] = useState('');
   const [isReady, setIsReady] = useState(false);
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [showSettings, setShowSettings] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  // Load subjects from database
+  // Load username from localStorage if available
   useEffect(() => {
-    const loadSubjects = async () => {
-      setLoading(true);
-      try {
-        const subjectsData = await getSubjects();
-        
-        // Get question counts for each subject
-        const subjectsWithCounts = await Promise.all(
-          subjectsData.map(async (subject) => {
-            if (!subject.id) return subject;
-            
-            try {
-              const questions = await getQuestions(subject.id);
-              return {
-                ...subject,
-                questionCount: questions.length
-              };
-            } catch (error) {
-              console.error(`Error fetching questions for subject ${subject.id}:`, error);
-              return {
-                ...subject,
-                questionCount: 0
-              };
-            }
-          })
-        );
-        
-        setSubjects(subjectsWithCounts);
-      } catch (err) {
-        console.error('Error loading subjects:', err);
-        setError('Failed to load quiz subjects');
-      } finally {
-        setLoading(false);
+    if (userProfile?.displayName) {
+      setUsername(userProfile.displayName);
+      setIsReady(true);
+    } else {
+      const savedUsername = localStorage.getItem('quizUsername');
+      if (savedUsername) {
+        setUsername(savedUsername);
+        setIsReady(true);
       }
-    };
-
-    loadSubjects();
-  }, []);
-
-  // Retrieve username from localStorage if available
-  useEffect(() => {
-    const savedUsername = localStorage.getItem('quizUsername');
-    if (savedUsername) {
-      setUsername(savedUsername);
     }
   }, []);
-
-  // Show confetti animation after loading completes
-  useEffect(() => {
-    if (!loading && subjects.length > 0 && settings.animationsEnabled) {
-      setShowConfetti(true);
-      const timer = setTimeout(() => setShowConfetti(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [loading, subjects, settings.animationsEnabled]);
-
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (username.trim()) {
-      // Save username to localStorage
       localStorage.setItem('quizUsername', username);
       setIsReady(true);
     }
   };
-
-  const handleSubjectSelect = (id: string) => {
-    setSelectedSubjectId(id);
-    setSelectedSubject(id); // Update the selected subject in the quiz context
-  };
-
-  const startQuiz = async () => {
-    if (selectedSubjectId) {
-      try {
-        // Load questions for the selected subject
-        await loadQuestions(selectedSubjectId);
-        onStart(); // Start the quiz
-      } catch (error) {
-        console.error('Error loading questions:', error);
-        setError('Failed to load questions for this subject');
-      }
-    } else {
-      setError('Please select a subject first');
-    }
-  };
-
-  // Filter subjects based on search term
-  const filteredSubjects = subjects.filter(subject => 
-    subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (subject.description && subject.description.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
 
   // Animation variants
   const containerVariants = {
@@ -150,63 +66,43 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
     }
   };
 
-  // Dashboard stats for visual appeal
-  const stats = [
-    { value: '1.5K+', label: 'Active Users', icon: <TrendingUp className="h-5 w-5 text-emerald-500" /> },
-    { value: '10K+', label: 'Questions', icon: <BrainCircuit className="h-5 w-5 text-indigo-500" /> },
-    { value: '20+', label: 'Subjects', icon: <BookOpen className="h-5 w-5 text-blue-500" /> },
-    { value: '98%', label: 'Satisfaction', icon: <Star className="h-5 w-5 text-amber-500" /> }
-  ];
-
-  // Confetti animation
-  const confettiColors = ["#FF5252", "#4CAF50", "#2196F3", "#FFD600", "#E040FB", "#FF6E40"];
-  const confettiCount = 50;
-  const confetti = Array.from({ length: confettiCount }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: -20 - Math.random() * 30,
-    size: 5 + Math.random() * 10,
-    color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
-    rotation: Math.random() * 360,
-  }));
-
   return (
-    <>
-      {/* Confetti Animation */}
-      {showConfetti && settings.animationsEnabled && (
-        <div className="fixed inset-0 pointer-events-none z-50">
-          {confetti.map((c) => (
-            <motion.div
-              key={c.id}
-              initial={{ 
-                x: `${c.x}%`, 
-                y: `${c.y}%`, 
-                rotate: c.rotation 
-              }}
-              animate={{ 
-                y: '120%', 
-                rotate: c.rotation + 360 
-              }}
-              transition={{ 
-                duration: 3 + Math.random() * 3,
-                ease: "easeIn",
-                delay: Math.random() * 1 
-              }}
-              style={{
-                position: 'absolute',
-                width: c.size,
-                height: c.size * 0.4,
-                backgroundColor: c.color,
-                borderRadius: '2px',
-              }}
-            />
-          ))}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <BrainCircuit className="h-8 w-8 text-indigo-600 mr-3" />
+              <h1 className="text-xl font-bold text-gray-900">Exam Platform</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={onUserLogin}
+                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Student Login
+              </button>
+              <button
+                onClick={onAdminLogin}
+                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Admin Login
+              </button>
+              <button
+                onClick={() => {}}
+                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <SettingsIcon className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
-      )}
+      </header>
 
       {/* Settings Button */}
       <button
-        onClick={() => setShowSettings(true)}
+        onClick={() => setIsSettingsOpen(true)}
         className="fixed top-24 right-4 z-40 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all"
       >
         <SettingsIcon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
@@ -214,8 +110,8 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
       
       {/* Settings Modal */}
       <SettingsModal 
-        isOpen={showSettings} 
-        onClose={() => setShowSettings(false)} 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
       />
       
       {/* Network Speed Monitor */}
@@ -287,7 +183,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
                     delay: 0.5
                   }}
                 >
-                  Quiz With MD
+                  Sanjivani Proctor Exam Portal
                   <Sparkles className="h-6 w-6 ml-2 text-yellow-300" />
                 </motion.span>
               </h1>
@@ -301,27 +197,10 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
             >
               Challenge yourself with our interactive quizzes. Expand your knowledge, track your progress, and compete with others.
             </motion.p>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-md rounded-lg p-3 text-center transition-transform hover:transform hover:scale-105"
-                  initial={settings.animationsEnabled ? { y: 30, opacity: 0 } : {}}
-                  animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-                  transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                  whileHover={settings.animationsEnabled ? { y: -5 } : {}}
-                >
-                  <div className="flex justify-center mb-2">{stat.icon}</div>
-                  <div className="font-bold text-xl">{stat.value}</div>
-                  <div className="text-xs opacity-80">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </motion.div>
 
-        <div className="p-8">
+        <div className="p-8 text-center">
           {!isReady ? (
             <motion.form 
               variants={settings.animationsEnabled ? itemVariants : {}} 
@@ -341,285 +220,181 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onReviewsClick }) => {
                   className="form-input text-lg py-3 px-4 w-full border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                   placeholder="Your name"
                   value={username}
-                  onChange={handleUsernameChange}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                 />
               </div>
               <motion.button 
-                type="submit" 
-                className="w-full py-3 px-6 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white transform transition-all hover:scale-[1.02] shadow-md hover:shadow-lg flex justify-center items-center"
+                type="submit"
+                className="w-full py-3 px-6 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all"
                 whileHover={settings.animationsEnabled ? { scale: 1.03 } : {}}
                 whileTap={settings.animationsEnabled ? { scale: 0.98 } : {}}
               >
                 Continue
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 inline-block" />
               </motion.button>
             </motion.form>
           ) : (
-            <motion.div variants={settings.animationsEnabled ? itemVariants : {}} className="mb-8">
-              <div className="mb-6">
-                {username && (
-                  <motion.div 
-                    className="mb-6 text-center"
-                    initial={settings.animationsEnabled ? { y: -20, opacity: 0 } : {}}
-                    animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                      Hello, <span className="text-indigo-600 dark:text-indigo-400">{username}</span>! 
-                    </h2>
-                    <p className="text-gray-600 dark:text-gray-300">Select a subject to begin your quiz journey</p>
-                  </motion.div>
-                )}
-                
-                <motion.div 
-                  className="relative mb-6"
-                  initial={settings.animationsEnabled ? { y: 20, opacity: 0 } : {}}
-                  animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                    <Search className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search subjects..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  />
-                </motion.div>
-                
-                {error && (
-                  <motion.div 
-                    className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 p-4 rounded-xl mb-6 flex items-center"
-                    initial={settings.animationsEnabled ? { opacity: 0 } : {}}
-                    animate={settings.animationsEnabled ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <svg className="h-5 w-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                    {error}
-                  </motion.div>
-                )}
-                
-                {loading ? (
-                  <div className="flex justify-center my-12">
-                    <motion.div 
-                      className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-indigo-600"
-                      animate={settings.animationsEnabled ? { rotate: 360 } : {}}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    />
-                  </div>
-                ) : subjects.length === 0 ? (
-                  <motion.div 
-                    className="text-center p-12 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700"
-                    initial={settings.animationsEnabled ? { scale: 0.95, opacity: 0 } : {}}
-                    animate={settings.animationsEnabled ? { scale: 1, opacity: 1 } : {}}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <BookOpen className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                    <p className="text-gray-500 dark:text-gray-400 text-lg">No subjects available. Please check back later.</p>
-                  </motion.div>
-                ) : (
-                  <>
-                    <motion.h2 
-                      className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center"
-                      initial={settings.animationsEnabled ? { x: -20, opacity: 0 } : {}}
-                      animate={settings.animationsEnabled ? { x: 0, opacity: 1 } : {}}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Lightbulb className="h-6 w-6 mr-2 text-amber-500" />
-                      Select a Subject
-                    </motion.h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
-                      <AnimatePresence>
-                        {filteredSubjects.map((subject, index) => (
-                          <motion.div
-                            key={subject.id}
-                            initial={settings.animationsEnabled ? { scale: 0.9, opacity: 0, y: 20 } : {}}
-                            animate={settings.animationsEnabled ? { scale: 1, opacity: 1, y: 0 } : {}}
-                            transition={{ 
-                              duration: 0.5, 
-                              delay: index * 0.1,
-                              type: "spring",
-                              stiffness: 100
-                            }}
-                            whileHover={settings.animationsEnabled ? { 
-                              scale: 1.05,
-                              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                            } : {}}
-                          >
-                            <SubjectCard
-                              id={subject.id || ''}
-                              name={subject.name}
-                              description={subject.description}
-                              icon={subject.icon}
-                              color={subject.color}
-                              questionCount={subject.questionCount || 0}
-                              isSelected={selectedSubjectId === subject.id}
-                              onClick={handleSubjectSelect}
-                            />
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                    
-                    {filteredSubjects.length === 0 && (
-                      <motion.div 
-                        className="text-center p-8 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700"
-                        initial={settings.animationsEnabled ? { opacity: 0 } : {}}
-                        animate={settings.animationsEnabled ? { opacity: 1 } : {}}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <Search className="h-10 w-10 mx-auto text-gray-400 mb-3" />
-                        <p className="text-gray-500 dark:text-gray-400">No subjects match your search. Try a different term.</p>
-                      </motion.div>
-                    )}
-                  </>
-                )}
-                
-                {selectedSubjectId && (
-                  <motion.button 
-                    onClick={startQuiz}
-                    className="w-full py-4 px-6 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white transform transition-all hover:scale-[1.02] shadow-md hover:shadow-lg flex items-center justify-center mt-8"
-                    disabled={loading}
-                    initial={settings.animationsEnabled ? { y: 20, opacity: 0 } : {}}
-                    animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    whileHover={settings.animationsEnabled ? { scale: 1.05 } : {}}
-                    whileTap={settings.animationsEnabled ? { scale: 0.98 } : {}}
-                  >
-                    <Play className="h-5 w-5 mr-2" />
-                    Start Quiz
-                  </motion.button>
-                )}
-              </div>
-              
-              <motion.div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-900 p-6 rounded-xl border border-indigo-100 dark:border-gray-700"
-                initial={settings.animationsEnabled ? { y: 40, opacity: 0 } : {}}
-                animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 }}
+            <motion.div 
+              className="text-center py-12"
+              initial={settings.animationsEnabled ? { y: -20, opacity: 0 } : {}}
+              animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+                Welcome back, <span className="text-indigo-600 dark:text-indigo-400">{userProfile?.displayName || username}</span>!
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Head over to your dashboard to view available quizzes and track your progress.
+              </p>
+              <motion.button
+                onClick={onUserLogin}
+                className="px-8 py-3 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
+                whileHover={settings.animationsEnabled ? { scale: 1.05 } : {}}
+                whileTap={settings.animationsEnabled ? { scale: 0.98 } : {}}
               >
-                <div className="flex items-center">
-                  <div className="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-full mr-4">
-                    <BookOpen className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Subjects</p>
-                    <p className="font-semibold text-lg">{subjects.length} Available</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full mr-4">
-                    <Timer className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Time Limit</p>
-                    <p className="font-semibold text-lg">60 Seconds per Question</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="bg-amber-100 dark:bg-amber-900/50 p-3 rounded-full mr-4">
-                    <Award className="h-6 w-6 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Certificate</p>
-                    <p className="font-semibold text-lg">Earn on Completion</p>
-                  </div>
-                </div>
-              </motion.div>
+                Go to Dashboard
+                <ArrowRight className="ml-2 h-5 w-5 inline-block" />
+              </motion.button>
             </motion.div>
           )}
 
-          {/* Reviews Section */}
+          {/* About Sanjivani University */}
           <motion.div 
-            className="mt-12"
-            initial={settings.animationsEnabled ? { opacity: 0, y: 30 } : {}}
+            className="mt-16 mb-16"
+            initial={settings.animationsEnabled ? { opacity: 0, y: 20 } : {}}
             animate={settings.animationsEnabled ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Reviews showTitle={false} />
-            <div className="flex justify-center mt-4">
-              <motion.button
-                onClick={onReviewsClick}
-                className="px-6 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full hover:bg-indigo-200 dark:hover:bg-indigo-800/50 transition-colors flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+            <div className="text-center mb-12">
+              <motion.div 
+                className="inline-flex items-center justify-center mb-4"
+                whileHover={settings.animationsEnabled ? { rotate: 5 } : {}}
               >
-                View All Reviews & Submit Your Own
-              </motion.button>
+                <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-full">
+                  <div className="bg-white dark:bg-gray-900 rounded-full p-2">
+                    <Info className="h-8 w-8 text-indigo-600" />
+                  </div>
+                </div>
+              </motion.div>
+              <h3 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-4">
+                About Sanjivani University
+              </h3>
+              <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full"></div>
             </div>
-          </motion.div>
-
-          <motion.div 
-            variants={settings.animationsEnabled ? itemVariants : {}} 
-            className="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8"
-            initial={settings.animationsEnabled ? { opacity: 0, y: 30 } : {}}
-            animate={settings.animationsEnabled ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <h3 className="font-semibold mb-6 text-xl text-center flex items-center justify-center">
-              <CheckCircle className="h-5 w-5 mr-2 text-emerald-500" />
-              How It Works
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* Card 1 */}
               <motion.div 
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700"
-                whileHover={settings.animationsEnabled ? { y: -5, scale: 1.02 } : {}}
+                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
+                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full h-10 w-10 flex items-center justify-center mr-3 shadow-md">
-                    <span className="text-white font-bold">1</span>
-                  </div>
-                  <h4 className="font-medium text-lg">Choose a Subject</h4>
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Glowing corner element */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
+                
+                <div className="relative z-10">
+                  <motion.div 
+                    className="inline-flex mb-5"
+                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: 10 } : {}}
+                  >
+                    <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-3 rounded-2xl shadow-lg">
+                      <BookOpen className="text-white h-7 w-7" />
+                    </div>
+                  </motion.div>
+                  
+                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    World-Class Education
+                  </h4>
+                  
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                    Sanjivani Rural Education Society’s Sanjivani University is a premier institution located in Ahmednagar, Maharashtra. Established with a vision to impart world-class education, the University offers multidisciplinary programs in engineering, pharmacy, management, and liberal studies.
+                  </p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">Browse through our diverse collection of subjects and select one that interests you.</p>
               </motion.div>
               
+              {/* Card 2 */}
               <motion.div 
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700"
-                whileHover={settings.animationsEnabled ? { y: -5, scale: 1.02 } : {}}
+                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
+                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-full h-10 w-10 flex items-center justify-center mr-3 shadow-md">
-                    <span className="text-white font-bold">2</span>
-                  </div>
-                  <h4 className="font-medium text-lg">Answer Questions</h4>
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Glowing corner element */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
+                
+                <div className="relative z-10">
+                  <motion.div 
+                    className="inline-flex mb-5"
+                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: -10 } : {}}
+                  >
+                    <div className="bg-gradient-to-r from-green-500 to-teal-500 p-3 rounded-2xl shadow-lg">
+                      <Building className="text-white h-7 w-7" />
+                    </div>
+                  </motion.div>
+                  
+                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                    State-of-the-Art Infrastructure
+                  </h4>
+                  
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                    With state-of-the-art infrastructure, experiential learning pedagogy, and strong industry collaborations, Sanjivani nurtures students to become globally competent professionals and socially responsible citizens.
+                  </p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">Test your knowledge with carefully crafted questions. Race against the clock with a 60-second timer.</p>
               </motion.div>
               
+              {/* Card 3 */}
               <motion.div 
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700"
-                whileHover={settings.animationsEnabled ? { y: -5, scale: 1.02 } : {}}
+                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
+                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="bg-gradient-to-r from-amber-500 to-orange-500 rounded-full h-10 w-10 flex items-center justify-center mr-3 shadow-md">
-                    <span className="text-white font-bold">3</span>
-                  </div>
-                  <h4 className="font-medium text-lg">Get Certified</h4>
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Glowing corner element */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
+                
+                <div className="relative z-10">
+                  <motion.div 
+                    className="inline-flex mb-5"
+                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: 10 } : {}}
+                  >
+                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-2xl shadow-lg">
+                      <Award className="text-white h-7 w-7" />
+                    </div>
+                  </motion.div>
+                  
+                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    Innovation & Excellence
+                  </h4>
+                  
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                    The University’s vibrant campus life, research culture, and emphasis on innovation consistently place it among India’s leading emerging universities.
+                  </p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400">Score high and receive a personalized certificate to showcase your achievement.</p>
               </motion.div>
             </div>
           </motion.div>
           
           {/* Footer */}
           <motion.div 
-            className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400"
+            className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-500 dark:text-gray-400"
             initial={settings.animationsEnabled ? { opacity: 0 } : {}}
             animate={settings.animationsEnabled ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <p>© {new Date().getFullYear()} Quiz With MD | All Rights Reserved</p>
+            <p> Sanjivani Proctor Exam Portal | All Rights Reserved</p>
             <p className="mt-1">Designed with ♥ for lifelong learners</p>
           </motion.div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 };
 

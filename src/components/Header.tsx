@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Moon, Sun, Settings, BarChart, BookOpen, ShieldAlert, Info, Wifi, WifiOff } from 'lucide-react';
+import { Menu, X, Moon, Sun, Settings, BarChart, ShieldAlert, Info, Wifi, WifiOff, Home } from 'lucide-react';
+import logoImg from '../logo/logo.png';
 import { useQuiz } from '../context/QuizContext';
 import { useSettings } from '../context/SettingsContext';
-import Timer from './Timer';
 import SettingsModal from './SettingsModal';
 
 interface HeaderProps {
-  appState: string;
+  appState?: 'welcome' | 'quiz' | 'dashboard' | 'admin' | 'results' | 'profile' | 'registration' | 'reviews' | 'detailed-results' | 'about' | 'user-login' | 'user-profile' | 'proctored-quiz' | 'adaptive-quiz-selector';
   onAdminClick?: () => void;
   onAboutClick?: () => void;
+  onHomeClick?: () => void;
+  questions?: any[];
+  userProfile?: { displayName?: string; email?: string; prn?: string; firstName?: string; lastName?: string };
 }
 
-const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick }) => {
+const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick, onHomeClick, userProfile }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
@@ -113,8 +116,8 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <BookOpen className="h-7 w-7 text-indigo-600 dark:text-indigo-400 mr-2.5 filter drop-shadow-md" />
-              <span className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 tracking-tight filter drop-shadow-sm">QUIZ WITH MD</span>
+              <img src={logoImg} alt="Logo" className="h-8 w-8 mr-2.5 rounded-md shadow-sm" />
+              <span className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 tracking-tight filter drop-shadow-sm">SANJIVANI PROCTOR EXAM PORTAL</span>
             </motion.div>
 
             {/* Quiz Progress (shows only during quiz) */}
@@ -129,11 +132,7 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
                 <span className="font-bold text-indigo-800 dark:text-indigo-200">{currentQuestionIndex + 1}</span>
                 <span className="mx-1 text-indigo-500">/</span>
                 <span className="text-indigo-600 dark:text-indigo-400">{questions.length}</span>
-                {settings?.timerVisible && (
-                  <div className="ml-4 border-l border-indigo-200 dark:border-indigo-700 pl-4">
-                    <Timer />
-                  </div>
-                )}
+
               </motion.div>
             )}
 
@@ -156,6 +155,22 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-3">
+              {/* Home Button */}
+              {onHomeClick && (
+                <motion.button 
+                  onClick={onHomeClick}
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all hover:shadow-md"
+                  title="Home"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                >
+                  <Home className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                </motion.button>
+              )}
+
               {/* Theme Toggle */}
               <motion.button 
                 onClick={toggleTheme}
@@ -165,26 +180,13 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
               >
                 {isDarkMode ? (
                   <Sun className="h-5 w-5 text-yellow-400" />
                 ) : (
                   <Moon className="h-5 w-5 text-indigo-600" />
                 )}
-              </motion.button>
-
-              {/* Settings Button */}
-              <motion.button 
-                onClick={openSettings}
-                className="p-2 rounded-full bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-800/50 transition-all hover:shadow-md"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
-              >
-                <Settings className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               </motion.button>
 
               {/* Stats Button */}
@@ -215,8 +217,8 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
                 </motion.button>
               )}
 
-              {/* Admin Button */}
-              {onAdminClick && (
+              {/* Admin Button - Only show to authenticated admins */}
+              {onAdminClick && typeof localStorage !== 'undefined' && localStorage.getItem('isAdminLoggedIn') === 'true' && (
                 <motion.button 
                   onClick={onAdminClick}
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all hover:shadow-md"
@@ -229,6 +231,21 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
                 >
                   <ShieldAlert className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                 </motion.button>
+              )}
+            </div>
+
+            {/* User Info */}
+            <div className="flex items-center space-x-3">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden sm:inline">
+                {userProfile?.displayName || 
+                 (userProfile?.firstName && userProfile?.lastName ? 
+                   `${userProfile.firstName} ${userProfile.lastName}` : 
+                   userProfile?.email || 'User')}
+              </span>
+              {userProfile?.prn && (
+                <span className="px-2 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-bold rounded-full whitespace-nowrap">
+                  PRN: {userProfile.prn}
+                </span>
               )}
             </div>
 
@@ -269,11 +286,7 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick })
                       <span className="font-bold">{currentQuestionIndex + 1}</span>
                       <span className="mx-1">/</span>
                       <span className="text-gray-500">{questions.length}</span>
-                      {settings?.timerVisible && (
-                        <div className="ml-4">
-                          <Timer />
-                        </div>
-                      )}
+                      
                     </div>
                   )}
                   

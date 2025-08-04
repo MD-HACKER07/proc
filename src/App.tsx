@@ -1,18 +1,24 @@
 import React, { useState, useEffect, ErrorInfo, Component, ReactNode } from 'react';
 import { QuizProvider } from './context/QuizContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
+import { UserAuthProvider, useUserAuth } from './context/UserAuthContext';
 import { SettingsProvider, useSettings } from './context/SettingsContext';
+import { UserExamProvider } from './context/UserExamContext';
 import { AnimatePresence } from 'framer-motion';
-import { CircleUserRound, Settings, BarChart, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import Welcome from './components/Welcome';
-import Quiz from './components/Quiz';
 import Results from './components/Results';
+import DetailedResults from './components/DetailedResults';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Login from './components/admin/Login';
-import Dashboard from './components/admin/Dashboard';
+import AdminModule from './components/admin/AdminModule';
 import AboutDeveloper from './components/AboutDeveloper';
 import ReviewPage from './components/ReviewPage';
+import UserLogin from './components/UserLogin';
+import UserProfile from './components/UserProfile';
+import Quiz from './components/Quiz';
+import RegistrationForm from './components/RegistrationForm';
+import AdaptiveQuizSelector from './components/AdaptiveQuizSelector';
 import './styles/main.css';
 
 // Error Boundary to catch errors in components
@@ -61,45 +67,29 @@ class ErrorBoundary extends Component<{ children: ReactNode, fallback?: ReactNod
   }
 }
 
-// Admin routes component
-const AdminRoutes = () => {
-  const { user, loading } = useAuth();
-  const [adminView, setAdminView] = useState<'login' | 'dashboard'>('login');
-
-  useEffect(() => {
-    if (user) {
-      setAdminView('dashboard');
-    } else {
-      setAdminView('login');
-    }
-  }, [user]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  return (
-    <AnimatePresence mode="wait">
-      {adminView === 'login' ? <Login /> : <Dashboard />}
-    </AnimatePresence>
-  );
-};
-
 function App() {
-  const [appState, setAppState] = useState('welcome'); // welcome, quiz, results, admin, about, reviews
+  const [appState, setAppState] = useState<'welcome' | 'quiz' | 'dashboard' | 'admin' | 'results' | 'profile' | 'registration' | 'reviews' | 'detailed-results' | 'about' | 'user-login' | 'user-profile' | 'proctored-quiz' | 'adaptive-quiz-selector'>('welcome'); // welcome, quiz-dashboard, quiz-active, proctored-quiz, results, admin, about, reviews, user-login, user-profile, adaptive-quiz-selector
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdaptiveQuiz, setIsAdaptiveQuiz] = useState(false);
+  const [previousPercentage, setPreviousPercentage] = useState<number | undefined>(undefined);
+
+
+
+  // Check for admin login
+  useEffect(() => {
+    const isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
+    const adminSession = localStorage.getItem('adminSession');
+    
+    if (isAdminLoggedIn && adminSession) {
+      setAppState('admin');
+    }
+  }, []);
 
   // Initialize app
   useEffect(() => {
     // Check URL for paths
     const path = window.location.pathname;
-    if (path.includes('/admin')) {
-      setAppState('admin');
-    } else if (path.includes('/about')) {
+    if (path.includes('/about')) {
       setAppState('about');
     } else if (path.includes('/reviews')) {
       setAppState('reviews');
@@ -133,17 +123,21 @@ function App() {
     // Call the function to initialize theme
     initializeTheme();
 
+    // Add event listener for detailed registration form
+    const handleDetailedRegistration = () => {
+      setAppState('registration');
+    };
+
+    window.addEventListener('showDetailedRegistration', handleDetailedRegistration);
+
     // Set loading to false after initial checks
     setIsLoading(false);
+    
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('showDetailedRegistration', handleDetailedRegistration);
+    };
   }, []);
-
-  const startQuiz = () => {
-    setAppState('quiz');
-  };
-
-  const endQuiz = () => {
-    setAppState('results');
-  };
 
   const resetQuiz = () => {
     setAppState('welcome');
@@ -151,45 +145,72 @@ function App() {
 
   const goToAdmin = () => {
     setAppState('admin');
-    // Update URL without reload
-    window.history.pushState({}, '', '/admin');
   };
+
+
 
   const goToHome = () => {
     setAppState('welcome');
-    // Update URL without reload
-    window.history.pushState({}, '', '/');
   };
 
   const goToAbout = () => {
     setAppState('about');
-    // Update URL without reload
-    window.history.pushState({}, '', '/about');
   };
 
-  const goToReviews = () => {
-    setAppState('reviews');
-    // Update URL without reload
-    window.history.pushState({}, '', '/reviews');
-  };
+
 
   // Render the appropriate component based on app state
   const renderContent = () => {
     switch (appState) {
       case 'welcome':
-        return <Welcome onStart={startQuiz} onReviewsClick={goToReviews} />;
+        return (
+          <Welcome 
+            onUserLogin={() => setAppState('user-login')}
+            onAdminLogin={() => setAppState('admin')}
+          />
+        );
       case 'quiz':
-        return <Quiz onComplete={endQuiz} />;
+        return <Quiz onComplete={() => setAppState('results')} />;
+      case 'proctored-quiz':
+        return <Quiz onComplete={() => setAppState('results')} />;
+
       case 'results':
         return <Results onRestart={resetQuiz} />;
+      case 'detailed-results':
+        return <DetailedResults onBack={() => setAppState('user-profile')} />;
       case 'admin':
-        return <AdminRoutes />;
+        return <AdminModule onHomeClick={goToHome} />;
       case 'about':
         return <AboutDeveloper />;
       case 'reviews':
         return <ReviewPage onBackClick={goToHome} />;
+      case 'user-login':
+        return <UserLogin onLogin={() => setAppState('user-profile')} onRegister={() => setAppState('user-profile')} onHomeClick={goToHome} />;
+      case 'registration':
+        return <RegistrationForm onRegistrationComplete={() => setAppState('user-profile')} onHomeClick={goToHome} />;
+      case 'user-profile':
+        return <UserProfile onStartQuiz={(quizType?: string) => {
+          if (quizType === 'detailed-results') {
+            setAppState('detailed-results');
+          } else if (quizType === 'adaptive') {
+            setAppState('adaptive-quiz-selector');
+          } else {
+            setAppState('quiz');
+          }
+        }} onLogout={resetQuiz} />;
+      case 'adaptive-quiz-selector':
+        return <AdaptiveQuizSelector onStartQuiz={(subjectId: string, isAdaptive: boolean, previousPercentage?: number) => {
+          // Set the adaptive quiz state and load appropriate questions
+          setIsAdaptiveQuiz(isAdaptive);
+          setPreviousPercentage(previousPercentage);
+          // The Quiz component will handle loading adaptive questions based on these settings
+          setAppState('quiz');
+        }} />;
       default:
-        return <Welcome onStart={startQuiz} onReviewsClick={goToReviews} />;
+        return <Welcome 
+          onUserLogin={() => setAppState('user-login')} 
+          onAdminLogin={() => setAppState('admin')} 
+        />;
     }
   };
 
@@ -204,16 +225,20 @@ function App() {
   return (
     <ErrorBoundary>
       <AuthProvider>
-        <SettingsProvider>
-          <QuizProvider>
-            <AppContent 
-              appState={appState} 
-              goToAdmin={goToAdmin} 
-              goToAbout={goToAbout} 
-              renderContent={renderContent} 
-            />
-          </QuizProvider>
-        </SettingsProvider>
+        <UserAuthProvider>
+          <SettingsProvider>
+            <QuizProvider>
+              <UserExamProvider>
+                <AppContent 
+                  appState={appState} 
+                  goToAdmin={goToAdmin} 
+                  goToAbout={goToAbout} 
+                  renderContent={renderContent} 
+                />
+              </UserExamProvider>
+            </QuizProvider>
+          </SettingsProvider>
+        </UserAuthProvider>
       </AuthProvider>
     </ErrorBoundary>
   );
@@ -221,12 +246,13 @@ function App() {
 
 // Separate component to access settings context
 function AppContent({ appState, goToAdmin, goToAbout, renderContent }: {
-  appState: string;
+  appState: 'welcome' | 'quiz' | 'dashboard' | 'admin' | 'results' | 'profile' | 'registration' | 'reviews' | 'detailed-results' | 'about' | 'user-login' | 'user-profile' | 'proctored-quiz' | 'adaptive-quiz-selector';
   goToAdmin: () => void;
   goToAbout: () => void;
   renderContent: () => React.ReactNode;
 }) {
   const { settings } = useSettings();
+  const { userProfile } = useUserAuth();
 
   // Apply theme when component mounts or settings change
   useEffect(() => {
@@ -254,6 +280,7 @@ function AppContent({ appState, goToAdmin, goToAbout, renderContent }: {
             appState={appState}
             onAdminClick={goToAdmin}
             onAboutClick={goToAbout}
+            userProfile={userProfile || undefined}
           />
         </ErrorBoundary>
       )}

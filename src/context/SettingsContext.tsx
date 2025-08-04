@@ -17,6 +17,8 @@ export interface Settings {
   notifications: boolean;
   timerVisible: boolean;
   timerDuration: number;
+  examDuration: number;
+  selectedSubject: string;
   highContrastMode: boolean;
   shuffleQuestions: boolean;
   shuffleOptions: boolean;
@@ -40,6 +42,8 @@ const defaultSettings: Settings = {
   notifications: true,
   timerVisible: true,
   timerDuration: 30, // 30 seconds per question
+  examDuration: 30,   // 30 minutes default exam length
+  selectedSubject: '',
   highContrastMode: false,
   shuffleQuestions: false,
   shuffleOptions: false,

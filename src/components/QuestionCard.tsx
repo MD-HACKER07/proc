@@ -135,16 +135,6 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             Question {questionNumber} of {totalQuestions}
           </span>
           
-          {!showFeedback && (
-            <button 
-              onClick={() => setShowAnswer(!showAnswer)}
-              className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center text-sm"
-              title="Show answer"
-            >
-              <HelpCircle className="h-4 w-4 mr-1" />
-              {showAnswer ? 'Hide Answer' : 'Show Answer'}
-            </button>
-          )}
         </div>
         <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">
           {question}
@@ -257,23 +247,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Submit Button */}
-      <motion.button
-        onClick={onSubmit}
-        disabled={isNextDisabled() || isSubmitting || showAnswer}
-        className={`btn-primary w-full flex items-center justify-center ${
-          isNextDisabled() || showAnswer ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        variants={animationsEnabled ? buttonVariants : {}}
-        whileHover="hover"
-        whileTap="tap"
-      >
-        {isSubmitting ? (
-          <span className="inline-block h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
-        ) : null}
-        {showFeedback ? 'Next Question' : 'Submit Answer'}
-        <ChevronRight className="h-5 w-5 ml-1" />
-      </motion.button>
+
     </div>
   );
 };

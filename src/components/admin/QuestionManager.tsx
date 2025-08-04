@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { Question, Subject, addQuestion, updateQuestion, deleteQuestion, getQuestions, getSubjects, addSubject, deleteAllQuestions } from '../../services/quizService';
-import { importQuestionsFromFile, extractAndCreateSubjects } from '../../services/importService';
-import { UploadCloud, AlertCircle, Check, X, Trash, Search } from 'lucide-react';
-import { Plus } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Plus, Trash, UploadCloud, Search, AlertCircle, Check, X } from 'lucide-react';
+import { Question, Subject, addQuestion, updateQuestion, deleteQuestion, getQuestions, getSubjects, deleteAllQuestions } from '../../services/quizService';
+import CsvImportModal from './CsvImportModal';
 
 interface QuestionFormData {
   id?: string;
@@ -10,6 +9,7 @@ interface QuestionFormData {
   options: string[];
   correctAnswer: string;
   subject: string;
+  difficulty: 'easy' | 'medium' | 'hard';
 }
 
 interface ImportStatus {
@@ -30,7 +30,8 @@ const QuestionManager = () => {
     question: '',
     options: ['', '', '', ''],
     correctAnswer: '',
-    subject: ''
+    subject: '',
+    difficulty: 'medium'
   });
   const [isEditing, setIsEditing] = useState(false);
   const [importStatus, setImportStatus] = useState<ImportStatus>({
@@ -40,15 +41,8 @@ const QuestionManager = () => {
     count: 0
   });
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [importData, setImportData] = useState({
-    file: null as File | null,
-    subjectId: '',
-    createNewSubject: false,
-    newSubjectName: '',
-    autoDetectSubjects: false
-  });
   const [searchTerm, setSearchTerm] = useState('');
+  const [difficultyFilter, setDifficultyFilter] = useState<'all' | 'easy' | 'medium' | 'hard'>('all');
   const [successMessage, setSuccessMessage] = useState('');
 
   // Load questions and subjects
@@ -78,7 +72,8 @@ const QuestionManager = () => {
       question: '',
       options: ['', '', '', ''],
       correctAnswer: '',
-      subject: subjects[0]?.id || ''
+      subject: subjects[0]?.id || '',
+      difficulty: 'medium'
     });
     setIsEditing(false);
   };
@@ -97,7 +92,8 @@ const QuestionManager = () => {
       question: question.question,
       options: [...question.options],
       correctAnswer: question.correctAnswer,
-      subject: question.subject || ''
+      subject: question.subject || '',
+      difficulty: question.difficulty || 'medium'
     });
     setIsEditing(true);
     setIsModalOpen(true);
@@ -131,14 +127,16 @@ const QuestionManager = () => {
           question: formData.question,
           options: formData.options,
           correctAnswer: formData.correctAnswer,
-          subject: formData.subject
+          subject: formData.subject,
+          difficulty: formData.difficulty
         });
       } else {
         await addQuestion({
           question: formData.question,
           options: formData.options,
           correctAnswer: formData.correctAnswer,
-          subject: formData.subject
+          subject: formData.subject,
+          difficulty: formData.difficulty
         });
       }
       
@@ -205,218 +203,53 @@ const QuestionManager = () => {
 
   const openImportModal = () => {
     setIsImportModalOpen(true);
-    setImportStatus({
-      isImporting: false,
-      success: false,
-      error: '',
-      count: 0
-    });
-    setImportData({
-      file: null,
-      subjectId: selectedSubject || '',
-      createNewSubject: false,
-      newSubjectName: '',
-      autoDetectSubjects: false
-    });
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    
-    // Accept JSON or CSV files
-    if (file.type !== 'application/json' && !file.name.endsWith('.json') && !file.name.endsWith('.csv')) {
-      setImportStatus({
-        ...importStatus,
-        error: 'Please select a JSON or CSV file'
-      });
-      return;
-    }
-    
-    setImportStatus({
-      isImporting: false,
-      success: false,
-      error: '',
-      count: 0
-    });
-    
-    setImportData({
-      ...importData,
-      file
-    });
-  };
-
-  const handleImportFile = async () => {
-    if (!importData.file) {
-      setImportStatus({
-        ...importStatus,
-        error: 'Please select a file to import'
-      });
-      return;
-    }
-
-    // Validate subject selection
-    if (!importData.autoDetectSubjects && !importData.subjectId && !importData.createNewSubject) {
-      setImportStatus({
-        ...importStatus,
-        error: 'Please select a subject, create a new one, or enable auto-detect subjects'
-      });
-      return;
-    }
-
-    // Validate new subject name if creating a new subject
-    if (importData.createNewSubject && !importData.newSubjectName.trim()) {
-      setImportStatus({
-        ...importStatus,
-        error: 'Please enter a name for the new subject'
-      });
-      return;
-    }
-
-    setImportStatus({
-      isImporting: true,
-      success: false,
-      error: '',
-      count: 0
-    });
-    
-    try {
-      let targetSubjectId = importData.subjectId;
-      
-      // Create a new subject if requested
-      if (importData.createNewSubject) {
-        const newSubject = await addSubject({
-          name: importData.newSubjectName,
-          description: `Created on ${new Date().toLocaleDateString()}`
-        });
-        targetSubjectId = newSubject.id || '';
-        
-        // Update subjects list
-        const updatedSubjects = await getSubjects();
-        setSubjects(updatedSubjects);
+  const handleImportComplete = () => {
+    // Refresh questions and subjects
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [questionsData, subjectsData] = await Promise.all([
+          getQuestions(selectedSubject || undefined),
+          getSubjects()
+        ]);
+        setQuestions(questionsData);
+        setSubjects(subjectsData);
+      } catch (err) {
+        console.error('Error loading data:', err);
+        setError('Failed to load questions or subjects');
+      } finally {
+        setLoading(false);
       }
-      
-      // Auto-detect and create subjects if enabled
-      if (importData.autoDetectSubjects) {
-        setImportStatus(prev => ({
-          ...prev,
-          error: '',
-          isImporting: true,
-          success: false,
-          count: 0
-        }));
-        
-        try {
-          // Extract and create subjects from the file
-          const createdSubjects = await extractAndCreateSubjects(importData.file);
-          
-          if (createdSubjects.length > 0) {
-            // Update subjects list
-            const updatedSubjects = await getSubjects();
-            setSubjects(updatedSubjects);
-            
-            setImportStatus(prev => ({
-              ...prev,
-              error: '',
-              isImporting: true,
-              success: false,
-              count: 0
-            }));
-          }
-        } catch (err: any) {
-          console.error('Error auto-detecting subjects:', err);
-          // Continue with import even if subject detection fails
-        }
-      }
-      
-      // Import the questions with the selected subject
-      const count = await importQuestionsFromFile(importData.file, targetSubjectId);
-      
-      // Refresh subjects and questions
-      const [updatedSubjects, updatedQuestions] = await Promise.all([
-        getSubjects(),
-        getQuestions(selectedSubject || undefined)
-      ]);
-      
-      setSubjects(updatedSubjects);
-      setQuestions(updatedQuestions);
-      
-      // If we created a new subject, select it
-      if (importData.createNewSubject && targetSubjectId) {
-        setSelectedSubject(targetSubjectId);
-      }
-      
-      setImportStatus({
-        isImporting: false,
-        success: true,
-        error: '',
-        count
-      });
-      
-      // Reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-    } catch (err: any) {
-      console.error('Error importing questions:', err);
-      setImportStatus({
-        isImporting: false,
-        success: false,
-        error: err.message || 'Failed to import questions',
-        count: 0
-      });
-    }
+    };
+    loadData();
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  // Filter questions based on search term and difficulty
+  const filteredQuestions = questions.filter(question => {
+    const matchesSearch = question.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      question.options.some(opt => opt.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      subjects.find(s => s.id === question.subject)?.name.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const files = e.dataTransfer.files;
-    if (!files || files.length === 0) return;
+    const matchesDifficulty = difficultyFilter === 'all' || question.difficulty === difficultyFilter;
     
-    const file = files[0];
-    if (file.type !== 'application/json') {
-      setImportStatus({
-        ...importStatus,
-        error: 'Please drop a JSON file'
-      });
-      return;
-    }
-    
-    setImportData({
-      ...importData,
-      file
-    });
-  };
-
-  // Filter questions based on search term
-  const filteredQuestions = questions.filter(question => 
-    question.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    question.options.some(opt => opt.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    subjects.find(s => s.id === question.subject)?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    return matchesSearch && matchesDifficulty;
+  });
 
   return (
     <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
       {error && (
         <div className="mb-4 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-md flex items-center">
-          <AlertCircle className="h-5 w-5 mr-2" />
-          {error}
-          <button 
-            onClick={() => setError('')} 
-            className="ml-auto text-red-500 hover:text-red-700"
-          >
-            <X size={16} />
-          </button>
-        </div>
+        <AlertCircle className="h-5 w-5 mr-2" />
+        {error}
+        <button 
+          onClick={() => setError('')} 
+          className="ml-auto text-red-500 hover:text-red-700"
+        >
+          <X size={16} />
+        </button>
+      </div>
       )}
       
       {successMessage && (
@@ -488,23 +321,42 @@ const QuestionManager = () => {
           )}
         </div>
 
-        <div className="w-full md:w-64">
-          <label htmlFor="subject-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Filter by Subject
-          </label>
-          <select
-            id="subject-filter"
-            value={selectedSubject}
-            onChange={(e) => setSelectedSubject(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-          >
-            <option value="">All Subjects</option>
-            {subjects.map((subject) => (
-              <option key={subject.id} value={subject.id}>
-                {subject.name}
-              </option>
-            ))}
-          </select>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="w-full md:w-64">
+            <label htmlFor="difficulty-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Filter by Difficulty
+            </label>
+            <select
+              id="difficulty-filter"
+              value={difficultyFilter}
+              onChange={(e) => setDifficultyFilter(e.target.value as 'all' | 'easy' | 'medium' | 'hard')}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+            >
+              <option value="all">All Difficulties</option>
+              <option value="easy">🟢 Easy</option>
+              <option value="medium">🟡 Medium</option>
+              <option value="hard">🔴 Hard</option>
+            </select>
+          </div>
+          
+          <div className="w-full md:w-64">
+            <label htmlFor="subject-filter" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Filter by Subject
+            </label>
+            <select
+              id="subject-filter"
+              value={selectedSubject}
+              onChange={(e) => setSelectedSubject(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+            >
+              <option value="">All Subjects</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -678,6 +530,26 @@ const QuestionManager = () => {
                     ))}
                   </select>
                 </div>
+                
+                <div>
+                  <label htmlFor="difficulty" className="block text-sm font-medium text-gray-700 mb-1">
+                    Difficulty Level
+                  </label>
+                  <select
+                    id="difficulty"
+                    value={formData.difficulty}
+                    onChange={(e) => setFormData({ ...formData, difficulty: e.target.value as 'easy' | 'medium' | 'hard' })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  >
+                    <option value="easy">🟢 Easy</option>
+                    <option value="medium">🟡 Medium</option>
+                    <option value="hard">🔴 Hard</option>
+                  </select>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Easy: For students scoring &lt;50% | Medium: For 50-79% | Hard: For 80%+
+                  </p>
+                </div>
               </div>
               
               <div className="mt-6 flex justify-end space-x-3">
@@ -702,162 +574,15 @@ const QuestionManager = () => {
       )}
 
       {/* Import Modal */}
-      {isImportModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-lg w-full p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Import Questions</h2>
-              <button 
-                onClick={() => setIsImportModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            
-            {importStatus.error && (
-              <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-md flex items-center">
-                <AlertCircle className="h-4 w-4 mr-2" />
-                {importStatus.error}
-              </div>
-            )}
-            
-            {importStatus.success && (
-              <div className="p-3 mb-4 text-sm text-green-700 bg-green-100 rounded-md flex items-center">
-                <Check className="h-4 w-4 mr-2" />
-                Successfully imported {importStatus.count} questions
-              </div>
-            )}
-            
-            <div className="space-y-4">
-              {!importStatus.success && (
-                <>
-                  <div 
-                    className="border-2 border-dashed border-gray-300 rounded-md p-8 text-center cursor-pointer hover:bg-gray-50"
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
-                    onClick={() => fileInputRef.current?.click()}
-                  >
-                    <UploadCloud className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-500 mb-1">
-                      {importData.file ? importData.file.name : 'Drag & drop a JSON file or click to browse'}
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      The file will be automatically converted to the correct format
-                    </p>
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleFileSelect}
-                      className="hidden"
-                      accept=".json,.csv"
-                    />
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {/* Auto-detect subjects option */}
-                    <div className="flex items-center space-x-2 p-2 bg-blue-50 dark:bg-blue-900/30 rounded-md">
-                      <input
-                        type="checkbox"
-                        id="auto-detect"
-                        checked={importData.autoDetectSubjects}
-                        onChange={(e) => setImportData({...importData, autoDetectSubjects: e.target.checked})}
-                      />
-                      <label htmlFor="auto-detect" className="text-sm">
-                        Auto-detect and create subjects from the file
-                      </label>
-                    </div>
-                    
-                    {!importData.autoDetectSubjects && (
-                      <>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Select Subject
-                          </label>
-                          <div className="flex items-center space-x-2 mb-2">
-                            <input
-                              type="radio"
-                              id="use-existing"
-                              checked={!importData.createNewSubject}
-                              onChange={() => setImportData({...importData, createNewSubject: false})}
-                            />
-                            <label htmlFor="use-existing">Use existing subject</label>
-                          </div>
-                          <select
-                            value={importData.subjectId}
-                            onChange={(e) => setImportData({...importData, subjectId: e.target.value})}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            disabled={importData.createNewSubject}
-                          >
-                            <option value="">Select a subject</option>
-                            {subjects.map((subject) => (
-                              <option key={subject.id} value={subject.id}>
-                                {subject.name}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        
-                        <div>
-                          <div className="flex items-center space-x-2 mb-2">
-                            <input
-                              type="radio"
-                              id="create-new"
-                              checked={importData.createNewSubject}
-                              onChange={() => setImportData({...importData, createNewSubject: true})}
-                            />
-                            <label htmlFor="create-new">Create new subject</label>
-                          </div>
-                          <input
-                            type="text"
-                            placeholder="New subject name"
-                            value={importData.newSubjectName}
-                            onChange={(e) => setImportData({...importData, newSubjectName: e.target.value})}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                            disabled={!importData.createNewSubject}
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-            
-            <div className="mt-6 flex justify-end space-x-2">
-              <button
-                type="button"
-                onClick={() => setIsImportModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-              >
-                {importStatus.success ? 'Close' : 'Cancel'}
-              </button>
-              {!importStatus.success && (
-                <button
-                  type="button"
-                  onClick={handleImportFile}
-                  disabled={importStatus.isImporting || !importData.file}
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-                >
-                  {importStatus.isImporting ? (
-                    <>
-                      <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                      <span>Importing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <UploadCloud className="h-4 w-4 mr-2" />
-                      <span>Import Questions</span>
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <CsvImportModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        subjects={subjects}
+        selectedSubject={selectedSubject}
+        onImportComplete={handleImportComplete}
+      />
     </div>
   );
 };
 
-export default QuestionManager; 
+export default QuestionManager;

@@ -1,19 +1,20 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics, isSupported, Analytics } from "firebase/analytics";
+import { getDatabase, connectDatabaseEmulator, Database } from "firebase/database";
 import { getFirestore, connectFirestoreEmulator, Firestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, connectAuthEmulator, Auth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAdtT_Hh-whneElJ1f3VpU7CDKzitezQDg",
-  authDomain: "quiz-by-md.firebaseapp.com",
-  projectId: "quiz-by-md",
-  storageBucket: "quiz-by-md.appspot.com",
-  messagingSenderId: "777075871934",
-  appId: "1:777075871934:web:fe4859db2943d870094eef",
-  measurementId: "G-4GV319B3ZT"
+  apiKey: "AIzaSyCju00DQK6fjVYaBZMCE-FXS21alpitL2U",
+  authDomain: "quizninja-ae45d.firebaseapp.com",
+  projectId: "quizninja-ae45d",
+  storageBucket: "quizninja-ae45d.firebasestorage.app",
+  messagingSenderId: "382180129048",
+  appId: "1:382180129048:web:f8c507c5fc137ba973466d",
+  measurementId: "G-4V4YPWWHRK"
 };
 
 // Initialize Firebase with error handling
@@ -41,12 +42,14 @@ isSupported().then(supported => {
 
 // Initialize Firebase services with error handling
 let db: Firestore | null = null;
+let rtdb: Database | null = null;
 let auth: Auth | null = null;
 let googleProvider: GoogleAuthProvider | null = null;
 
 if (app) {
   try {
     db = getFirestore(app);
+    rtdb = getDatabase(app);
     auth = getAuth(app);
     googleProvider = new GoogleAuthProvider();
     
@@ -66,4 +69,4 @@ if (app) {
   }
 }
 
-export { app, analytics, db, auth, googleProvider }; 
+export { app, analytics, db, rtdb, auth, googleProvider }; 

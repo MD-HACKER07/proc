@@ -4,16 +4,28 @@ import QuestionManager from './QuestionManager';
 import SubjectManager from './SubjectManager';
 import ResultsViewer from './ResultsViewer';
 import ReviewsManager from './ReviewsManager';
+import ResponseViewer from './ResponseViewer';
+import ExamStart from './ExamStart';
+import ExamMonitoring from './ExamMonitoring';
+import ExamConfigManager from './ExamConfigManager';
+import AdaptiveQuizManager from './AdaptiveQuizManager';
+
 import { 
-  Clipboard, LogOut, Users, Book, BarChart2, 
+  LogOut, Users, Book, BarChart2, 
   FileQuestion, GraduationCap, Award, ActivitySquare, MessageSquare,
-  TrendingUp, Clock, PieChart, Target, Calendar, Star
+  Target, Star, Plus, Play
 } from 'lucide-react';
 import { getQuestions, getSubjects } from '../../services/quizService';
 
+interface Tab {
+  id: 'questions' | 'subjects' | 'results' | 'responses' | 'reviews' | 'analytics' | 'quiz-creator' | 'exam-start' | 'monitor' | 'exam-config' | 'adaptive-quiz';
+  label: string;
+  icon: React.ElementType;
+}
+
 const Dashboard = () => {
-  const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState<'questions' | 'subjects' | 'results' | 'reviews' | 'analytics'>('questions');
+  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState<Tab['id']>('questions');
   const [dashboardStats, setDashboardStats] = useState({
     totalUsers: 0,
     averageScore: 0,
@@ -32,6 +44,11 @@ const Dashboard = () => {
       'true-false': 0
     },
     mostActiveUsers: [] as { username: string, quizCount: number }[],
+    totalQuizzes: 0,
+    activeQuizzes: 0,
+    quizCompletionRate: 0,
+    topPerformers: [] as { username: string, score: number }[],
+    quizStats: [] as any[]
   });
   const [loading, setLoading] = useState(true);
 
@@ -64,10 +81,13 @@ const Dashboard = () => {
         });
         
         // Get counts from the database
-        const [questions, subjects] = await Promise.all([
-          getQuestions(),
-          getSubjects()
-        ]);
+        const questions = await getQuestions();
+        const subjects = await getSubjects();
+        
+        // Load admin-created quizzes
+        const adminQuizzes = JSON.parse(localStorage.getItem('quizzes') || '[]');
+        const totalQuizzes = adminQuizzes.length;
+        const activeQuizzes = adminQuizzes.filter((q: any) => q.isActive !== false).length;
 
         // Get recent quizzes (last 5)
         const sortedResults = [...results].sort((a: any, b: any) => 
@@ -114,16 +134,10 @@ const Dashboard = () => {
 
         // Calculate question type distribution
         const typeDistribution = {
-          single: 0,
-          multiple: 0,
-          'true-false': 0
+          single: questions.filter(q => q.type === 'single').length,
+          multiple: questions.filter(q => q.type === 'multiple').length,
+          'true-false': questions.filter(q => q.type === 'true-false').length
         };
-
-        questions.forEach((q: any) => {
-          if (typeDistribution.hasOwnProperty(q.type)) {
-            typeDistribution[q.type as keyof typeof typeDistribution] += 1;
-          }
-        });
 
         // Calculate most active users
         const userActivity: Record<string, number> = {};
@@ -147,12 +161,17 @@ const Dashboard = () => {
           totalSubjects: subjects.length,
           totalReviews: reviews.length,
           averageRating: avgRating,
-          reviewsByRating,
+          reviewsByRating: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
           recentQuizzes: sortedResults,
           subjectPerformance,
           weeklyActivity,
           questionTypeDistribution: typeDistribution,
-          mostActiveUsers
+          mostActiveUsers,
+          totalQuizzes,
+          activeQuizzes,
+          quizCompletionRate: results.length > 0 ? Math.round((results.filter((r: any) => r.percentage >= 70).length / results.length) * 100) : 0,
+          topPerformers: results.slice(0, 5).map((r: any) => ({ username: r.username, score: r.percentage })),
+          quizStats: adminQuizzes
         });
       } catch (error) {
         console.error('Error loading dashboard stats:', error);
@@ -164,34 +183,59 @@ const Dashboard = () => {
     loadStats();
   }, []);
 
+  const { logout } = useAuth();
+  
   const handleLogout = async () => {
     try {
+      // Clear admin session from localStorage
+      localStorage.removeItem('isAdminLoggedIn');
+      localStorage.removeItem('adminSession');
+      
+      // Use Firebase logout for regular users
       await logout();
+      
+      // Navigate back to welcome page
+      window.location.href = '/';
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
 
+  const tabs: Tab[] = [
+    { id: 'questions', label: 'Questions', icon: FileQuestion },
+    { id: 'subjects', label: 'Subjects', icon: Book },
+    { id: 'results', label: 'Results', icon: Award },
+    { id: 'responses', label: 'Responses', icon: MessageSquare },
+    { id: 'reviews', label: 'Reviews', icon: Star },
+    { id: 'analytics', label: 'Analytics', icon: BarChart2 },
+    { id: 'quiz-creator', label: 'Quiz Creator', icon: Plus },
+    { id: 'exam-config', label: 'Multi-Section Exams', icon: Target },
+    { id: 'exam-start', label: 'Start Exam', icon: Play },
+    { id: 'monitor', label: 'Exam Monitoring', icon: ActivitySquare },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <GraduationCap className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Quiz Admin Dashboard</h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-              {user?.email}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="flex items-center px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-            >
-              <LogOut className="h-4 w-4 mr-1" />
-              Logout
-            </button>
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <GraduationCap className="h-8 w-8 text-indigo-600 mr-3" />
+              <h1 className="text-xl font-bold text-gray-900">Quiz Admin Dashboard</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600">
+                Welcome, {user?.email || 'Admin'}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -276,61 +320,20 @@ const Dashboard = () => {
         <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden mb-8">
           <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="flex overflow-x-auto">
-              <button
-                onClick={() => setActiveTab('questions')}
-                className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
-                  activeTab === 'questions'
-                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
-                }`}
-              >
-                <FileQuestion className="h-4 w-4 mr-2" />
-                Manage Questions
-              </button>
-              <button
-                onClick={() => setActiveTab('subjects')}
-                className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
-                  activeTab === 'subjects'
-                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
-                }`}
-              >
-                <Book className="h-4 w-4 mr-2" />
-                Manage Subjects
-              </button>
-              <button
-                onClick={() => setActiveTab('results')}
-                className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
-                  activeTab === 'results'
-                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
-                }`}
-              >
-                <BarChart2 className="h-4 w-4 mr-2" />
-                View Results
-              </button>
-              <button
-                onClick={() => setActiveTab('reviews')}
-                className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
-                  activeTab === 'reviews'
-                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
-                }`}
-              >
-                <MessageSquare className="h-4 w-4 mr-2" />
-                Manage Reviews
-              </button>
-              <button
-                onClick={() => setActiveTab('analytics')}
-                className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
-                  activeTab === 'analytics'
-                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
-                }`}
-              >
-                <TrendingUp className="h-4 w-4 mr-2" />
-                Analytics
-              </button>
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`py-4 px-6 text-sm font-medium flex items-center border-b-2 transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
+                  }`}
+                >
+                  <tab.icon className="h-4 w-4 mr-2" />
+                  {tab.label}
+                </button>
+              ))}
             </nav>
           </div>
         </div>
@@ -340,318 +343,132 @@ const Dashboard = () => {
           {activeTab === 'questions' && <QuestionManager />}
           {activeTab === 'subjects' && <SubjectManager />}
           {activeTab === 'results' && <ResultsViewer />}
-          {activeTab === 'reviews' && <ReviewsManager />}
-          {activeTab === 'analytics' && (
-            <div className="space-y-6">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-lg font-medium text-gray-900 dark:text-white">Performance Analytics</h2>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Weekly Activity Chart */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-md font-medium text-gray-900 dark:text-white flex items-center">
-                          <Calendar className="h-5 w-5 mr-2 text-blue-500" />
-                          Weekly Quiz Activity
-                        </h3>
-                      </div>
-                      <div className="h-64">
-                        {loading ? (
-                          <div className="flex h-full items-center justify-center">
-                            <div className="animate-pulse">Loading activity data...</div>
-                          </div>
-                        ) : (
-                          <div className="h-full flex items-end space-x-2">
-                            {Object.entries(dashboardStats.weeklyActivity).map(([date, count], index) => {
-                              const dayOfWeek = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
-                              const maxCount = Math.max(...Object.values(dashboardStats.weeklyActivity));
-                              const height = maxCount > 0 ? (count / maxCount) * 100 : 0;
-                              return (
-                                <div key={date} className="flex flex-col items-center flex-1">
-                                  <div 
-                                    className="w-full bg-blue-500 dark:bg-blue-600 rounded-t transition-all duration-500"
-                                    style={{ height: `${height}%` }}
-                                  ></div>
-                                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">{dayOfWeek}</div>
-                                  <div className="text-xs font-medium text-gray-900 dark:text-white">{count}</div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Subject Performance */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-md font-medium text-gray-900 dark:text-white flex items-center">
-                          <Target className="h-5 w-5 mr-2 text-purple-500" />
-                          Subject Performance
-                        </h3>
-                      </div>
-                      <div className="h-64 overflow-y-auto">
-                        {loading ? (
-                          <div className="flex h-full items-center justify-center">
-                            <div className="animate-pulse">Loading subject data...</div>
-                          </div>
-                        ) : Object.keys(dashboardStats.subjectPerformance).length > 0 ? (
-                          <ul className="space-y-4">
-                            {Object.entries(dashboardStats.subjectPerformance).map(([subject, data]) => (
-                              <li key={subject} className="flex flex-col">
-                                <div className="flex justify-between mb-1">
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">{subject}</span>
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">{data.avgScore}%</span>
-                                </div>
-                                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                                  <div 
-                                    className={`h-2.5 rounded-full ${
-                                      data.avgScore >= 70 ? 'bg-green-500' : 'bg-yellow-500'
-                                    }`}
-                                    style={{ width: `${data.avgScore}%` }}
-                                  ></div>
-                                </div>
-                                <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">{data.attempts} attempts</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <div className="flex h-full items-center justify-center">
-                            <p className="text-gray-500 dark:text-gray-400">No subject data available</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Reviews Analytics Section */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-lg font-medium text-gray-900 dark:text-white">Reviews Analytics</h2>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Reviews Rating Distribution */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-md font-medium text-gray-900 dark:text-white flex items-center">
-                          <Star className="h-5 w-5 mr-2 text-yellow-500" />
-                          Rating Distribution
-                        </h3>
-                        <div className="flex items-center">
-                          <span className="text-2xl font-bold text-gray-900 dark:text-white">{dashboardStats.averageRating}</span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">/ 5</span>
-                        </div>
-                      </div>
-                      <div className="h-64">
-                        {loading ? (
-                          <div className="flex h-full items-center justify-center">
-                            <div className="animate-pulse">Loading ratings data...</div>
-                          </div>
-                        ) : (
-                          <div className="space-y-4">
-                            {Object.entries(dashboardStats.reviewsByRating || {}).reverse().map(([rating, count]) => {
-                              const totalReviews = dashboardStats.totalReviews || 1; // Avoid division by zero
-                              const percentage = Math.round((count as number / totalReviews) * 100) || 0;
-                              return (
-                                <div key={rating} className="flex items-center">
-                                  <div className="flex items-center w-20">
-                                    <span className="text-sm font-medium mr-1">{rating}</span>
-                                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                                  </div>
-                                  <div className="w-full ml-2">
-                                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                                      <div
-                                        className="bg-yellow-500 h-2.5 rounded-full"
-                                        style={{ width: `${percentage}%` }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                  <div className="ml-2 min-w-[50px] text-right">
-                                    <span className="text-sm text-gray-500 dark:text-gray-400">{count}</span>
-                                    <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">({percentage}%)</span>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Reviews Timeline */}
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-md font-medium text-gray-900 dark:text-white flex items-center">
-                          <MessageSquare className="h-5 w-5 mr-2 text-pink-500" />
-                          Reviews Summary
-                        </h3>
-                      </div>
-                      <div className="h-64 flex flex-col">
-                        {loading ? (
-                          <div className="flex h-full items-center justify-center">
-                            <div className="animate-pulse">Loading review data...</div>
-                          </div>
-                        ) : (
-                          <>
-                            <div className="grid grid-cols-2 gap-4 mb-6">
-                              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
-                                <h4 className="text-sm text-gray-500 dark:text-gray-400 mb-1">Total Reviews</h4>
-                                <p className="text-2xl font-bold text-gray-900 dark:text-white">{dashboardStats.totalReviews}</p>
-                              </div>
-                              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
-                                <h4 className="text-sm text-gray-500 dark:text-gray-400 mb-1">Average Rating</h4>
-                                <div className="flex items-center justify-center">
-                                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{dashboardStats.averageRating}</p>
-                                  <Star className="h-5 w-5 text-yellow-500 fill-yellow-500 ml-1" />
-                                </div>
-                              </div>
-                            </div>
-
-                            {dashboardStats.totalReviews > 0 ? (
-                              <div className="flex-1 flex flex-col justify-center items-center">
-                                <div className="text-center">
-                                  <div className="flex justify-center mb-2">
-                                    {[1, 2, 3, 4, 5].map((star) => (
-                                      <Star
-                                        key={star}
-                                        className={`h-8 w-8 ${
-                                          star <= Math.round(parseFloat(dashboardStats.averageRating))
-                                            ? 'text-yellow-500 fill-yellow-500'
-                                            : 'text-gray-300'
-                                        }`}
-                                      />
-                                    ))}
-                                  </div>
-                                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                                    {parseFloat(dashboardStats.averageRating) >= 4.5
-                                      ? 'Excellent feedback from users!'
-                                      : parseFloat(dashboardStats.averageRating) >= 4
-                                      ? 'Very good feedback from users!'
-                                      : parseFloat(dashboardStats.averageRating) >= 3
-                                      ? 'Good feedback from users'
-                                      : 'Users think we can improve'}
-                                  </p>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="flex-1 flex justify-center items-center">
-                                <p className="text-gray-500 dark:text-gray-400">No reviews available</p>
-                              </div>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Question Type Distribution */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                  <div className="flex items-center mb-6">
-                    <PieChart className="h-5 w-5 mr-2 text-indigo-500" />
-                    <h3 className="text-md font-medium text-gray-900 dark:text-white">Question Types</h3>
-                  </div>
-                  {loading ? (
-                    <div className="animate-pulse">Loading question type data...</div>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                        <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">Single Choice</span>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{dashboardStats.questionTypeDistribution.single}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
-                        <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">Multiple Choice</span>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{dashboardStats.questionTypeDistribution.multiple}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-                        <span className="text-sm text-gray-700 dark:text-gray-300 flex-1">True/False</span>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{dashboardStats.questionTypeDistribution["true-false"]}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Most Active Users */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                  <div className="flex items-center mb-6">
-                    <Users className="h-5 w-5 mr-2 text-green-500" />
-                    <h3 className="text-md font-medium text-gray-900 dark:text-white">Most Active Users</h3>
-                  </div>
-                  {loading ? (
-                    <div className="animate-pulse">Loading user data...</div>
-                  ) : dashboardStats.mostActiveUsers.length > 0 ? (
-                    <ul className="space-y-3">
-                      {dashboardStats.mostActiveUsers.map((user, index) => (
-                        <li key={user.username} className="flex items-center">
-                          <div className={`flex items-center justify-center w-6 h-6 rounded-full ${
-                            index === 0 ? 'bg-yellow-100 text-yellow-800' : 
-                            index === 1 ? 'bg-gray-100 text-gray-800' : 
-                            index === 2 ? 'bg-orange-100 text-orange-800' : 
-                            'bg-blue-100 text-blue-800'
-                          } dark:bg-gray-700 mr-3 text-xs font-bold`}>
-                            {index + 1}
-                          </div>
-                          <span className="text-sm text-gray-700 dark:text-gray-300 flex-1 truncate">
-                            {user.username}
-                          </span>
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
-                            {user.quizCount} {user.quizCount === 1 ? 'quiz' : 'quizzes'}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-gray-500 dark:text-gray-400">No user activity data available</p>
-                  )}
-                </div>
-
-                {/* Recent Quizzes */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                  <div className="flex items-center mb-6">
-                    <Clock className="h-5 w-5 mr-2 text-orange-500" />
-                    <h3 className="text-md font-medium text-gray-900 dark:text-white">Recent Quizzes</h3>
-                  </div>
-                  {loading ? (
-                    <div className="animate-pulse">Loading recent quizzes...</div>
-                  ) : dashboardStats.recentQuizzes.length > 0 ? (
-                    <ul className="space-y-3">
-                      {dashboardStats.recentQuizzes.map((quiz: any, index) => (
-                        <li key={index} className="text-sm">
-                          <div className="flex justify-between mb-1">
-                            <span className="font-medium text-gray-900 dark:text-white">{quiz.username}</span>
-                            <span className={`${
-                              quiz.percentage >= 70 ? 'text-green-600 dark:text-green-400' : 'text-yellow-600 dark:text-yellow-400'
-                            } font-medium`}>
-                              {quiz.percentage}%
-                            </span>
-                          </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            {new Date(quiz.date).toLocaleString()}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-gray-500 dark:text-gray-400">No recent quiz data available</p>
-                  )}
-                </div>
-              </div>
+          {activeTab === 'responses' && (
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">User Quiz Responses</h2>
+              <ResponseViewer onClose={() => setActiveTab('questions')} />
             </div>
           )}
+          {activeTab === 'exam-config' && <ExamConfigManager />}
+          {activeTab === 'exam-start' && <ExamStart />}
+          {activeTab === 'monitor' && <ExamMonitoring />}
+          {activeTab === 'reviews' && <ReviewsManager />}
+          {activeTab === 'analytics' && (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Analytics Dashboard</h2>
+              <p className="text-gray-600 dark:text-gray-400">Analytics coming soon...</p>
+            </div>
+          )}
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Analytics Dashboard</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+                  <div className="flex items-center">
+                    <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full">
+                      <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                  <div className="flex items-center">
+                    <Book className="h-8 w-8 text-gray-500 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Total Quizzes</p>
+                      <p className="text-2xl font-bold text-gray-800 dark:text-white">{dashboardStats.totalQuizzes}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4">
+                  <div className="flex items-center">
+                    <ActivitySquare className="h-8 w-8 text-indigo-500 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Active Quizzes</p>
+                      <p className="text-2xl font-bold text-gray-800 dark:text-white">{dashboardStats.activeQuizzes}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                  <div className="flex items-center">
+                    <Target className="h-8 w-8 text-green-500 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Completion Rate</p>
+                      <p className="text-2xl font-bold text-gray-800 dark:text-white">{dashboardStats.quizCompletionRate}%</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Users</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : dashboardStats.totalUsers}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center">
+      <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded-full">
+        <Award className="h-6 w-6 text-green-600 dark:text-green-400" />
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Average Score</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : `${dashboardStats.averageScore}%`}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center">
+      <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full">
+        <ActivitySquare className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Quizzes Taken</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : dashboardStats.quizzesTaken}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center">
+      <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-full">
+        <FileQuestion className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Questions</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : dashboardStats.totalQuestions}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center">
+      <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-full">
+        <Book className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Subjects</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : dashboardStats.totalSubjects}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center">
+      <div className="bg-teal-100 dark:bg-teal-900/30 p-3 rounded-full">
+        <MessageSquare className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+      </div>
+      <div className="ml-4">
+        <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Reviews</h2>
+        <p className="text-2xl font-bold text-gray-900 dark:text-white">{loading ? '...' : dashboardStats.totalReviews}</p>
+      </div>
+    </div>
+  </div>
+
+
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

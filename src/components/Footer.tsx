@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
+import logoImg from '../logo/logo.png';
 
 interface FooterProps {
   onAboutClick?: () => void;
@@ -12,9 +13,12 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick }) => {
     <footer className="bg-white dark:bg-gray-800 shadow-sm py-4 mt-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 md:mb-0">
-            &copy; {currentYear} Quiz With MD. All rights reserved.
-          </p>
+          <div className="flex items-center space-x-2 mb-2 md:mb-0">
+            <img src={logoImg} alt="Logo" className="h-6 w-6 rounded-md shadow-sm" />
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              &copy; {currentYear} Sanjivani Proctor Exam Portal. All rights reserved.
+            </p>
+          </div>
           
           <div className="flex items-center">
             <span className="text-sm text-gray-600 dark:text-gray-400 flex items-center">

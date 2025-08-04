@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase/config';
 
+
 interface AuthContextType {
   user: User | null;
   loading: boolean;
@@ -57,11 +58,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     try {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
         setUser(currentUser);
-        // For simplicity, we're just checking if user exists to determine admin status
-        // In a real app, you would check user claims or a separate admin collection
-        setIsAdmin(!!currentUser);
+        
+        // Admin status is now handled separately through Firestore-only authentication
+        // This context only handles user authentication
+        setIsAdmin(false);
+        
         setLoading(false);
       }, (error) => {
         console.error("Auth state change error:", error);

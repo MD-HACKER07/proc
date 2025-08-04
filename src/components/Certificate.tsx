@@ -47,7 +47,7 @@ const Certificate: React.FC<CertificateProps> = ({
       const pdfHeight = pdf.internal.pageSize.getHeight();
       
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${username.replace(/\s+/g, '_')}_selenium_certificate.pdf`);
+      pdf.save(`${username.replace(/\s+/g, '_')}_${certificationLevel.toLowerCase()}_certificate.pdf`);
     } catch (error) {
       console.error('Error generating PDF:', error);
     }
@@ -92,8 +92,8 @@ const Certificate: React.FC<CertificateProps> = ({
             {/* Header */}
             <div className="mb-6">
               <div className="text-green-700 text-xl font-bold mb-1">CERTIFICATE OF ACHIEVEMENT</div>
-              <div className="text-3xl font-serif font-bold text-gray-900 mb-1">Selenium Automation</div>
-              <div className="text-sm text-gray-600">Web Testing Professional Certification</div>
+              <div className="text-3xl font-serif font-bold text-gray-900 mb-1">Innovation Cell</div>
+              <div className="text-sm text-gray-600">{certificationLevel} Certification</div>
             </div>
             
             {/* Award Icon */}
@@ -107,7 +107,7 @@ const Certificate: React.FC<CertificateProps> = ({
             <div className="mb-8">
               <div className="text-lg text-gray-600 mb-2">This is to certify that</div>
               <div className="text-3xl font-bold text-gray-900 font-serif mb-2">{username}</div>
-              <div className="text-lg text-gray-600 mb-4">has successfully completed the Selenium Web Testing Quiz with a score of</div>
+              <div className="text-lg text-gray-600 mb-4">has successfully completed the {certificationLevel} Quiz with a score of</div>
               <div className="flex justify-center items-center gap-2 mb-2">
                 <span className="text-4xl font-bold text-green-700">{score}</span>
                 <span className="text-xl text-gray-800">out of</span>

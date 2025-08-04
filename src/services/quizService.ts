@@ -22,6 +22,7 @@ export interface Question {
   points?: number;
   subject?: string;
   explanation?: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
 }
 
 // Subject interface for managing quiz subjects
@@ -32,15 +33,24 @@ export interface Subject {
   icon?: string;
   color?: string;
   questionCount?: number;
+  // Adaptive quiz fields
+  hasAdaptiveQuiz?: boolean;
+  easySetId?: string;
+  mediumSetId?: string;
+  hardSetId?: string;
 }
 
 // Collection references
-const questionsCollection = collection(db, 'questions');
-const subjectsCollection = collection(db, 'subjects');
+const questionsCollection = db ? collection(db, 'questions') : null;
+const subjectsCollection = db ? collection(db, 'subjects') : null;
 
 // Questions operations
 export const getQuestions = async (subjectId?: string) => {
   try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     let q: CollectionReference | Query = questionsCollection;
     
     if (subjectId) {
@@ -60,6 +70,10 @@ export const getQuestions = async (subjectId?: string) => {
 
 export const addQuestion = async (question: Question) => {
   try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const docRef = await addDoc(questionsCollection, {
       ...question,
       type: question.type || 'single',
@@ -77,6 +91,10 @@ export const addQuestion = async (question: Question) => {
 
 export const updateQuestion = async (id: string, question: Partial<Question>) => {
   try {
+    if (!db) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const questionRef = doc(db, 'questions', id);
     await updateDoc(questionRef, question);
     return {
@@ -91,6 +109,10 @@ export const updateQuestion = async (id: string, question: Partial<Question>) =>
 
 export const deleteQuestion = async (id: string) => {
   try {
+    if (!db) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const questionRef = doc(db, 'questions', id);
     await deleteDoc(questionRef);
     return id;
@@ -103,6 +125,10 @@ export const deleteQuestion = async (id: string) => {
 // Subjects operations
 export const getSubjects = async () => {
   try {
+    if (!subjectsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const snapshot = await getDocs(subjectsCollection);
     return snapshot.docs.map(doc => ({
       id: doc.id,
@@ -116,6 +142,10 @@ export const getSubjects = async () => {
 
 export const addSubject = async (subject: Subject) => {
   try {
+    if (!subjectsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const docRef = await addDoc(subjectsCollection, subject);
     return {
       id: docRef.id,
@@ -129,6 +159,10 @@ export const addSubject = async (subject: Subject) => {
 
 export const updateSubject = async (id: string, subject: Partial<Subject>) => {
   try {
+    if (!db) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const subjectRef = doc(db, 'subjects', id);
     await updateDoc(subjectRef, subject);
     return {
@@ -143,6 +177,10 @@ export const updateSubject = async (id: string, subject: Partial<Subject>) => {
 
 export const deleteSubject = async (id: string) => {
   try {
+    if (!db) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const subjectRef = doc(db, 'subjects', id);
     await deleteDoc(subjectRef);
     return id;
@@ -155,6 +193,10 @@ export const deleteSubject = async (id: string) => {
 // New functions to delete all questions
 export const deleteAllQuestions = async () => {
   try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const snapshot = await getDocs(questionsCollection);
     const deletePromises = snapshot.docs.map(doc => 
       deleteDoc(doc.ref)
@@ -169,6 +211,10 @@ export const deleteAllQuestions = async () => {
 
 export const deleteQuestionsBySubject = async (subjectId: string) => {
   try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
     const q = query(questionsCollection, where('subject', '==', subjectId));
     const snapshot = await getDocs(q);
     const deletePromises = snapshot.docs.map(doc => 
@@ -178,6 +224,68 @@ export const deleteQuestionsBySubject = async (subjectId: string) => {
     return { success: true, count: snapshot.size };
   } catch (error) {
     console.error('Error deleting questions by subject:', error);
+    throw error;
+  }
+};
+
+// Function to determine next quiz set based on user performance
+export const getNextQuizSet = (percentage: number): 'easy' | 'medium' | 'hard' => {
+  if (percentage >= 80) {
+    return 'hard';
+  } else if (percentage >= 50) {
+    return 'medium';
+  } else {
+    return 'easy';
+  }
+};
+
+// Function to get questions for a specific difficulty level
+export const getQuestionsByDifficulty = async (subjectId: string, difficulty: 'easy' | 'medium' | 'hard') => {
+  try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
+    const q = query(
+      questionsCollection, 
+      where('subject', '==', subjectId),
+      where('difficulty', '==', difficulty)
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as Question[];
+  } catch (error) {
+    console.error(`Error getting ${difficulty} questions:`, error);
+    throw error;
+  }
+};
+
+// Function to get adaptive quiz questions based on subject and previous performance
+export const getAdaptiveQuizQuestions = async (subjectId: string, previousPercentage?: number) => {
+  try {
+    if (!questionsCollection) {
+      throw new Error('Firebase database not initialized');
+    }
+    
+    // If no previous performance, start with medium difficulty
+    const difficulty = previousPercentage ? getNextQuizSet(previousPercentage) : 'medium';
+    
+    const q = query(
+      questionsCollection, 
+      where('subject', '==', subjectId),
+      where('difficulty', '==', difficulty)
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as Question[];
+  } catch (error) {
+    console.error('Error getting adaptive quiz questions:', error);
     throw error;
   }
 }; 
