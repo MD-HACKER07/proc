@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Moon, Sun, Settings, BarChart, ShieldAlert, Info, Wifi, WifiOff, Home } from 'lucide-react';
 import logoImg from '../logo/logo.png';
-import { useQuiz } from '../context/QuizContext';
+import { useExam } from '../context/ExamContext';
 import { useSettings } from '../context/SettingsContext';
 import SettingsModal from './SettingsModal';
 
 interface HeaderProps {
-  appState?: 'welcome' | 'quiz' | 'dashboard' | 'admin' | 'results' | 'profile' | 'registration' | 'reviews' | 'detailed-results' | 'about' | 'user-login' | 'user-profile' | 'proctored-quiz' | 'adaptive-quiz-selector';
+  appState?: 'welcome' | 'quiz' | 'dashboard' | 'admin' | 'results' | 'profile' | 'registration' | 'reviews' | 'detailed-results' | 'about' | 'user-login' | 'user-profile' | 'proctored-quiz' | 'quiz-selector';
   onAdminClick?: () => void;
   onAboutClick?: () => void;
   onHomeClick?: () => void;
@@ -20,9 +20,9 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick, o
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
   // Add default values using destructuring to handle potential undefined values
-  const quizContext = useQuiz();
-  const currentQuestionIndex = quizContext?.currentQuestionIndex || 0;
-  const questions = quizContext?.questions || [];
+  const examContext = useExam();
+  const currentQuestionIndex = examContext?.currentQuestionIndex || 0;
+  const questions = examContext?.questions || [];
   
   const { settings, updateSettings } = useSettings();
   
@@ -117,7 +117,7 @@ const Header: React.FC<HeaderProps> = ({ appState, onAdminClick, onAboutClick, o
               transition={{ duration: 0.5 }}
             >
               <img src={logoImg} alt="Logo" className="h-8 w-8 mr-2.5 rounded-md shadow-sm" />
-              <span className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 tracking-tight filter drop-shadow-sm">SANJIVANI PROCTOR EXAM PORTAL</span>
+              <span className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 dark:from-pink-400 dark:via-purple-400 dark:to-indigo-400 tracking-tight filter drop-shadow-sm">SadiyaIgnite</span>
             </motion.div>
 
             {/* Quiz Progress (shows only during quiz) */}

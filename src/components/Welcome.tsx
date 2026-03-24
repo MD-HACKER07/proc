@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useUserAuth } from '../context/UserAuthContext';
-import { motion } from 'framer-motion';
-import { 
-  BrainCircuit, Settings as SettingsIcon, ArrowRight, 
-  Sparkles, Info, BookOpen, Building, Award
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ArrowRight,
+  Sparkles,
+  BookOpen,
+  Award,
+  Star,
+  GraduationCap,
+  Trophy,
+  Clock,
+  Shield,
+  Crown,
+  Zap,
+  Target,
+  CheckCircle,
+  Users,
+  Brain,
 } from 'lucide-react';
-import { useSettings } from '../context/SettingsContext';
-import SettingsModal from './SettingsModal';
-import NetworkSpeed from './NetworkSpeed';
 
 interface WelcomeProps {
   onUserLogin: () => void;
@@ -15,385 +24,268 @@ interface WelcomeProps {
 }
 
 const Welcome: React.FC<WelcomeProps> = ({ onUserLogin, onAdminLogin }) => {
-  const { settings } = useSettings();
-  const { userProfile } = useUserAuth();
-  const [username, setUsername] = useState('');
-  const [isReady, setIsReady] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [currentQuote, setCurrentQuote] = useState(0);
 
-  // Load username from localStorage if available
+  const quotes = [
+    'Believe in yourself and shine! ✨',
+    'Every expert was once a beginner 🌟',
+    'Your potential is limitless! 💫',
+    'Success starts with a single step 🚀',
+    'Dream big, work hard! 💪',
+  ];
+
   useEffect(() => {
-    if (userProfile?.displayName) {
-      setUsername(userProfile.displayName);
-      setIsReady(true);
-    } else {
-      const savedUsername = localStorage.getItem('quizUsername');
-      if (savedUsername) {
-        setUsername(savedUsername);
-        setIsReady(true);
-      }
-    }
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentQuote((prev) => (prev + 1) % quotes.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [quotes.length]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (username.trim()) {
-      localStorage.setItem('quizUsername', username);
-      setIsReady(true);
-    }
-  };
+  const features = [
+    { icon: Brain, title: 'Smart Learning', desc: 'AI-powered exam system designed for success', color: 'from-pink-500 to-rose-500' },
+    { icon: Shield, title: 'Secure Exams', desc: 'Proctored environment with anti-cheat protection', color: 'from-purple-500 to-violet-500' },
+    { icon: Trophy, title: 'Track Progress', desc: 'Detailed analytics and performance insights', color: 'from-amber-500 to-orange-500' },
+  ];
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
+  const stats = [
+    { value: '10K+', label: 'Students', icon: Users },
+    { value: '500+', label: 'Exams', icon: BookOpen },
+    { value: '98%', label: 'Success Rate', icon: Target },
+    { value: '24/7', label: 'Support', icon: Clock },
+  ];
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100
-      }
-    }
-  };
+  const steps = [
+    { title: 'Sign Up', icon: Users },
+    { title: 'Choose Exam', icon: Target },
+    { title: 'Take Test', icon: BookOpen },
+    { title: 'Get Results', icon: CheckCircle },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <BrainCircuit className="h-8 w-8 text-indigo-600 mr-3" />
-              <h1 className="text-xl font-bold text-gray-900">Exam Platform</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={onUserLogin}
-                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-              >
-                Student Login
-              </button>
-              <button
-                onClick={onAdminLogin}
-                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Admin Login
-              </button>
-              <button
-                onClick={() => {}}
-                className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                <SettingsIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background Glow */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-violet-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      </div>
 
-      {/* Settings Button */}
-      <button
-        onClick={() => setIsSettingsOpen(true)}
-        className="fixed top-24 right-4 z-40 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all"
-      >
-        <SettingsIcon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-      </button>
-      
-      {/* Settings Modal */}
-      <SettingsModal 
-        isOpen={isSettingsOpen} 
-        onClose={() => setIsSettingsOpen(false)} 
-      />
-      
-      {/* Network Speed Monitor */}
-      <NetworkSpeed />
+      {/* Floating Stars */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            initial={{ y: '100vh', x: `${Math.random() * 100}%`, opacity: 0 }}
+            animate={{ y: '-10vh', opacity: [0, 0.5, 0.5, 0] }}
+            transition={{ duration: 15 + Math.random() * 10, delay: i * 1.5, repeat: Infinity, ease: 'linear' }}
+          >
+            {i % 2 === 0 ? (
+              <Star className="w-4 h-4 text-yellow-400/30 fill-yellow-400/30" />
+            ) : (
+              <Sparkles className="w-4 h-4 text-purple-400/30" />
+            )}
+          </motion.div>
+        ))}
+      </div>
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={settings.animationsEnabled ? containerVariants : {}}
-        className="quiz-card max-w-5xl mx-auto rounded-2xl shadow-lg overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900"
-      >
-        {/* Hero Header Section */}
-        <motion.div 
-          variants={settings.animationsEnabled ? itemVariants : {}}
-          className="relative bg-gradient-to-br from-indigo-600 to-purple-700 dark:from-indigo-700 dark:to-purple-900 text-white p-8 md:p-12 rounded-b-[40px] shadow-md"
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Header */}
+        <motion.header
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="p-6 flex justify-between items-center"
         >
-          {/* Animated Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {settings.animationsEnabled && Array.from({ length: 15 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full bg-white opacity-10"
-                initial={{
-                  x: Math.random() * 100 + '%',
-                  y: Math.random() * 100 + '%',
-                  scale: 0.1 + Math.random() * 0.3
-                }}
-                animate={{
-                  x: [
-                    Math.random() * 100 + '%',
-                    Math.random() * 100 + '%',
-                    Math.random() * 100 + '%'
-                  ],
-                  y: [
-                    Math.random() * 100 + '%',
-                    Math.random() * 100 + '%',
-                    Math.random() * 100 + '%'
-                  ]
-                }}
-                transition={{
-                  duration: 10 + Math.random() * 30,
-                  repeat: Infinity,
-                  repeatType: 'reverse'
-                }}
-                style={{
-                  width: 20 + Math.random() * 50,
-                  height: 20 + Math.random() * 50
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="relative z-10 text-center md:text-left md:max-w-3xl">
-            <motion.div
-              initial={settings.animationsEnabled ? { y: -20, opacity: 0 } : {}}
-              animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight flex flex-wrap items-center justify-center md:justify-start">
-                Welcome to 
-                <motion.span 
-                  className="ml-2 inline-flex items-center text-transparent bg-clip-text bg-gradient-to-r from-white to-indigo-200"
-                  initial={settings.animationsEnabled ? { scale: 0.8 } : {}}
-                  animate={settings.animationsEnabled ? { scale: 1 } : {}}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 500, 
-                    damping: 15,
-                    delay: 0.5
-                  }}
-                >
-                  Sanjivani Proctor Exam Portal
-                  <Sparkles className="h-6 w-6 ml-2 text-yellow-300" />
-                </motion.span>
-              </h1>
-            </motion.div>
-            
-            <motion.p 
-              className="text-lg md:text-xl opacity-90 mb-6 max-w-2xl"
-              initial={settings.animationsEnabled ? { y: 20, opacity: 0 } : {}}
-              animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              Challenge yourself with our interactive quizzes. Expand your knowledge, track your progress, and compete with others.
-            </motion.p>
-          </div>
-        </motion.div>
-
-        <div className="p-8 text-center">
-          {!isReady ? (
-            <motion.form 
-              variants={settings.animationsEnabled ? itemVariants : {}} 
-              onSubmit={handleSubmit}
-              className="mb-8 max-w-md mx-auto"
-            >
-              <div className="mb-6">
-                <label 
-                  htmlFor="username" 
-                  className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-3"
-                >
-                  Enter your name to get started
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  className="form-input text-lg py-3 px-4 w-full border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="Your name"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 via-purple-500 to-violet-500 flex items-center justify-center">
+                <Crown className="w-7 h-7 text-white" />
               </div>
-              <motion.button 
-                type="submit"
-                className="w-full py-3 px-6 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transform hover:scale-[1.02] transition-all"
-                whileHover={settings.animationsEnabled ? { scale: 1.03 } : {}}
-                whileTap={settings.animationsEnabled ? { scale: 0.98 } : {}}
-              >
-                Continue
-                <ArrowRight className="ml-2 h-5 w-5 inline-block" />
-              </motion.button>
-            </motion.form>
-          ) : (
-            <motion.div 
-              className="text-center py-12"
-              initial={settings.animationsEnabled ? { y: -20, opacity: 0 } : {}}
-              animate={settings.animationsEnabled ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
-                Welcome back, <span className="text-indigo-600 dark:text-indigo-400">{userProfile?.displayName || username}</span>!
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Head over to your dashboard to view available quizzes and track your progress.
-              </p>
-              <motion.button
-                onClick={onUserLogin}
-                className="px-8 py-3 text-lg font-medium rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
-                whileHover={settings.animationsEnabled ? { scale: 1.05 } : {}}
-                whileTap={settings.animationsEnabled ? { scale: 0.98 } : {}}
-              >
-                Go to Dashboard
-                <ArrowRight className="ml-2 h-5 w-5 inline-block" />
-              </motion.button>
-            </motion.div>
-          )}
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
+                <Sparkles className="w-2.5 h-2.5 text-yellow-800" />
+              </div>
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-violet-400 bg-clip-text text-transparent">
+              SadiyaIgnite
+            </span>
+          </div>
 
-          {/* About Sanjivani University */}
-          <motion.div 
-            className="mt-16 mb-16"
-            initial={settings.animationsEnabled ? { opacity: 0, y: 20 } : {}}
-            animate={settings.animationsEnabled ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+          <button
+            onClick={onAdminLogin}
+            className="px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20 hover:scale-105 transition-all"
           >
-            <div className="text-center mb-12">
-              <motion.div 
-                className="inline-flex items-center justify-center mb-4"
-                whileHover={settings.animationsEnabled ? { rotate: 5 } : {}}
+            Admin Portal
+          </button>
+        </motion.header>
+
+        {/* Hero Section */}
+        <main className="flex-1 flex flex-col items-center justify-center px-6 py-8">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', duration: 0.8 }}
+            className="relative mb-8"
+          >
+            <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-pink-500 via-purple-500 to-violet-600 flex items-center justify-center shadow-2xl shadow-purple-500/30">
+              <GraduationCap className="w-14 h-14 text-white" />
+            </div>
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg"
+            >
+              <Award className="w-4 h-4 text-white" />
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="absolute -bottom-1 -left-1 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center"
+            >
+              <Star className="w-3 h-3 text-white fill-white" />
+            </motion.div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl md:text-6xl font-bold text-center mb-3"
+          >
+            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-violet-400 bg-clip-text text-transparent">
+              SadiyaIgnite
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-xl text-purple-200/80 text-center mb-4"
+          >
+            Your Gateway to Academic Excellence
+          </motion.p>
+
+          {/* Animated Quote */}
+          <div className="h-10 mb-8">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentQuote}
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -15, opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-lg text-pink-300/90 text-center font-medium"
               >
-                <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-full">
-                  <div className="bg-white dark:bg-gray-900 rounded-full p-2">
-                    <Info className="h-8 w-8 text-indigo-600" />
+                {quotes[currentQuote]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4 mb-12"
+          >
+            <button
+              onClick={onUserLogin}
+              className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-violet-500 text-white font-bold text-lg shadow-xl shadow-purple-500/30 flex items-center gap-3 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/40 transition-all"
+            >
+              <GraduationCap className="w-6 h-6" />
+              Start Your Journey
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={onUserLogin}
+              className="px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-purple-400/30 text-white font-bold text-lg flex items-center gap-3 hover:bg-white/20 hover:scale-105 transition-all"
+            >
+              <BookOpen className="w-6 h-6" />
+              Explore Exams
+            </button>
+          </motion.div>
+
+          {/* Features Section */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl w-full mb-12"
+          >
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="relative group p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/30 hover:-translate-y-2 transition-all cursor-pointer"
+              >
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 shadow-lg group-hover:scale-110 transition-transform`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-1">{feature.title}</h3>
+                <p className="text-purple-200/70 text-sm">{feature.desc}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Stats Section */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl w-full mb-12"
+          >
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-center hover:scale-105 transition-transform"
+              >
+                <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-to-br from-pink-500/30 to-purple-500/30 flex items-center justify-center">
+                  <stat.icon className="w-4 h-4 text-pink-400" />
+                </div>
+                <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-purple-200/60 text-xs mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* How It Works */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="max-w-3xl w-full mb-8"
+          >
+            <h2 className="text-xl font-bold text-center text-white mb-6 flex items-center justify-center gap-2">
+              <Zap className="w-5 h-5 text-yellow-400" />
+              How It Works
+            </h2>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3">
+              {steps.map((item, index) => (
+                <React.Fragment key={index}>
+                  <div className="flex flex-col items-center hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center mb-2 shadow-lg shadow-purple-500/30">
+                      <item.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-white font-medium text-sm">{item.title}</span>
                   </div>
-                </div>
-              </motion.div>
-              <h3 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-4">
-                About Sanjivani University
-              </h3>
-              <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* Card 1 */}
-              <motion.div 
-                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
-                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Glowing corner element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
-                
-                <div className="relative z-10">
-                  <motion.div 
-                    className="inline-flex mb-5"
-                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: 10 } : {}}
-                  >
-                    <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-3 rounded-2xl shadow-lg">
-                      <BookOpen className="text-white h-7 w-7" />
-                    </div>
-                  </motion.div>
-                  
-                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    World-Class Education
-                  </h4>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
-                    Sanjivani Rural Education Society’s Sanjivani University is a premier institution located in Ahmednagar, Maharashtra. Established with a vision to impart world-class education, the University offers multidisciplinary programs in engineering, pharmacy, management, and liberal studies.
-                  </p>
-                </div>
-              </motion.div>
-              
-              {/* Card 2 */}
-              <motion.div 
-                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
-                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Glowing corner element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
-                
-                <div className="relative z-10">
-                  <motion.div 
-                    className="inline-flex mb-5"
-                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: -10 } : {}}
-                  >
-                    <div className="bg-gradient-to-r from-green-500 to-teal-500 p-3 rounded-2xl shadow-lg">
-                      <Building className="text-white h-7 w-7" />
-                    </div>
-                  </motion.div>
-                  
-                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                    State-of-the-Art Infrastructure
-                  </h4>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
-                    With state-of-the-art infrastructure, experiential learning pedagogy, and strong industry collaborations, Sanjivani nurtures students to become globally competent professionals and socially responsible citizens.
-                  </p>
-                </div>
-              </motion.div>
-              
-              {/* Card 3 */}
-              <motion.div 
-                className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-7 shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
-                whileHover={settings.animationsEnabled ? { y: -10, scale: 1.02 } : {}}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Glowing corner element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500 rounded-full filter blur-3xl opacity-10 -translate-y-16 translate-x-16 group-hover:opacity-20 transition-opacity"></div>
-                
-                <div className="relative z-10">
-                  <motion.div 
-                    className="inline-flex mb-5"
-                    whileHover={settings.animationsEnabled ? { scale: 1.1, rotate: 10 } : {}}
-                  >
-                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-2xl shadow-lg">
-                      <Award className="text-white h-7 w-7" />
-                    </div>
-                  </motion.div>
-                  
-                  <h4 className="font-bold text-xl text-gray-800 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                    Innovation & Excellence
-                  </h4>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
-                    The University’s vibrant campus life, research culture, and emphasis on innovation consistently place it among India’s leading emerging universities.
-                  </p>
-                </div>
-              </motion.div>
+                  {index < 3 && (
+                    <ArrowRight className="w-5 h-5 text-purple-400/50 hidden md:block" />
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </motion.div>
-          
-          {/* Footer */}
-          <motion.div 
-            className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-500 dark:text-gray-400"
-            initial={settings.animationsEnabled ? { opacity: 0 } : {}}
-            animate={settings.animationsEnabled ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <p> Sanjivani Proctor Exam Portal | All Rights Reserved</p>
-            <p className="mt-1">Designed with ♥ for lifelong learners</p>
-          </motion.div>
-        </div>
-      </motion.div>
+        </main>
+
+        {/* Footer */}
+        <footer className="p-4 text-center border-t border-white/10">
+          <p className="text-purple-300/60 text-sm">© 2024 SadiyaIgnite. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
   );
 };

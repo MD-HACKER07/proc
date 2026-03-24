@@ -1,0 +1,200 @@
+subjectId,question,optionA,optionB,optionC,optionD,correctOption
+physics,The value of permittivity of free space (ε₀) is:,9 × 10⁹ Fm⁻¹,1.6 × 10⁻¹⁹ C,8.85 × 10⁻¹² Fm⁻¹,4π × 10⁻⁷ Hm⁻¹,C
+physics,The S.I. unit of electric dipole moment is:,Joule·second,Coulomb·metre,Coulomb·metre⁻¹,Coulomb·Volt,B
+physics,Which of the following is the correct vector form of Coulomb's law?,F = (1/4πε₀)(q₁q₂/r)r̂,F = (1/4πε₀)(q₁q₂/|r|³)r,F = (1/4πε₀)(q₁q₂/r³)r̂,F = (1/4πε₀)(q₁q₂/r²),B
+physics,Capacity of a capacitor is given by:,C = Q·V,C = Q/V,C = V/Q,C = ½QV,B
+physics,Energy stored in a charged capacitor is:,E = CV,E = ½CV,E = ½CV²,E = Q²/C,C
+physics,If n capacitors of equal capacitance C₁ are connected in parallel the equivalent capacitance is:,C = C₁/n,C = nC₁,C = n²C₁,C = C₁/n²,B
+physics,Dielectric strength of air is approximately:,3 × 10⁶ Vm⁻¹,3 × 10⁸ Vm⁻¹,9 × 10⁹ Vm⁻¹,1.6 × 10⁻¹⁹ Vm⁻¹,A
+physics,Intensity of electric field (E) at a point is:,E = F·q,E = F/q,E = q/F,E = ½Fq,B
+physics,Surface charge density (σ) is defined as:,σ = Q·A,σ = Q·L,σ = Q/A,σ = Q/V,C
+physics,Capacity of an isolated spherical conductor of radius R is:,C = (1/4πε₀)R,C = 4πε₀R,C = 4πε₀R²,C = 4πε₀/R,B
+physics,S.I. unit of electric flux is:,Weber,Volt-metre (Vm) or Nm²C⁻¹,Newton/Coulomb,Joule,B
+physics,The value of 1/4πε₀ is:,9 × 10⁹ Nm²C⁻²,9 × 10⁻⁹ Nm²C⁻²,8.85 × 10⁻¹² Nm²C⁻²,1.6 × 10⁻¹⁹ Nm²C⁻²,A
+physics,Which of the following is correct for charge on an electron?,1.6 × 10⁻¹⁸ C,1.602 × 10⁻¹⁹ C,1.6 × 10⁻⁹ C,9.1 × 10⁻³¹ C,B
+physics,Quantisation of charge implies that charge exists as:,Fractions of electron charge,Continuous values,Integral multiples of electronic charge,Any random value,C
+physics,Electric field lines inside a charged hollow spherical conductor are:,Radial,Circular,Zero,Infinite,C
+physics,The angle between electric field lines and an equipotential surface is:,0°,45°,90°,180°,C
+physics,Potential energy of an electric dipole of moment p in electric field E is:,p × E,p·E,-p·E,pE sinθ,C
+physics,Torque acting on an electric dipole in a uniform electric field is:,τ = p × E,τ = p·E,τ = pE cosθ,τ = E × p,A
+physics,Van de Graaff generator is used to produce:,High current,High voltage,Electromagnetic waves,High magnetic field,B
+physics,Three capacitors each of capacity C are connected in series. The equivalent capacity is:,3C,C/3,3/C,1/3C,B
+physics,Unit of potential difference is:,Coulomb,Joule,Volt (or Joule/Coulomb),Watt,C
+physics,The dielectric constant (K) of a metal is:,0,1,80,Infinite,D
+physics,If a dielectric slab is introduced between plates of a capacitor its capacitance:,Increases,Decreases,Remains same,Becomes zero,A
+physics,Potential due to a point charge q at distance r is:,V = (1/4πε₀)(q/r),V = (1/4πε₀)(q/r²),V = (1/4πε₀)qr,V = qr²,A
+physics,Work done in moving a charge on an equipotential surface is:,Positive,Negative,Zero,Infinite,C
+physics,Two point charges +q and -q are placed at a distance d. The potential at the midpoint is:,2kq/d,kq/d²,Zero,4kq/d,C
+physics,Gauss's Law states that total flux φ through a closed surface is:,q(enclosed)/ε₀,q(enclosed)·ε₀,q(enclosed)/4πε₀,Zero,A
+physics,Unit of linear charge density (λ) is:,Cm⁻¹,Cm⁻²,Cm,C,A
+physics,Dimensional formula of capacitance is:,[M⁻¹L⁻²T⁴A²],[ML²T⁻³A⁻¹],[MLT⁻³A⁻¹],[M⁰L⁰T⁰],A
+physics,Force between two charges in a medium of dielectric constant K is F'. If F is force in air then:,F' = F,F' = F/K,F' = KF,F' = K²F,B
+physics,Current density (J) is given by:,J = I·A,J = I/A,J = A/I,J = I²A,B
+physics,The relation between drift velocity (vd) and electric field (E) is:,vd ∝ E²,vd = μE,vd = μ/E,vd = constant,B
+physics,Which of the following is correct for mobility (μ)?,μ = vd/E,μ = E/vd,μ = vd·E,μ = 1/vd,A
+physics,Kirchhoff's first law (Junction law) is based on conservation of:,Energy,Charge,Momentum,Mass,B
+physics,Kirchhoff's second law (Loop law) is based on conservation of:,Charge,Energy,Momentum,Angular Momentum,B
+physics,Wheatstone bridge is used to measure:,High resistance,Low resistance,Both high and low resistance,Potential difference,C
+physics,The algebraic sum of currents meeting at a point in an electrical circuit is:,Infinity,Zero,Positive,Negative,B
+physics,Potentiometer is used to measure:,Current,EMF of cell/Potential difference,Resistance only,Power,B
+physics,1 kWh is equal to:,3.6 × 10⁵ J,3.6 × 10⁶ J,3.6 × 10³ J,10³ J,B
+physics,Resistance of an ideal ammeter is:,Infinite,Very high,Zero,Very low,C
+physics,Resistance of an ideal voltmeter is:,Infinite,Zero,Very low,100 Ohm,A
+physics,Colour code of carbon resistance for Red colour is:,0,1,2,3,C
+physics,Colour code for Green colour is:,4,5,6,7,B
+physics,On increasing temperature the resistance of a semiconductor:,Increases,Decreases,Remains same,Becomes zero,B
+physics,On increasing temperature the resistance of a conductor:,Increases,Decreases,Remains same,First increases then decreases,A
+physics,Ampere-hour is a unit of:,Power,Energy,Charge,Voltage,C
+physics,Principle of Meter Bridge is based on:,Wheatstone bridge,Potentiometer,Kirchhoff's Law,Ohm's Law,A
+physics,If the length of a wire is doubled by stretching its resistance becomes:,2 times,4 times,8 times,Unchanged,B
+physics,Power of an electric circuit is:,V·R,V²/R,V²·R,I²/R,B
+physics,Fuse wire is made of material with:,High melting point,Low melting point,High resistance (ideal),Low conductivity,B
+physics,Conductivity (σ) is the reciprocal of:,Resistance,Resistivity,Conductance,Inductance,B
+physics,Vector form of Ohm's law is:,V = IR,J = σE,E = σJ,J = ρE,B
+physics,Lorentz force is given by:,F = q(E + v × B),F = q(E + B × v),F = qE + v·B,F = qv × B,A
+physics,Biot-Savart law in vector form is:,dB = (μ₀/4π)(I(dl × r̂)/r²),dB = (μ₀/4π)(Idl/r²),dB = (μ₀/4π)(Idl × r/r²),dB = μ₀Idl,A
+physics,Magnetic field at the center of a circular current carrying coil is:,B = μ₀NI/2r,B = μ₀NI/2πr,B = μ₀NI,B = 0,A
+physics,A moving charge produces:,Only electric field,Only magnetic field,Both electric and magnetic fields,None,C
+physics,Work done in deflecting a magnetic dipole in a magnetic field is:,MB sinθ,MB(1 - cosθ),MB cosθ,Zero,B
+physics,S.I. unit of magnetic field (B) is:,Weber,Tesla (or Wb/m²),Henry,Farad,B
+physics,S.I. unit of magnetic flux is:,Weber,Tesla,Gauss,Ampere-metre,A
+physics,S.I. unit of Pole Strength is:,Ampere-metre (Am),Ampere/metre,Joule/Tesla,Newton/Tesla,A
+physics,Unit of magnetic moment is:,Ampere-metre² (Am²) or Joule/Tesla,Am,Tm,JT,A
+physics,Value of permeability of vacuum μ₀ is:,4π × 10⁻⁷ Hm⁻¹ (or TmA⁻¹),9 × 10⁹,8.85 × 10⁻¹²,1.6 × 10⁻¹⁹,A
+physics,Magnetic susceptibility of a vacuum is:,1,0,Infinity,Negative,B
+physics,Susceptibility is positive and large for:,Diamagnetic,Paramagnetic,Ferromagnetic,Non-magnetic,C
+physics,Diamagnetic materials move from:,Weak to strong field,Strong to weak field,Do not move,Random direction,B
+physics,Curie temperature is the temperature above which:,Ferromagnetic becomes Paramagnetic,Paramagnetic becomes Diamagnetic,Ferromagnetic becomes Diamagnetic,Metal melts,A
+physics,Angle of dip at the magnetic poles of earth is:,0°,45°,90°,180°,C
+physics,Angle of dip at the equator is:,0°,90°,45°,60°,A
+physics,Relation between magnetic elements at a place:,Bv = BH tanδ,B² = BH² + Bv²,BH = B sinδ,tanδ = BH/Bv,B
+physics,Shunt is used in ammeter to:,Decrease its range,Increase its range,Increase its resistance,Make it a voltmeter,B
+physics,To convert a galvanometer into a voltmeter we connect:,Low resistance in parallel,High resistance in parallel,Low resistance in series,High resistance in series,D
+physics,Cyclotron frequency is given by:,ν = qB/2πm,ν = 2πm/qB,ν = qB/m,ν = mv/qB,A
+physics,Magnetic field inside a long solenoid is:,μ₀nI,μ₀I/n,Zero,μ₀I,A
+physics,Force between two parallel current carrying wires is attractive if:,Currents are in same direction,Currents are in opposite direction,Currents are perpendicular,Never attractive,A
+physics,Energy density of magnetic field is:,B²/2μ₀,B²/μ₀,μ₀B²/2,B/2μ₀,A
+physics,Magnetic potential due to a pole of strength m at distance r is:,(μ₀/4π)(m/r),(μ₀/4π)(m/r²),μ₀mr,Zero,A
+physics,Torque on a current carrying loop of magnetic moment M in field B:,M·B,M × B,Zero,MB,B
+physics,Gyromagnetic ratio of electron is:,8.8 × 10¹⁰ C/kg,1.6 × 10⁻¹⁹ C,6.6 × 10⁻³⁴ Js,Constant,A
+physics,Lenz's law is a consequence of conservation of:,Charge,Momentum,Energy,Mass,C
+physics,Unit of Self Inductance is:,Weber,Tesla,Henry,Gauss,C
+physics,S.I. unit of Mutual Inductance is:,Henry,Volt,Ohm,Faraday,A
+physics,In a step-up transformer:,Ns < Np,Ns > Np and Vs > Vp,Is > Ip,Power increases,B
+physics,Transformer works on the principle of:,Self Induction,Mutual Induction,Eddy Currents,Lorentz Force,B
+physics,Core of a transformer is laminated to reduce:,Copper loss,Eddy current loss,Hysteresis loss,Flux leakage,B
+physics,RMS value of AC (Irms) is related to Peak value (I₀) by:,Irms = I₀,Irms = I₀/√2 ≈ 0.707I₀,Irms = √2I₀,Irms = I₀/2,B
+physics,Mean (Average) value of AC over a half cycle is:,2I₀/π ≈ 0.637I₀,I₀/π,I₀/√2,Zero,A
+physics,Average value of AC over a full cycle is:,I₀,Irms,Zero,Infinite,C
+physics,Inductive Reactance (XL) is:,ωL = 2πfL,1/ωL,ωC,R,A
+physics,Capacitive Reactance (XC) is:,ωC,1/ωC = 1/2πfC,ωL,C/ω,B
+physics,Impedance (Z) of an L-R series circuit is:,R + ωL,√(R² + (ωL)²),√(R² + (1/ωL)²),R,B
+physics,Power factor of an AC circuit is:,cosφ = R/Z,sinφ = X/Z,tanφ = X/R,Z/R,A
+physics,Power factor of a pure inductor or pure capacitor is:,1,0,0.5,Infinite,B
+physics,Power factor of a pure resistive circuit is:,1,0,0.5,-1,A
+physics,Resonant frequency of L-C-R circuit is:,f = 1/2π√(LC),f = 2π√(LC),f = 1/√(LC),f = LC,A
+physics,Phase difference between voltage and current in a capacitor is:,0,π/2 (Current leads),π,π/4,B
+physics,Dimensions of RC (Resistance × Capacitance) are same as:,Time,Frequency,Length,Velocity,A
+physics,Dimensions of L/R are same as:,Time,Frequency,Acceleration,Force,A
+physics,An AC source is connected to a resistor. The phase diff between V and I is:,0°,90°,180°,Variable,A
+physics,Dynamo works on the principle of:,Electromagnetic Induction,Chemical effect,Heating effect,Electrostatics,A
+physics,Hot wire ammeter measures:,Peak value,Average value,RMS value,Instantaneous value,C
+physics,In an LCR circuit at resonance the impedance is:,Minimum (Z=R),Maximum,Zero,Infinite,A
+physics,Quality factor (Q) of a circuit is related to:,Sharpness of resonance,Power loss,Resistance,Current magnitude,A
+physics,Which of the following is not an Electromagnetic wave?,Gamma rays,X-rays,Beta rays/Sound waves,Radio waves,C
+physics,The speed of electromagnetic waves in vacuum is given by:,c = 1/√(μ₀ε₀),c = √(μ₀ε₀),c = μ₀ε₀,c = 1/μ₀ε₀,A
+physics,Electromagnetic waves are:,Longitudinal,Transverse,Mechanical,Stationary,B
+physics,Which EM wave has the highest frequency/energy?,Radio,Visible,Gamma rays,UV rays,C
+physics,Which EM wave has the longest wavelength?,Radio waves,X-rays,Microwaves,Infrared,A
+physics,Ozone layer absorbs:,Visible light,Ultraviolet (UV) radiations,Infrared,Radio waves,B
+physics,Infrared rays are used in:,Radar,Remote controls/Night vision,Surgery,Sterilization,B
+physics,Direction of propagation of EM wave is parallel to:,E,B,E × B,B × E,C
+physics,Displacement current arises due to:,Steady electric field,Changing electric field,Steady magnetic field,Moving charges,B
+physics,Formula for refractive index ₁μ₂ is:,μ₂/μ₁,μ₁/μ₂,μ₁ × μ₂,1/μ₂,A
+physics,Critical angle is the angle of incidence in denser medium for which angle of refraction is:,0°,90°,180°,45°,B
+physics,Relation between Critical angle C and refractive index μ:,μ = 1/sin C,μ = sin C,μ = cos C,μ = 1/cos C,A
+physics,Image formed on the retina of human eye is:,Real and Erect,Real and Inverted,Virtual and Erect,Virtual and Inverted,B
+physics,Short-sightedness (Myopia) is corrected using:,Convex lens,Concave lens,Cylindrical lens,Bifocal lens,B
+physics,Long-sightedness (Hypermetropia) is corrected using:,Convex lens,Concave lens,Cylindrical lens,Plane glass,A
+physics,Astigmatism is corrected using:,Bifocal lens,Cylindrical lens,Concave lens,Convex lens,B
+physics,Power of a convex lens of focal length 20 cm is:,20 D,+5 D,−5 D,0.2 D,B
+physics,Magnifying power of Astronomical Telescope in normal adjustment:,fo/fe,fe/fo,fo × fe,fo + fe,A
+physics,Length of Astronomical Telescope in normal adjustment:,fo − fe,fo + fe,fo/fe,fo·fe,B
+physics,Magnifying power of simple microscope:,1 + D/f,1 − D/f,D/f,f/D,A
+physics,Blue colour of sky is due to:,Dispersion,Scattering,Interference,Reflection,B
+physics,Rainbow is formed due to:,Scattering,Dispersion,Diffraction,Polarization,B
+physics,Mirage is an optical illusion due to:,Total Internal Reflection (TIR),Diffraction,Polarization,Interference,A
+physics,Optical fiber works on the principle of:,Refraction,Dispersion,Total Internal Reflection,Scattering,C
+physics,Two lenses of power P₁ and P₂ are placed in contact. Net power:,P = P₁ + P₂,P = P₁ × P₂,P = P₁/P₂,1/P = 1/P₁ + 1/P₂,A
+physics,Focal length of a plane mirror is:,Zero,Infinity,25 cm,−25 cm,B
+physics,Image formed by a plane mirror is:,Real and inverted,Virtual erect and same size,Real and magnified,Virtual and diminished,B
+physics,Bending of light around corners of an obstacle is called:,Interference,Diffraction,Polarization,Refraction,B
+physics,Wavefronts originating from a point source are:,Plane,Spherical,Cylindrical,Elliptical,B
+physics,Young's Double Slit Experiment demonstrates:,Particle nature,Interference/Wave nature,Polarization,Photoelectric effect,B
+physics,Condition for constructive interference (Maxima):,Path diff = (2n+1)λ/2,Path diff = nλ,Phase diff = π/2,Path diff = 0 only,B
+physics,Width of interference fringes (β) is:,Dλ/d,dλ/D,D/dλ,λ/dD,A
+physics,Brewster's Law is related to:,Interference,Diffraction,Polarization,Reflection,C
+physics,According to Brewster's law:,μ = tan ip,μ = sin ip,μ = cos ip,μ = cot ip,A
+physics,Which phenomenon confirms transverse nature of light?,Interference,Diffraction,Polarization,Dispersion,C
+physics,Rayleigh scattering intensity (I) is proportional to:,λ,1/λ,1/λ²,1/λ⁴,D
+physics,Deviation produced by a thin prism of angle A:,δ = (μ − 1)A,δ = (μ + 1)A,δ = μA,δ = A/μ,A
+physics,Dispersive power (ω) depends on:,Angle of prism,Nature of material of prism,Height of prism,Angle of incidence,B
+physics,For a lens if it is immersed in water (μ=1.33) its focal length:,Decreases,Increases (approx 4 times),Remains same,Becomes zero,B
+physics,A convex lens behaves as a concave lens if placed in a medium of refractive index:,Less than lens,Equal to lens,Greater than lens,Vacuum,C
+physics,Formula for refractive index of prism:,μ = sin((A+δm)/2)/sin(A/2),μ = sin(A+δm)/sin A,μ = sin A/sin δm,μ = (μ−1)A,A
+physics,Energy of a photon is:,E = hν = hc/λ,E = ½mv²,E = hλ,E = mc,A
+physics,Momentum of a photon is:,p = h/λ,p = hλ,p = E/c²,p = mλ,A
+physics,Photoelectric effect supports:,Wave nature of light,Particle nature of light,Both,None,B
+physics,Kinetic energy of photoelectrons depends on:,Intensity of light,Frequency of light,Time of exposure,Distance of source,B
+physics,Photoelectric current depends on:,Intensity of light,Frequency of light,Speed of light,Polarization,A
+physics,De Broglie wavelength (λ) is:,λ = h/mv,λ = hmv,λ = mv/h,λ = h/E,A
+physics,Which spectral series of Hydrogen lies in the Visible region?,Lyman,Balmer,Paschen,Bracket,B
+physics,Which spectral series lies in the Ultraviolet region?,Lyman,Balmer,Paschen,Pfund,A
+physics,Rydberg constant (R) has unit:,m⁻¹,m,s⁻¹,J,A
+physics,Energy of electron in nth orbit of Hydrogen:,En = −13.6/n² eV,En = −13.6n² eV,En = −13.6/n eV,En = 13.6/n² eV,A
+physics,Radius of nucleus (R) is proportional to:,A^(1/3),A,A²,A^(−1/3),A
+physics,Alpha particles are:,Electrons,Protons,Helium nuclei (⁴He₂),Hydrogen nuclei,C
+physics,Beta rays are fast moving:,Protons,Neutrons,Electrons,Photons,C
+physics,Gamma rays are:,High energy electrons,High energy Electromagnetic waves,Helium nuclei,Protons,B
+physics,Which radiation has the highest penetrating power?,Alpha,Beta,Gamma,Cathode rays,C
+physics,Which radiation has the highest ionizing power?,Alpha,Beta,Gamma,X-rays,A
+physics,Solar energy is generated by:,Nuclear Fission,Nuclear Fusion,Chemical burning,Photoelectric effect,B
+physics,Atom bomb is based on:,Nuclear Fission,Nuclear Fusion,Radioactivity,Chemical explosion,A
+physics,Half-life (T₁/₂) is related to decay constant (λ) by:,T₁/₂ = 0.693/λ,T₁/₂ = λ/0.693,T₁/₂ = 0.693λ,T₁/₂ = 1/λ,A
+physics,Unit of radioactivity is:,Curie or Becquerel,Fermi,Tesla,Hertz,A
+physics,Number of neutrons in ²³⁸U₉₂ is:,92,238,146 (238−92),330,C
+physics,Isotopes have:,Same A different Z,Same Z different A (different neutrons),Same N,Same physical properties,B
+physics,Isobars have:,Same Mass Number (A),Same Atomic Number (Z),Same Neutrons,Same Protons,A
+physics,1 amu is equivalent to:,931 eV,931 MeV,1.6 J,9.1 kg,B
+physics,Mass-Energy equivalence relation is:,E = mc²,E = m/c²,E = m²c,E = ½mc,A
+physics,Function of moderator in a nuclear reactor is:,To absorb neutrons,To slow down neutrons,To cool the reactor,To generate neutrons,B
+physics,In an intrinsic semiconductor at 0K it behaves as:,Conductor,Insulator,Superconductor,Semiconductor,B
+physics,Majority charge carriers in N-type semiconductor are:,Holes,Electrons,Protons,Neutrons,B
+physics,Majority charge carriers in P-type semiconductor are:,Holes,Electrons,Positive Ions,Neutrons,A
+physics,To obtain N-type semiconductor Ge is doped with valency:,3,4,5 (Pentavalent),2,C
+physics,To obtain P-type semiconductor Si is doped with valency:,3 (Trivalent like Boron Indium),4,5,6,A
+physics,A P-N junction diode acts as a:,Amplifier,Rectifier,Oscillator,Modulator,B
+physics,In forward bias the width of depletion layer:,Increases,Decreases,Remains same,Becomes infinite,B
+physics,In reverse bias the potential barrier:,Increases,Decreases,Disappears,Unchanged,A
+physics,Full wave rectifier uses:,1 diode,2 diodes (or 4 in bridge),3 diodes,No diode,B
+physics,The relation between α and β of a transistor is:,β = α/(1+α),β = α/(1−α),α = β/(1−β),α × β = 1,B
+physics,Boolean expression for OR gate:,Y = A + B,Y = A·B,Y = Ā,Y = A+B (complement),A
+physics,Boolean expression for AND gate:,Y = A + B,Y = A·B,Y = A·B (complement),Y = A ⊕ B,B
+physics,Boolean expression for NAND gate:,Y = A·B (complement),Y = A+B (complement),Y = A·B,Y = A + B,A
+physics,Boolean expression for NOR gate:,Y = A + B,Y = A+B (complement),Y = A·B (complement),Y = Ā,B
+physics,The logic gate that yields output 1 only when both inputs are 1:,OR,AND,NOR,NAND,B
+physics,The binary equivalent of decimal number 8 is:,1000,1001,111,110,A
+physics,The binary equivalent of decimal number 25 is:,11000,11001,10101,11100,B
+physics,Sky wave propagation is based on reflection from:,Troposphere,Ionosphere,Stratosphere,Mesosphere,B
+physics,Which frequency range is used for TV transmission?,30−300 KHz,30−300 MHz,30−300 GHz,3−30 Hz,B
+physics,Modulation is the process of:,Superimposing signal on carrier wave,Separating signal from carrier,Amplifying signal,Rectifying signal,A
+physics,Modem is a device used for:,Modulation only,Demodulation only,Both Modulation and Demodulation,Amplification,C
+physics,The height of a geostationary satellite from earth surface is approx:,360 km,6400 km,36000 km,3600 km,C
+physics,Unit of attenuation is:,Ohm,Decibel (dB),Volt,Hertz,B
+physics,Zener diode is used as:,Amplifier,Rectifier,Voltage Regulator,Oscillator,C
+physics,Which gate is known as a Universal Gate?,AND,OR,NAND/NOR,NOT,C
+physics,Optical communication uses:,Radio waves,Light waves,Sound waves,Cosmic rays,B
+physics,Facsimile (FAX) is used for:,Transmission of documents/pictures,Voice call,Video call,None,A
+physics,Range of horizon (d) for a TV tower of height h is:,d = √(2hR),d = √(2hR),d = hR,d = 2hR,A
+physics,Forbidden energy gap in conductors is:,Very large,Zero/Overlapping,Small (~1 eV),Infinite,B
+physics,Forbidden energy gap in insulators is:,Large (> 3 eV),Zero,Small,Negative,A

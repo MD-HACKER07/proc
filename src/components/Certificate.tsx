@@ -1,169 +1,453 @@
 import React, { useRef } from 'react';
-import { useQuiz } from '../context/QuizContext';
-import { Award, Download, Printer } from 'lucide-react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { motion } from 'framer-motion';
+import { Award, Download, X, Calendar, BookOpen, Star, Crown } from 'lucide-react';
+import signatureImg from '../assets/images/sign.png';
 
 interface CertificateProps {
-  username: string;
+  studentName: string;
+  subject: string;
   score: number;
-  maxScore: number;
-  certificationLevel: string;
+  totalQuestions: number;
+  percentage: number;
+  completedAt: any;
+  onClose: () => void;
 }
 
-const Certificate: React.FC<CertificateProps> = ({ 
-  username, 
-  score, 
-  maxScore, 
-  certificationLevel 
+const Certificate: React.FC<CertificateProps> = ({
+  studentName,
+  subject,
+  score,
+  totalQuestions,
+  percentage,
+  completedAt,
+  onClose,
 }) => {
   const certificateRef = useRef<HTMLDivElement>(null);
-  const percentage = Math.round((score / maxScore) * 100);
-  const date = new Date().toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
 
-  const downloadPDF = async () => {
-    if (!certificateRef.current) return;
-    
+  const formatDate = (dateValue: any): string => {
     try {
-      const canvas = await html2canvas(certificateRef.current, {
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        backgroundColor: '#ffffff'
-      });
-      
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'mm',
-        format: 'a4'
-      });
-      
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${username.replace(/\s+/g, '_')}_${certificationLevel.toLowerCase()}_certificate.pdf`);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
+      let date: Date;
+      if (!dateValue)
+        return new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+      if (dateValue && typeof dateValue === 'object' && (dateValue.seconds || dateValue._seconds)) {
+        const seconds = dateValue.seconds || dateValue._seconds;
+        date = new Date(seconds * 1000);
+      } else if (dateValue instanceof Date) {
+        date = dateValue;
+      } else if (typeof dateValue === 'string') {
+        date = new Date(dateValue);
+      } else if (typeof dateValue === 'number') {
+        date = new Date(dateValue);
+      } else {
+        date = new Date();
+      }
+      if (isNaN(date.getTime()))
+        return new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+      return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch {
+      return new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
     }
   };
 
-  const printCertificate = () => {
-    const printWindow = window.open('', '', 'height=650,width=900');
-    if (!printWindow || !certificateRef.current) return;
-    
-    printWindow.document.write('<html><head><title>Certificate</title>');
-    printWindow.document.write('<style>body { margin: 0; padding: 20px; }</style>');
-    printWindow.document.write('</head><body>');
-    printWindow.document.write(certificateRef.current.outerHTML);
-    printWindow.document.write('</body></html>');
-    
-    printWindow.document.close();
-    printWindow.focus();
-    
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 500);
+  const getGrade = () => {
+    if (percentage >= 90) return { grade: 'A+', text: 'Outstanding' };
+    if (percentage >= 80) return { grade: 'A', text: 'Excellent' };
+    if (percentage >= 70) return { grade: 'B+', text: 'Very Good' };
+    if (percentage >= 60) return { grade: 'B', text: 'Good' };
+    if (percentage >= 50) return { grade: 'C', text: 'Pass' };
+    return { grade: 'D', text: 'Keep Trying' };
+  };
+
+  const gradeInfo = getGrade();
+  const formattedDate = formatDate(completedAt);
+
+  const handleDownload = () => {
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Certificate - ${studentName}</title>
+          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            @page { 
+              size: A4 landscape; 
+              margin: 0; 
+            }
+            html, body {
+              width: 297mm;
+              height: 210mm;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+            body { 
+              font-family: 'Poppins', sans-serif; 
+              background: #f8fafc;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+            .certificate {
+              width: 297mm;
+              height: 210mm;
+              background: linear-gradient(135deg, #fefce8 0%, #fef9c3 50%, #fef08a 100%);
+              position: relative;
+              overflow: hidden;
+            }
+            .gold-border {
+              position: absolute;
+              top: 8mm; left: 8mm; right: 8mm; bottom: 8mm;
+              border: 3px solid #b8860b;
+              pointer-events: none;
+            }
+            .gold-border-inner {
+              position: absolute;
+              top: 12mm; left: 12mm; right: 12mm; bottom: 12mm;
+              border: 1px solid #daa520;
+              pointer-events: none;
+            }
+            .corner {
+              position: absolute;
+              width: 50px;
+              height: 50px;
+              border: 3px solid #b8860b;
+            }
+            .corner-tl { top: 15mm; left: 15mm; border-right: none; border-bottom: none; }
+            .corner-tr { top: 15mm; right: 15mm; border-left: none; border-bottom: none; }
+            .corner-bl { bottom: 15mm; left: 15mm; border-right: none; border-top: none; }
+            .corner-br { bottom: 15mm; right: 15mm; border-left: none; border-top: none; }
+            .content {
+              position: relative;
+              z-index: 1;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              padding: 15mm 25mm;
+              text-align: center;
+            }
+            .header-badge {
+              background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+              color: #ffd700;
+              padding: 8px 40px;
+              font-size: 11px;
+              letter-spacing: 4px;
+              text-transform: uppercase;
+              font-weight: 600;
+              border-radius: 0 0 10px 10px;
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+            .logo {
+              font-family: 'Great Vibes', cursive;
+              font-size: 36px;
+              color: #1e3a5f;
+              margin-bottom: 5px;
+            }
+            .title {
+              font-family: 'Cinzel', serif;
+              font-size: 48px;
+              font-weight: 700;
+              color: #1e3a5f;
+              letter-spacing: 10px;
+              margin: 8px 0;
+              text-transform: uppercase;
+            }
+            .subtitle {
+              color: #64748b;
+              font-size: 14px;
+              margin: 10px 0;
+            }
+            .student-name {
+              font-family: 'Great Vibes', cursive;
+              font-size: 44px;
+              color: #1e3a5f;
+              margin: 10px 0;
+              border-bottom: 2px solid #b8860b;
+              padding-bottom: 5px;
+              display: inline-block;
+            }
+            .exam-info {
+              color: #64748b;
+              font-size: 13px;
+              margin: 8px 0;
+            }
+            .exam-name {
+              display: inline-block;
+              background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+              color: white;
+              padding: 10px 35px;
+              border-radius: 25px;
+              font-size: 16px;
+              font-weight: 600;
+              margin: 10px 0;
+            }
+            .score-row {
+              display: flex;
+              justify-content: center;
+              gap: 30px;
+              margin: 15px 0;
+            }
+            .score-box {
+              background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+              color: white;
+              padding: 15px 35px;
+              border-radius: 12px;
+              text-align: center;
+            }
+            .score-value {
+              font-size: 28px;
+              font-weight: 700;
+            }
+            .score-label {
+              font-size: 10px;
+              opacity: 0.9;
+              letter-spacing: 2px;
+              margin-top: 3px;
+            }
+            .date-text {
+              color: #64748b;
+              font-size: 12px;
+              margin: 12px 0;
+            }
+            .signature-area {
+              margin-top: 15px;
+              text-align: center;
+            }
+            .signature-img {
+              height: 70px;
+              margin-bottom: 5px;
+            }
+            .signature-line {
+              width: 180px;
+              height: 2px;
+              background: #b8860b;
+              margin: 0 auto 8px;
+            }
+            .signature-title {
+              font-size: 12px;
+              color: #1e3a5f;
+              font-weight: 600;
+            }
+            .quote-box {
+              margin-top: 12px;
+              padding: 10px 30px;
+              background: rgba(30, 58, 95, 0.08);
+              border-left: 3px solid #b8860b;
+              border-radius: 5px;
+              max-width: 500px;
+            }
+            .quote-text {
+              font-style: italic;
+              color: #1e3a5f;
+              font-size: 11px;
+              line-height: 1.5;
+            }
+            .seal {
+              position: absolute;
+              bottom: 20mm;
+              right: 25mm;
+              width: 60px;
+              height: 60px;
+              border: 3px solid #b8860b;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+            }
+            .seal-text {
+              font-size: 8px;
+              color: #b8860b;
+              font-weight: 700;
+              text-align: center;
+              line-height: 1.2;
+            }
+            @media print {
+              html, body {
+                width: 297mm;
+                height: 210mm;
+              }
+              .certificate {
+                width: 297mm;
+                height: 210mm;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="certificate">
+            <div class="gold-border"></div>
+            <div class="gold-border-inner"></div>
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+            
+            <div class="header-badge">★ Certificate of Excellence ★</div>
+            
+            <div class="content">
+              <div class="logo">SadiyaIgnite</div>
+              <div class="title">Certificate</div>
+              <div class="subtitle">This is to certify that</div>
+              <div class="student-name">${studentName}</div>
+              <div class="exam-info">has successfully completed the examination in</div>
+              <div class="exam-name">${subject}</div>
+              
+              <div class="score-row">
+                <div class="score-box">
+                  <div class="score-value">${score}/${totalQuestions}</div>
+                  <div class="score-label">SCORE</div>
+                </div>
+                <div class="score-box">
+                  <div class="score-value">${percentage}%</div>
+                  <div class="score-label">GRADE: ${gradeInfo.grade}</div>
+                </div>
+              </div>
+              
+              <div class="date-text">Awarded on ${formattedDate}</div>
+              
+              <div class="signature-area">
+                <img src="${signatureImg}" alt="Signature" class="signature-img" />
+                <div class="signature-line"></div>
+                <div class="signature-title">Director, SadiyaIgnite</div>
+              </div>
+              
+              <div class="quote-box">
+                <div class="quote-text">"Success is the sum of small efforts, repeated day in and day out."</div>
+              </div>
+            </div>
+            
+            <div class="seal">
+              <div class="seal-text">VERIFIED<br/>✓</div>
+            </div>
+          </div>
+          <script>window.onload = function() { setTimeout(function() { window.print(); }, 300); }</script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
   };
 
   return (
-    <div className="my-8">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md mb-4">
-        <div 
-          ref={certificateRef} 
-          className="certificate-container bg-white text-gray-800 p-8 rounded-lg border-8 border-double border-green-600 relative overflow-hidden"
-          style={{ minHeight: '500px' }}
-        >
-          {/* Background Pattern */}
-          <div className="absolute inset-0 z-0 opacity-5">
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-repeat" 
-                 style={{ backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48ZyBzdHJva2U9IiMyMjIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIxMCIvPjxwYXRoIGQ9Ik0zMCwxMCB2LTEwIE01MCwzMCBoMTAgTTMwLDUwIHYxMCBNMTAsMzAgaC0xMCIvPjwvZz48L3N2Zz4=')" }}>
-            </div>
-          </div>
-
-          {/* Certificate Content */}
-          <div className="relative z-10 text-center">
-            {/* Header */}
-            <div className="mb-6">
-              <div className="text-green-700 text-xl font-bold mb-1">CERTIFICATE OF ACHIEVEMENT</div>
-              <div className="text-3xl font-serif font-bold text-gray-900 mb-1">Innovation Cell</div>
-              <div className="text-sm text-gray-600">{certificationLevel} Certification</div>
-            </div>
-            
-            {/* Award Icon */}
-            <div className="mb-4 flex justify-center">
-              <div className="bg-green-50 p-3 rounded-full">
-                <Award className="h-16 w-16 text-green-600" />
-              </div>
-            </div>
-            
-            {/* Main Text */}
-            <div className="mb-8">
-              <div className="text-lg text-gray-600 mb-2">This is to certify that</div>
-              <div className="text-3xl font-bold text-gray-900 font-serif mb-2">{username}</div>
-              <div className="text-lg text-gray-600 mb-4">has successfully completed the {certificationLevel} Quiz with a score of</div>
-              <div className="flex justify-center items-center gap-2 mb-2">
-                <span className="text-4xl font-bold text-green-700">{score}</span>
-                <span className="text-xl text-gray-800">out of</span>
-                <span className="text-4xl font-bold text-gray-800">{maxScore}</span>
-              </div>
-              <div className="text-2xl font-bold mb-4 text-green-700">{percentage}%</div>
-              <div className="inline-block border-2 border-green-600 px-4 py-1 rounded-full text-green-800 font-medium">
-                {certificationLevel}
-              </div>
-            </div>
-            
-            {/* Date & Signature */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="text-left">
-                <div className="text-sm text-gray-600 mb-1">Date of Issuance:</div>
-                <div className="text-md font-medium text-gray-800">{date}</div>
-              </div>
-              <div className="text-right">
-                <div className="mb-2">
-                  <img 
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAqCAYAAABRCaLsAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF8WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTIzVDE0OjE5OjA1KzA1OjMwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNC0yM1QxNDoyMDoyMSswNTozMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNC0yM1QxNDoyMDoyMSswNTozMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1NmY0MmFmMS04NGJl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" 
-                    alt="Signature" 
-                    className="h-12 mx-auto" 
-                  />
-                </div>
-                <div className="text-sm text-gray-600">Authorized by:</div>
-                <div className="text-md font-medium text-gray-800">MD ABU SHALEM ALAM</div>
-              </div>
-            </div>
-            
-            {/* Certificate ID */}
-            <div className="text-xs text-gray-500 mt-4">
-              Certificate ID: {Math.random().toString(36).substring(2, 12).toUpperCase()}
-            </div>
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] overflow-hidden shadow-2xl"
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-amber-600 to-yellow-500 p-4 flex justify-between items-center">
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <Award className="w-6 h-6" />
+            Certificate of Excellence
+          </h2>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleDownload}
+              className="flex items-center gap-2 px-5 py-2 bg-white text-amber-700 rounded-full font-semibold shadow-lg"
+            >
+              <Download className="w-4 h-4" />
+              Download
+            </motion.button>
+            <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-full">
+              <X className="w-5 h-5 text-white" />
+            </button>
           </div>
         </div>
-      </div>
-      
-      {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-2">
-        <button 
-          onClick={downloadPDF}
-          className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center"
-        >
-          <Download className="h-5 w-5 mr-2" />
-          Download PDF
-        </button>
-        
-        <button 
-          onClick={printCertificate}
-          className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center"
-        >
-          <Printer className="h-5 w-5 mr-2" />
-          Print Certificate
-        </button>
-      </div>
+
+        {/* Preview */}
+        <div className="p-6 overflow-y-auto max-h-[calc(95vh-70px)] bg-gray-100">
+          <motion.div
+            ref={certificateRef}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-lg p-8 shadow-xl border-4 border-amber-600 relative"
+          >
+            {/* Inner border */}
+            <div className="absolute top-3 left-3 right-3 bottom-3 border-2 border-amber-400 rounded pointer-events-none" />
+
+            {/* Corners */}
+            <Star className="absolute top-5 left-5 w-6 h-6 text-amber-600" />
+            <Star className="absolute top-5 right-5 w-6 h-6 text-amber-600" />
+            <Star className="absolute bottom-5 left-5 w-6 h-6 text-amber-600" />
+            <Star className="absolute bottom-5 right-5 w-6 h-6 text-amber-600" />
+
+            <div className="text-center py-6">
+              <div className="inline-block bg-slate-800 text-amber-400 px-6 py-1 rounded-b-lg text-xs tracking-widest mb-4">
+                ★ CERTIFICATE OF EXCELLENCE ★
+              </div>
+
+              <p className="text-3xl text-slate-800 mb-2" style={{ fontFamily: 'cursive' }}>
+                SadiyaIgnite
+              </p>
+
+              <h1 className="text-4xl font-bold text-slate-800 tracking-widest mb-4">CERTIFICATE</h1>
+
+              <p className="text-gray-600 mb-2">This is to certify that</p>
+
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Crown className="w-6 h-6 text-amber-600" />
+                <h2
+                  className="text-3xl text-slate-800 border-b-2 border-amber-600 pb-1 px-4"
+                  style={{ fontFamily: 'cursive' }}
+                >
+                  {studentName}
+                </h2>
+                <Crown className="w-6 h-6 text-amber-600" />
+              </div>
+
+              <p className="text-gray-600 mb-2">has successfully completed the examination in</p>
+
+              <div className="inline-flex items-center gap-2 bg-slate-800 text-white px-6 py-2 rounded-full mb-4">
+                <BookOpen className="w-4 h-4" />
+                <span className="font-semibold">{subject}</span>
+              </div>
+
+              <div className="flex justify-center gap-4 mb-4">
+                <div className="bg-slate-800 text-white px-6 py-3 rounded-xl">
+                  <p className="text-2xl font-bold">
+                    {score}/{totalQuestions}
+                  </p>
+                  <p className="text-xs opacity-80">SCORE</p>
+                </div>
+                <div className="bg-slate-800 text-white px-6 py-3 rounded-xl">
+                  <p className="text-2xl font-bold">{percentage}%</p>
+                  <p className="text-xs opacity-80">GRADE: {gradeInfo.grade}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center gap-1 text-gray-500 text-sm mb-4">
+                <Calendar className="w-4 h-4" />
+                <span>Awarded on {formattedDate}</span>
+              </div>
+
+              <div className="mt-4">
+                <img src={signatureImg} alt="Signature" className="h-16 mx-auto mb-1" />
+                <div className="w-40 h-0.5 bg-amber-600 mx-auto mb-1" />
+                <p className="text-sm font-semibold text-slate-800">Director, SadiyaIgnite</p>
+              </div>
+
+              <div className="mt-4 max-w-md mx-auto bg-slate-100 p-3 rounded border-l-4 border-amber-600">
+                <p className="text-xs italic text-slate-700">
+                  "Success is the sum of small efforts, repeated day in and day out."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 };

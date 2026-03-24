@@ -1,0 +1,232 @@
+subjectId,question,optionA,optionB,optionC,optionD,correctOption
+biology,Which of the following is an incorrect pair?,G=C,T=A,A=U,T=U,D
+biology,What does the Open Model demonstrate?,Gene synthesis,Gene expression,Gene regulation,Gene function,C
+biology,DNA is the genetic material of which of the following?,TMV,Bacteriophage,Both (A) and (B),None of these,C
+biology,Which of the following is the start codon?,UAG and UGA,AUG and GUG,UAA and UAG,UAA and UGA,B
+biology,Uracil is related to:,RNA,DNA,Both (A) and (B),None of these,C
+biology,"If cytosine is 18% in a DNA molecule, what will be the percentage of adenine?",64,36,85,32,D
+biology,What is the synthesis of RNA on a DNA template called?,Translation,Transcription,Transduction,Replication,B
+biology,The sequence of three bases in tRNA that binds to mRNA codon is called:,Triplet,Nonsense codon,Anticodon,Termination codon,C
+biology,The correct base sequence in DNA for RNA sequence AUCGCCUGA is:,TTGCGGACT,TAGCGGACT,UAGCGGACU,TAGCCCACT,B
+biology,What are Okazaki fragments formed during?,DNA replication in progeny duplex,DNA replication in lagging strand,DNA replication in leading strand,Both (B) and (C),D
+biology,Which of the following is mobile genetic element?,Split genes,Transposon,Jumping genes,Both (B) and (C),D
+biology,Anticodon is found in:,mRNA,tRNA,rRNA,None of these,B
+biology,Which purine bases are present in DNA?,Adenine and cytosine,Cytosine and thymine,Adenine and guanine,None of these,C
+biology,Which pyrimidines are found in RNA?,Cytosine and thymine,Adenine and guanine,Cytosine and uracil,Thymine and uracil,C
+biology,Nucleoside consists of:,Sugar + a nitrogen base,Sugar + phosphate,Nitrogen base + phosphate,None of these,A
+biology,Mendel proposed:,Law of linkage,Law of inheritance,Both (A) and (B),None of these,B
+biology,The law of segregation is also called:,Law of dominance,Law of independent assortment,Law of purity of gametes,None of these,C
+biology,"When one gene pair suppresses the effect of another gene pair, this phenomenon is called:",Epistasis,Dominance,Mutation,None of these,A
+biology,An exception to Mendel's law is:,Dominance,Purity of gametes,Linkage,Independent assortment,C
+biology,"In humans, ABO blood group shows:",Incomplete dominance,Multiple alleles,Codominance,Both (B) and (C),D
+biology,Sickle cell anemia is what type of disease?,Sex-linked disease,Autosomal disease,Deficiency disease,Metabolic disease,A
+biology,How many chromosomes are present in Turner syndrome?,45,46,47,None of these,A
+biology,"In humans (male), the number of chromosomes is:",44 + XX,44 + XY,46 + XY,46 + XX,B
+biology,How many chromosomes are present in human gametes?,21,23,44,46,B
+biology,Crossing over occurs during which stage?,Leptotene,Cytokinesis,Pachytene,Diakinesis,C
+biology,The ampR gene is responsible for developing resistance in:,Pathogens,Insects,Antibiotics,Against drought,C
+biology,Restriction enzymes are known as:,Biological guns,Molecular scissors,Plasmids,Micropipettes,B
+biology,Which of the following is used to bring foreign DNA into host cells?,Gene gun,Micropipette,Both (A) and (B),None of these,C
+biology,What does a bioreactor produce under optimum conditions?,Product,Organism,Medium,All of these,D
+biology,Which of the following can be used for amplification of desired genes?,MMR,PCR,MRI,All of these,B
+biology,Transgenic mice can be used for:,Safety testing of vaccines,Testing fertility effects,Testing antibiotic dosage,All of these,D
+biology,RNAi is used to control pathogens in which plant?,Tobacco,Mango,Potato,Poppy,C
+biology,Which of the following is a plasmid?,Bam HI,Eco RI,pBR322,Hind III,C
+biology,Ti plasmid is obtained from:,Agrobacterium rhizogenes,Agrobacterium tumefaciens,Both (A) and (B),Bacillus subtilis,B
+biology,GAATTC is the recognition site of:,EcoRI,EcoRII,Hind II,Bam HI,A
+biology,The source of EcoRI enzyme is:,Bam HI,E. coli,Both (A) and (B),Hind III,B
+biology,Restriction enzyme is:,Exonuclease,Endonuclease,Ligase,Polymerase,B
+biology,What are recombinant DNA vaccines?,Immunogenic lipids,Immunogenic acids,Immunogenic proteins,Exogenic proteins,C
+biology,Cry IAb controls:,Corn borer,Wheat rust,Cotton pests,Maize pests,A
+biology,Cry gene from Bacillus thuringiensis protects which crop?,Cotton,Rice,Mango,Wheat,A
+biology,Transgenic golden rice contains abundant amounts of which vitamin?,Glutenin,Vitamin A,Vitamin B,Vitamin C,B
+biology,Every living plant cell can form a complete plant. This property is called:,Cloning,Somaclonal,Totipotency,All of these,C
+biology,PCR is used for detection of:,HIV,Tuberculosis,Cholera,Cancer,A
+biology,What is the function of polymerase chain reaction?,Replication,Translation,Both (A) and (B),DNA amplification,D
+biology,The cap-like structure at the tip of mature sperm is called:,Acrosome,Mesosome,Episome,Spherosome,A
+biology,Yeast reproduces mainly by:,Budding,Fission,Pollination,All of these,A
+biology,Gametes are generally:,Haploid,Diploid,Polyploid,Nulliploid,A
+biology,Which of the following is a diploid structure?,Sperm,Ovum,Zygote,Endosperm,C
+biology,Uterus is related to:,Male reproductive system,Female reproductive system,Plant reproductive system,All of these,B
+biology,Graafian follicle is found in:,Human testis,Human ovary,Human liver,Frog ovary,B
+biology,Sertoli cells are found in:,Testis,Uterus,Ovary,Liver,A
+biology,Menstrual cycle occurs in:,Humans,Monkeys,Chimpanzees,All of these,D
+biology,"When offspring originates from a single parent, it is called:",Sexual reproduction,Asexual reproduction,Both (A) and (B),Internal fertilization,B
+biology,Binary fission is found in:,Amoeba,Paramecium,Both (A) and (B),None of these,C
+biology,Which secondary nucleus fuses with male gamete to form endosperm?,Antipodals,Egg cell,Synergids,Secondary nucleus,D
+biology,The ploidy of endosperm in angiosperms is:,n,2n,3n,Both (A) and (C),C
+biology,Seeds with endosperm are called:,Apocarpic,Polyembryonic,Endocarpic,Endospermic,D
+biology,From which germ layer do blood and circulatory system originate?,Ectoderm,Mesoderm,Endoderm,None of these,B
+biology,Copper-T prevents:,Ovulation,Egg maturation,Fertilization,None of these,C
+biology,Vegetative propagation in ginger occurs through:,Rhizome,Root,Tuber,Bulb,A
+biology,Dryopithecus was most similar to:,Apes,Gorillas,Chimpanzees,Humans,A
+biology,The concept that chemical evolution preceded organic evolution was given by:,A. I. Oparin and J. B. S. Haldane,Charles Darwin,Arrhenius,Baptist Lamarck,A
+biology,S. L. Miller is associated with:,Origin and evolution of life,Theory of use and disuse,Neo-Darwinism,Neo-Lamarckism,A
+biology,Humans are members of which order and family?,Anthropoidea and Pongidae,Primates and Pongidae,Primates and Hominidae,None of these,C
+biology,Homologous organs are:,Similar in origin but different in function,Similar in function but different in origin,Similar in both origin and function,Different in both origin and function,A
+biology,Wings of birds and butterflies are what type of organs?,Atavistic organs,Vestigial organs,Homologous organs,Analogous organs,D
+biology,Fossils are generally found in:,Metamorphic rocks,Igneous rocks,Sedimentary rocks,All of these,C
+biology,An important factor in formation of new species is:,Competition,Mutation,Isolation,Continuous variation,B
+biology,Echidna is:,Connecting link,Vestigial organ,Extinct link,None of these,A
+biology,Dodo is:,Extinct species,Endangered species,Threatened species,None of these,A
+biology,Climax community is found in which area?,Balanced area,Succession area,Bare land,None of these,A
+biology,Amphibians of plants are related to:,Algae,Bryophytes,Fungi,Pteridophytes,B
+biology,"In the ecosystem food chain, energy flow is:",Unidirectional,Bidirectional,Multidirectional,None of these,A
+biology,Which pyramid is never inverted?,Biomass pyramid,Energy pyramid,Number pyramid,Size pyramid,B
+biology,Secondary consumers are related to:,Producers,Herbivores,Carnivores,None of these,C
+biology,Decomposers are:,Autotrophs,Producers,Heterotrophs,None of these,C
+biology,Blue-green algae are useful biofertilizers for which crop?,Maize,Wheat,Sugarcane,Rice,D
+biology,Wind pollination does not occur in:,Grass,Maize,Wheat,Salvia,D
+biology,Flowers of Vallisneria are:,Wind pollinated,Insect pollinated,Water pollinated,Animal pollinated,C
+biology,The number of deaths in a particular population at a particular time and place is called:,Natality,Mortality,Migratory,Integrity,B
+biology,Plants not found in aquatic environment are:,Hydrilla,Trapa,Water lily,Babool,D
+biology,Which of the following is an aquatic wild grass?,Trapa,Hydrilla,Water hyacinth,Both (B) and (C),D
+biology,Which of the following is a hydrophyte plant?,Singhara,Cactus,Shisham,Acacia,A
+biology,Which of the following is an example of in-situ conservation?,Sacred groves,National parks,Seed banks,All of these,D
+biology,Kaziranga National Park is famous for:,Birds,Tigers,Rhinoceros,Crocodiles,C
+biology,Rhinoceros sanctuary is located in which state?,Assam,West Bengal,Uttar Pradesh,Bihar,A
+biology,National parks provide protection to:,Flora,Fauna,Ecosystem,Both (A) and (B),D
+biology,Which of the following is an endangered species?,Amarbel,Lantana,Nepenthes,All of these,D
+biology,What is not found in photochemical smog?,PAN,Sulfur trioxide,Sulfur dioxide,Carbon dioxide,D
+biology,The pH of acid rain is:,7,6,5,4,C
+biology,SO₂ is an indicator of:,Algae,Lichen,Fungi,All of these,B
+biology,Which of the following is not a greenhouse gas?,Methane,Chlorofluorocarbons,Carbon dioxide,Nitrogen,D
+biology,Biogas contains:,CO₂,H₂,CH₄,All of these,D
+biology,Which bacterium is used in biogas plants?,Nitrifying bacteria,Ammonifying bacteria,Denitrifying bacteria,Methanogens,D
+biology,Excess of E. coli in water is an indicator of:,Water deterioration,Industrial pollution,Sewage water pollution,All of these,C
+biology,The cause of biomagnification is considered to be:,Mercury,DDT,Both (A) and (B),Sulfur dioxide,C
+biology,Pollen wall layers are:,Unilayered,Bilayered,Trilayered,Multilayered,B
+biology,Which of the following is not included in animal husbandry?,Beekeeping,Poultry farming,Fisheries,Organic farming,D
+biology,The correct sequence of food chain is:,"Grass, wheat and mango","Goat, cow and grass","Grass, goat and lion","Grass, fish and goat",C
+biology,Chlorella is:,Algae,Bacteria,Protozoa,Single cell protein,D
+biology,Agar is obtained from:,Maize,Marine grass,Cycas,None of these,B
+biology,India has exceptionally high genetic diversity in:,Wheat,Pulses,Rice,Mango,D
+biology,"For early and accurate detection of some diseases, we can use:",ELISA,Culture,Chemicals,Analytics,A
+biology,Tuberculosis transmission occurs mainly through:,Water,Air,Insects,Contact,B
+biology,Widal test is done to confirm:,Malaria,Typhoid,AIDS,Cancer,B
+biology,Which disease occurs in poultry?,Cholera,Smut,Both (A) and (B),Ranikhet,D
+biology,Retrovirus is the pathogen of which disease?,Syphilis,AIDS,Filariasis,Both (A) and (B),B
+biology,Which of the following are cancer cells?,Plasma cells,HeLa cells,Memory cells,T cells,B
+biology,HIV attacks which cell?,B-cell,T-cell,Epithelial cell,T-helper cell,D
+biology,Substances against which immune response occurs are called:,Allergen,Vaccine,Antibody,Antigen,D
+biology,Chemicals released due to allergy are:,Histamine,Serotonin,Both (A) and (B),None of these,C
+biology,Antibodies in our body are:,Steroids,Lipoproteins,Glycoproteins,All of these,C
+biology,T-lymphocytes originate from:,Bone marrow,Stomach,Thymus,Liver,C
+biology,The pathogen group of Wuchereria bancrofti that causes filariasis in humans is:,Protozoa,Bacteria,Virus,Helminth,A
+biology,Which disease is vector-borne?,Typhoid,Cholera,Malaria,Syphilis,C
+biology,Which disease is not caused by virus?,Mumps,Influenza,Diphtheria,Measles,C
+biology,The infectious stage of Plasmodium in humans is:,Sporozoite,Merozoite,Cryptozoite,None of these,A
+biology,Triple antigen vaccine is not used for:,Diphtheria,Pertussis,Typhoid,Tetanus,C
+biology,Which organ is most affected by excess alcohol consumption?,Lungs,Liver,Spleen,Stomach,B
+biology,Opium is obtained from:,Papaver somniferum,Erythroxylum coca,Cannabis sativa,Atropa belladonna,A
+biology,Cancer is caused by:,Bacteria,Oncogenes,Both (A) and (B),None of these,B
+biology,Idli and dosa batter is made using which microorganism?,Bacteria,Lactobacillus,Virus,Yeast,B
+biology,Silk thread contains which protein?,Fibroin,Albumin,Globulin,Keratin,A
+biology,Who makes honey?,Male bee,Queen bee,Worker bee,Both (A) and (B),C
+biology,Pasteurization involves heating:,Only milk,Any liquid above 100°C,Any liquid at 70°C,None of these,C
+biology,Brevibacterium is related to:,Actinomycetes,Protozoa,Pteridophytes,Marsupials,D
+biology,"For nitrogen fixation in soil, we can use:",Blue-green bacteria,Protozoa,Nematodes,Wheat plants,A
+biology,Taichung is a variety of:,Rice,Wheat,Maize,Sugarcane,A
+biology,Which of the following is not a biofertilizer?,Azotobacter,Bacillus thuringiensis,Azolla,Clostridium,D
+biology,In which plant are vegetative functions multiplied?,Algae,Fungi,Bryophytes,All of these,C
+biology,Which of the following is not related to microbiology?,Louis Pasteur,J.D. Watson,Stephen Hales,Robert Koch,B
+biology,Lac operon is a representative of:,Inducible gene mechanism,Repressible gene mechanism,Housekeeping gene structure,All of these,A
+biology,Who proposed the operon model?,Watson and Crick,Nirenberg,Jacob and Monod,None of these,C
+biology,Palindrome sequences are found in:,DNA,RNA,Proteins,Lipids,A
+biology,ZZ/ZW type of sex determination is seen in:,Snail,Cockroach,Peacock,Human,C
+biology,Which inflorescence is eaten?,Jackfruit,Apple,Orange,All of these,D
+biology,In which fruit is the seed coat eaten?,Jackfruit,Litchi,Custard apple,All of these,A
+biology,What is micropropagation?,Asexual reproduction,Sexual reproduction,Both (A) and (B),None of these,A
+biology,Gamete formation is called:,Gametogenesis,Cytokinesis,Sporogenesis,None of these,A
+biology,Which of the following is insectivorous plants?,Drosera,Nepenthes,Both (A) and (B),Hydrilla,C
+biology,Which of the following is hermaphrodite?,Chicken,Snake,Both (A) and (B),Earthworm,D
+biology,The concept that organic evolution was preceded by chemical evolution was given by:,Charles Darwin,Oparin and Haldane,Lamarck,Mendel,B
+biology,Homologous organs indicate:,Convergent evolution,Divergent evolution,Parallel evolution,Retrogressive evolution,B
+biology,Analogous organs are the result of:,Convergent evolution,Divergent evolution,Stabilizing evolution,Disruptive evolution,A
+biology,Living fossils are organisms that:,Are extinct,Have remained unchanged,Are endangered,Are threatened,B
+biology,Industrial melanism is an example of:,Natural selection,Artificial selection,Directional selection,Stabilizing selection,C
+biology,Darwin's finches show:,Convergent evolution,Adaptive radiation,Parallel evolution,Coevolution,B
+biology,The most accepted theory of origin of life is:,Special creation,Chemical evolution,Panspermia,Spontaneous generation,B
+biology,Miller's experiment demonstrated:,Origin of proteins,Abiotic synthesis of amino acids,Origin of nucleic acids,Origin of carbohydrates,B
+biology,First life appeared in:,Land,Water,Air,Underground,B
+biology,Fossils are studied under:,Taxonomy,Paleontology,Ecology,Genetics,B
+biology,Vestigial organs in humans include:,Ear muscles,Wisdom teeth,Appendix,All of these,D
+biology,Australian marsupials show:,Convergent evolution,Adaptive radiation,Parallel evolution,Retrogression,B
+biology,Gene flow occurs through:,Migration,Mutation,Selection,Both migration and mutation,D
+biology,Hardy-Weinberg equilibrium requires:,Large population,Random mating,No mutations,All of these,D
+biology,Genetic drift is more prominent in:,Large populations,Small populations,Stable populations,Migrating populations,B
+biology,Founder effect is a type of:,Natural selection,Genetic drift,Gene flow,Mutation,B
+biology,Speciation without geographic isolation is:,Allopatric,Sympatric,Parapatric,Peripatric,B
+biology,Reproductive isolation leads to:,Extinction,Speciation,Hybridization,Gene flow,B
+biology,Darwin's theory emphasized:,Inheritance of acquired characters,Natural selection,Mutation,Genetic drift,B
+biology,Lamarck's theory emphasized:,Natural selection,Use and disuse of organs,Mutation,Genetic drift,B
+biology,Primary succession occurs on:,Abandoned farmland,Bare rock,Burned forest,Flooded area,B
+biology,Pioneer species in xerosere are:,Mosses,Lichens,Grasses,Shrubs,B
+biology,Ecological succession is:,Random changes,Directional changes,Cyclic changes,No changes,B
+biology,Hydrarch succession leads to:,Desert,Forest,Grassland,Pond,B
+biology,Keystone species are:,Rare species,Species with disproportionate impact,Dominant species,Invasive species,B
+biology,Trophic level represents:,Population size,Feeding position,Species diversity,Biomass,B
+biology,Energy transfer between trophic levels is approximately:,1%,10%,20%,50%,B
+biology,Gross primary productivity is:,NPP + respiration,Total photosynthesis,NPP - respiration,Biomass accumulation,B
+biology,Net primary productivity equals:,GPP + respiration,GPP - respiration,Total biomass,Secondary productivity,B
+biology,Standing crop is measured in terms of:,Energy,Biomass,Numbers,Area,B
+biology,Pyramid of energy is always:,Inverted,Upright,Spindle-shaped,Variable,B
+biology,Inverted pyramid of biomass occurs in:,Forest,Grassland,Aquatic ecosystem,Desert,C
+biology,Phosphorus cycle is:,Gaseous,Sedimentary,Both,Neither,B
+biology,Carbon cycle is:,Gaseous,Sedimentary,Both,Neither,A
+biology,Nitrogen fixation is done by:,Plants,Animals,Bacteria,Fungi,C
+biology,Denitrification returns nitrogen to:,Soil,Water,Atmosphere,Plants,C
+biology,Biological oxygen demand indicates:,Oxygen content,Organic pollution,Temperature,pH,B
+biology,Eutrophication results from:,Oil spills,Nutrient enrichment,Thermal pollution,Radiation,B
+biology,Red Data Book contains:,Common species,Threatened species,Extinct species only,All species,B
+biology,Biodiversity hotspots have:,High endemism,High threat,Both (A) and (B),Neither,C
+biology,Capacitation of sperm occurs in:,Testis,Epididymis,Female reproductive tract,Vas deferens,C
+biology,Acrosome contains:,DNA,Hydrolytic enzymes,Mitochondria,Centrioles,B
+biology,Sperm motility is provided by:,Head,Middle piece,Tail,Acrosome,C
+biology,Corpus luteum secretes:,Estrogen,Progesterone,FSH,LH,B
+biology,Implantation occurs in:,Ovary,Fallopian tube,Uterus,Cervix,C
+biology,HCG is secreted by:,Ovary,Placenta,Pituitary,Uterus,B
+biology,Parturition is induced by:,Estrogen,Progesterone,Oxytocin,FSH,C
+biology,Colostrum contains:,Lactose,Antibodies,Proteins,All of these,B
+biology,Amniocentesis is used for:,Contraception,Prenatal diagnosis,Abortion,Delivery,B
+biology,IVF involves:,In vivo fertilization,In vitro fertilization,Artificial insemination,Surrogacy,B
+biology,Pollination by bats is:,Ornithophily,Chiropterophily,Entomophily,Anemophily,B
+biology,Pollination by birds is:,Ornithophily,Chiropterophily,Entomophily,Anemophily,A
+biology,Cleistogamous flowers are:,Always open,Never open,Sometimes open,Partially open,B
+biology,Chasmogamous flowers are:,Always open,Never open,Sometimes open,Partially open,A
+biology,Self-incompatibility prevents:,Cross-pollination,Self-pollination,Fertilization,Germination,B
+biology,Triple fusion produces:,Zygote,Endosperm,Embryo,Seed coat,B
+biology,Synergids help in:,Fertilization,Guiding pollen tube,Endosperm formation,Seed development,B
+biology,Antipodal cells are located at:,Micropylar end,Chalazal end,Middle,Everywhere,B
+biology,Polyembryony is common in:,Rice,Wheat,Citrus,Maize,C
+biology,Parthenocarpy produces:,Seeded fruits,Seedless fruits,Seeds only,Neither fruits nor seeds,B
+biology,Bt toxin kills insects by:,Blocking nerve signals,Creating pores in gut,Stopping reproduction,Paralyzing,B
+biology,Gene therapy is used for:,Diagnosis,Treatment of genetic disorders,Prevention,Screening,B
+biology,RNA interference is used for:,Gene expression,Gene silencing,Gene amplification,Gene transfer,B
+biology,ELISA is used for:,Gene therapy,Antigen-antibody detection,DNA sequencing,Cloning,B
+biology,Southern blotting detects:,RNA,Protein,DNA,Lipids,C
+biology,Northern blotting detects:,DNA,RNA,Protein,Lipids,B
+biology,Western blotting detects:,DNA,RNA,Protein,Lipids,C
+biology,DNA fingerprinting uses:,Coding DNA,Non-coding DNA,mRNA,tRNA,B
+biology,Gel electrophoresis separates DNA based on:,Charge only,Size and charge,Shape,Sequence,B
+biology,Bioreactors provide:,Sterile conditions,Optimum temperature,Optimum pH,All of these,D
+biology,Mycorrhiza is an association between:,Algae and fungi,Fungi and plant roots,Bacteria and plant roots,Algae and bacteria,B
+biology,Lichen is a symbiotic association between:,Algae and fungi,Bacteria and algae,Fungi and bacteria,Plant and fungi,A
+biology,Nitrogen-fixing bacteria in root nodules of legumes:,Azotobacter,Rhizobium,Clostridium,Nostoc,B
+biology,Free-living nitrogen fixer:,Rhizobium,Azotobacter,Frankia,Anabaena,B
+biology,Nitrogenase enzyme requires:,Oxygen,Anaerobic conditions,High pH,Low temperature,B
+biology,Biological nitrogen fixation converts:,NO₃ to N₂,N₂ to NH₃,NH₃ to NO₃,NO₂ to N₂,B
+biology,Ammonification converts:,N₂ to NH₃,NO₃ to NH₃,Organic N to NH₃,NH₃ to NO₃,C
+biology,Nitrification converts:,N₂ to NO₃,NH₃ to NO₃,NO₃ to N₂,Organic N to NH₃,B
+biology,Artificial selection in plant breeding aims for:,Random traits,Desirable traits,All traits,Natural traits,B
+biology,Hybridization in plant breeding produces:,Pure lines,Genetic variation,Clones,Mutations,B
+biology,Green Revolution increased production of:,Vegetables,Fruits,Food grains,Pulses,C
+biology,Semi-dwarf varieties have:,Tall stems,Short stems,No stems,Variable height,B
+biology,Somaclonal variation occurs in:,Sexual reproduction,Tissue culture,Natural breeding,Hybridization,B
+biology,Protoplast fusion produces:,Clones,Somatic hybrids,Gametes,Spores,B
+biology,Cryopreservation is done at:,0°C,-20°C,-80°C,-196°C,D
+biology,Germplasm is conserved in:,Gardens,Gene banks,Farms,Markets,B
+biology,Ex-situ conservation includes:,National parks,Sanctuaries,Zoos and botanical gardens,Biosphere reserves,C
+biology,In-situ conservation includes:,Zoos,Seed banks,National parks,Botanical gardens,C
+biology,Sacred groves are examples of:,Ex-situ conservation,In-situ conservation,Both,Neither,B
+biology,Biosphere reserves allow:,No human activity,Limited tourism,Research,All of these with proper management,D
